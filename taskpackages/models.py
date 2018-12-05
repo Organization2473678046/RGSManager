@@ -6,9 +6,18 @@ from users.models import Users
 import datetime
 
 
-def user_directory_path(instance, filename):
+def user_directory_path(instance, name):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'user_{0}/{1}/{2}'.format(instance.user.id, datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"), filename)
+    return 'user_{0}/{1}/{2}'.format(instance.user.id, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"),
+                                     name)
+
+def user_directory_path1(instance, version_name):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'user_{0}/{1}/{2}'.format(instance.user.id,datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"),
+                                     version_name)
+
+
+
 
 
 @python_2_unicode_compatible
@@ -30,20 +39,37 @@ class TaskPackage(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.filename
+        return self.name
+
+    @property
+    def worker(self):
+        return self.user.username
 
 
+@python_2_unicode_compatible
 class TaskPackageVersion(models.Model):
-    version = models.CharField(max_length=16, default='v1.0', verbose_name=u"版本号")
-    taskpackage = models.ForeignKey(TaskPackage, related_name='taskpackageversion', blank=True,
-                                         on_delete=models.SET_NULL, verbose_name=u"任务包名称")
+    version_name = models.CharField(max_length=128, null=True, blank=True, verbose_name=u"版本号")
+    taskpackage = models.ForeignKey(TaskPackage, related_name='taskpackageversion', blank=True, null=True,
+                                    on_delete=models.SET_NULL, verbose_name=u"任务包名称")
     is_delete = models.BooleanField(default=False, verbose_name=u"逻辑删除")
     create_time = models.DateTimeField(auto_now_add=True, verbose_name=u"创建时间")
     update_time = models.DateTimeField(auto_now=True, verbose_name=u"更新时间")
     describe = models.CharField(max_length=256, null=True, blank=True, verbose_name=u"文件描述")
-    file = models.FileField(upload_to=user_directory_path, verbose_name=u"任务包路径")
+    file = models.FileField(upload_to=user_directory_path1, null=True, blank=True, verbose_name=u"任务包路径")
+    user = models.ForeignKey(Users, related_name='taskpackageversion', null=True, blank=True, on_delete=models.SET_NULL,
+                             verbose_name=u"作业员")
 
     class Meta:
         db_table = 'tb_taskpackageversion'
         verbose_name = u'任务包版本'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.version_name
+
+    @property
+    def taskpackage_name(self):
+        return self.taskpackage.name
+
+
+

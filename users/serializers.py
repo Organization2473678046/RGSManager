@@ -8,7 +8,7 @@ from models import Users
 class CreateUserSerizlizer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ['username', 'password', 'is_admin']
+        fields = ['username', 'password', 'role']
 
     def create(self, validated_data):
         user = super(CreateUserSerizlizer, self).create(validated_data=validated_data)
@@ -21,7 +21,7 @@ class CreateUserSerizlizer(serializers.ModelSerializer):
 class UserMessageList(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ['id', 'username', 'is_admin']
+        fields = ['id', 'username', 'role']
 
 
 class WorkerListSerialziers(serializers.ModelSerializer):

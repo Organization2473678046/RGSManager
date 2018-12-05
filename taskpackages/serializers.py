@@ -4,12 +4,7 @@ from rest_framework import serializers
 from models import TaskPackage, TaskPackageVersion
 
 
-class MapListViewSerializer(serializers.ModelSerializer):
-    worker = serializers.ReadOnlyField()
 
-    class Meta:
-        model = TaskPackage
-        fields = ['id', 'name', 'mapnums', 'file', 'status', 'create_time', 'worker']
 
 
 class CreateMapMessageViewSerializer(serializers.ModelSerializer):
@@ -59,9 +54,17 @@ class CreateTaskpackageVersionSerializer(serializers.ModelSerializer):
         return taskpackageversion
 
 
+class MapListViewSerializer(serializers.ModelSerializer):
+    worker = serializers.ReadOnlyField()
+
+    class Meta:
+        model = TaskPackage
+        fields = ['id', 'name', 'mapnums', 'file', 'status', 'create_time', 'worker']
+
+
 class MapVersionListViewSerializer(serializers.ModelSerializer):
     taskpackage_name = serializers.ReadOnlyField()
 
     class Meta:
         model = TaskPackageVersion
-        fields = ['id', 'version_name', 'file', 'status', 'create_time', 'describe', 'taskpackage_name']
+        fields = ['id', 'version_name', 'file', 'create_time', 'describe', 'taskpackage_name']

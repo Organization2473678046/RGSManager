@@ -33,7 +33,7 @@ from django.views.static import serve
 router = routers.DefaultRouter()
 router.register(r'workers', WorkerList, base_name=u"workers")
 router.register(r'getTaskpackageList', MapList, base_name=u"maplists")
-# router.register(r'taskpackageversion', CreateTaskpackageVersion, base_name='taskpackageversion')
+router.register(r'taskpackageversionlist', MapVersionList, base_name=u"mapversionlists")
 
 
 urlpatterns = [
@@ -47,7 +47,6 @@ urlpatterns = [
     url(r'^createuser/$', CreateUserView.as_view()),
     url(r'^taskackageDivision/$', CreateMapMessage.as_view()),
     url(r'^taskpackageversion/$', CreateTaskpackageVersion.as_view()),
-    # url(r'^taskpackageversionlist/$', MapVersionList.as_view()),
 ]
 
 

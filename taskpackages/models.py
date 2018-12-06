@@ -11,13 +11,11 @@ def user_directory_path(instance, name):
     return 'user_{0}/{1}/{2}'.format(instance.user.id, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"),
                                      name)
 
+
 def user_directory_path1(instance, version_name):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'user_{0}/{1}/{2}'.format(instance.user.id,datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"),
+    return 'user_{0}/{1}/{2}'.format(instance.user.id, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"),
                                      version_name)
-
-
-
 
 
 @python_2_unicode_compatible
@@ -70,6 +68,3 @@ class TaskPackageVersion(models.Model):
     @property
     def taskpackage_name(self):
         return self.taskpackage.name
-
-
-

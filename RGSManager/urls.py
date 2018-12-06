@@ -29,25 +29,21 @@ from rest_framework_jwt.views import obtain_jwt_token
 from RGSManager.settings import MEDIA_ROOT
 from django.views.static import serve
 
-
 router = routers.DefaultRouter()
 router.register(r'workers', WorkerList, base_name=u"workers")
 router.register(r'getTaskpackageList', MapList, base_name=u"maplists")
-router.register(r'taskpackageversionlist', MapVersionList, base_name=u"mapversionlists")
-
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
     url(r'login/', obtain_jwt_token),
-    url(r'docs/', include_docs_urls(title=u"库管系统API", authentication_classes=[JSONWebTokenAuthentication, SessionAuthentication])),
+    url(r'docs/', include_docs_urls(title=u"库管系统API",
+                                    authentication_classes=[JSONWebTokenAuthentication, SessionAuthentication])),
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^usermessage/$', RoleView.as_view()),
     url(r'^createuser/$', CreateUserView.as_view()),
     url(r'^taskackageDivision/$', CreateMapMessage.as_view()),
     url(r'^taskpackageversion/$', CreateTaskpackageVersion.as_view()),
+    url(r'^taskpackageversionlist/id/(?P<id>\d+)/', MapVersionList.as_view()),
 ]
-
-
-

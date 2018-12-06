@@ -5,7 +5,7 @@ from django.db.models import Q
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from models import Users
-from serializers import  WorkerListSerialziers, CreateUserSerizlizer, UserMessageList
+from serializers import WorkerListSerialziers, CreateUserSerizlizer, UserMessageList
 from utils.permission import AdminPerssion
 from rest_framework.generics import GenericAPIView, CreateAPIView, ListAPIView
 
@@ -15,10 +15,9 @@ class CreateUserView(CreateAPIView):
     serializer_class = CreateUserSerizlizer
 
 
-
 class RoleView(ListAPIView):
     """
-    获取用户信息      GET
+    获取用户信息
     """
     permission_classes = [IsAuthenticated]
     serializer_class = UserMessageList
@@ -28,12 +27,10 @@ class RoleView(ListAPIView):
         return query_set
 
 
-
 class WorkerList(ReadOnlyModelViewSet):
     """
-    获取作业员列表     GET
+    获取作业员列表
     """
     permission_classes = [IsAuthenticated, AdminPerssion]
     queryset = Users.objects.filter(role=False)
     serializer_class = WorkerListSerialziers
-

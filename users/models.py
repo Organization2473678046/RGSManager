@@ -19,8 +19,6 @@ class Users(AbstractUser):
         return self.username
 
 
-
-
 """
 @python_2_unicode_compatible
 class Permssions(models.Model):

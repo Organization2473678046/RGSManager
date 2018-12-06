@@ -10,4 +10,3 @@ class AdminPerssion(BasePermission):
         if request.user.role is False:
             return False
         return True
-

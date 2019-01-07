@@ -5,7 +5,7 @@ from django.test import TestCase
 
 # Create your tests here.
 if not os.environ.get("DJANGO_SETTINGS_MODULE"):
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "RGSManageV5.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "RGSManager.settings")
 import django
 django.setup()
 

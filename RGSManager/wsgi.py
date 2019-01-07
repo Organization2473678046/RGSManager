@@ -1,5 +1,5 @@
 """
-WSGI config for RGSManageV5 project.
+WSGI config for RGSManager project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "RGSManageV5.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "RGSManager.settings")
 
 application = get_wsgi_application()

@@ -1,5 +1,5 @@
 .DS_Store
-/media/data
+/media/data/*
 
 # local env files
 .env.local

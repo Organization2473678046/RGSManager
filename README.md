@@ -1,2 +1,0 @@
-# RGSManager
-RGS model manager

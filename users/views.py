@@ -1,36 +1,33 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.db.models import Q
+from django.shortcuts import render
+from rest_framework import mixins
+from rest_framework.viewsets import GenericViewSet
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.viewsets import ReadOnlyModelViewSet
-from models import Users
-from serializers import WorkerListSerialziers, CreateUserSerizlizer, UserMessageList
 from utils.permission import AdminPerssion
-from rest_framework.generics import GenericAPIView, CreateAPIView, ListAPIView
+from models import User
+from .serializers import UserSerializer, UserListSerializer
 
 
-class CreateUserView(CreateAPIView):
-    permission_classes = [IsAdminUser]
-    serializer_class = CreateUserSerizlizer
-
-
-class RoleView(ListAPIView):
+class UserListViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):
     """
-    获取用户信息
+    list: 获取作业员列表
+    create: 创建用户
     """
-    permission_classes = [IsAuthenticated]
-    serializer_class = UserMessageList
+    serializer_class = UserListSerializer
+    permission_classes = [IsAuthenticated, AdminPerssion]
 
     def get_queryset(self):
-        query_set = Users.objects.filter(id=self.request.user.id)
-        return query_set
+        if self.action == 'list':
+            return User.objects.filter(isadmin=False)
+        else:
+            return None
 
 
-class WorkerList(ReadOnlyModelViewSet):
-    """
-    获取作业员列表
-    """
-    permission_classes = [IsAuthenticated, AdminPerssion]
-    queryset = Users.objects.filter(role=False)
-    serializer_class = WorkerListSerialziers
+class UserViewSet(mixins.ListModelMixin, GenericViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return User.objects.filter(id=user.id)

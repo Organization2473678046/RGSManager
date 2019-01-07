@@ -1,30 +1,23 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from rest_framework import serializers
-from models import Users
+from models import User
 
 
-class CreateUserSerizlizer(serializers.ModelSerializer):
+class UserListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Users
-        fields = ['username', 'password', 'role']
+        model = User
+        fields = ['id', 'username', 'password', 'isadmin', 'reallyname']
+        extra_kwargs = {'password': {"write_only": True},'isadmin': {"write_only": True},'reallyname':{"required":True}}
+
 
     def create(self, validated_data):
-        user = super(CreateUserSerizlizer, self).create(validated_data=validated_data)
-        user.set_password(validated_data['password'])
+        user = super(UserListSerializer, self).create(validated_data)
+        user.set_password(validated_data["password"])
         user.save()
 
         return user
 
-
-class UserMessageList(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Users
-        fields = ['id', 'username', 'role']
-
-
-class WorkerListSerialziers(serializers.ModelSerializer):
-    class Meta:
-        model = Users
-        fields = ['id', 'username']
+        model = User
+        fields = ["username","isadmin"]

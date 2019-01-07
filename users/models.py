@@ -1,35 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.encoding import python_2_unicode_compatible
+from django.db import models
 
-
-# Create your models here.
 @python_2_unicode_compatible
-class Users(AbstractUser):
-    role = models.BooleanField(default=False, verbose_name=u"角色")
+class User(AbstractUser):
+    isadmin = models.BooleanField(default=False, verbose_name=u"是否管理员")
+    reallyname = models.CharField(max_length=150, default="未命名", null=True, verbose_name=u"真实姓名")
 
     class Meta:
-        db_table = 'tb_users'
         verbose_name = u"用户"
         verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.username
 
-
-"""
-@python_2_unicode_compatible
-class Permssions(models.Model):
-    role = models.CharField(max_length=32, verbose_name=u"角色")
-    perssion = models.CharField(max_length=32, verbose_name=u"权限")
-
-    class Meta:
-        db_table = 'tb_users'
-        verbose_name = u"用户"
-        verbose_name_plural = verbose_name
-
-    def __str__(self):
-        return self.username
-"""

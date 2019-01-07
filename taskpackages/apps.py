@@ -4,5 +4,5 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class TaskpackageConfig(AppConfig):
+class TaskpackagesConfig(AppConfig):
     name = 'taskpackages'

@@ -31,7 +31,7 @@ class TaskPackage(models.Model):
     updatetime = models.DateTimeField(auto_now=True, verbose_name=u"更新时间")
     isdelete = models.BooleanField(default=False, verbose_name=u"逻辑删除")
     schedule = models.CharField(max_length=32, default=u"未指定状态",verbose_name=u"任务包进度")
-    # 子任务包创建未查看的消息提醒
+    # 子任务包创建后的消息提醒
     newtaskpackagesonfornotice = models.IntegerField(default=0, null=True, verbose_name=u"消息提醒")
     reallyname = models.CharField(max_length=150, default=None, null=True, verbose_name=u"作业员真实姓名")
 
@@ -71,7 +71,7 @@ class TaskPackageSon(models.Model):
     createtime = models.DateTimeField(auto_now_add=True, verbose_name=u"创建时间")
     updatetime = models.DateTimeField(auto_now=True, verbose_name=u"更新时间")
     isdelete = models.BooleanField(default=False, verbose_name=u"逻辑删除")
-    schedule = models.IntegerField(choices=SCHEDULECHOICE, default=0, verbose_name=u"任务包进度")
+    schedule = models.CharField(max_length=32, default=u"未指定状态",verbose_name=u"任务包进度")
 
     class Meta:
         verbose_name = u'子任务包'
@@ -115,3 +115,9 @@ class EchartSchedule(models.Model):
 
     def __str__(self):
         return self.taskpackage_schedule
+
+
+# 子任务包进度表
+@python_2_unicode_compatible
+class Schedule(models.Model):
+    schedule = models.CharField(max_length=32, default=u"未指定状态",verbose_name=u"任务包进度")

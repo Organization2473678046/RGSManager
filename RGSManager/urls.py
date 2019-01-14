@@ -27,7 +27,8 @@ from django.conf import settings
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework.routers import DefaultRouter
 from users.views import UserListViewSet,UserViewSet
-from taskpackages.views import TaskPackageViewSet, TaskPackageSonViewSet, TaskPackageOwnerViewSet, EchartTaskpackageViewSet,EchartScheduleViewSet
+from taskpackages.views import TaskPackageViewSet, TaskPackageSonViewSet, TaskPackageOwnerViewSet, \
+    EchartTaskpackageViewSet, EchartScheduleViewSet, ScheduleViewSet, TaskPackageChunkViewSet
 
 router = DefaultRouter()
 router.register(r'users', UserListViewSet, base_name='users')
@@ -37,6 +38,8 @@ router.register(r'taskpackagesons', TaskPackageSonViewSet, base_name='taskpackag
 router.register(r'taskpackageowners', TaskPackageOwnerViewSet, base_name='taskpackageowner')
 router.register(r'echarttaskpackages', EchartTaskpackageViewSet, base_name='echarttaskpackage')
 router.register(r'echartschedules', EchartScheduleViewSet, base_name='echartschedules')
+router.register(r'schedule', ScheduleViewSet, base_name='schedule')
+router.register(r'taskpackagechunk', TaskPackageChunkViewSet, base_name='file_chunk')
 
 
 urlpatterns = [

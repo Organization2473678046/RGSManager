@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+import hashlib
+import os
+from datetime import datetime
+
 from rest_framework import serializers
 from rest_framework.exceptions import APIException
-from models import TaskPackage, TaskPackageSon, TaskPackageOwner, EchartTaskPackage, EchartSchedule
+
+from RGSManager.settings import BASE_DIR
+from models import TaskPackage, TaskPackageSon, TaskPackageOwner, EchartTaskPackage, EchartSchedule, \
+    TaskPackageScheduleSet, TaskPackageChunk, TaskPackageSonMerge
 from django.conf import settings
 from rest_framework import status
 from celery_app.clipfromsde import clipfromsde
@@ -94,14 +102,9 @@ class ScheduleChoiceField(serializers.ChoiceField):
 
 
 class TaskPackageSonSerializer(serializers.ModelSerializer):
-    SCHEDULE_CHOICE = (
-        (0, u'未指定状态'), (1, u'修改缝隙'), (2, u'河网环修改'), (3, u'有向点修改'), (4, u'一对多修改'), (5, u'匝道赋值'), (6, u'同层拓扑'),
-        (7, u'不同层拓扑'),
-        (8, u'微短线修改'), (9, u'微小面修改'), (10, u'急锐角修改'), (11, u'等高线拼接'), (12, u'完成'))
-
     handle_progress = serializers.BooleanField(allow_null=True)
     taskpackage_file_id = serializers.IntegerField(allow_null=True)
-    schedule = ScheduleChoiceField(choices=SCHEDULE_CHOICE, label=u"任务包处理进度")
+    # schedule = ScheduleChoiceField(choices=SCHEDULE_CHOICE, label=u"任务包处理进度")
     reallyname = serializers.SerializerMethodField(label=u"作业员真实姓名")
 
     class Meta:
@@ -164,7 +167,7 @@ class TaskPackageSonSerializer(serializers.ModelSerializer):
         # 将主任务包的file字段,改成最新的子任务包的file,主任务包file字段展示最新的子版本
         taskpackage.file = taskpackageson.file
         taskpackage.describe = taskpackageson.describe
-        taskpackage.schedule = taskpackageson.get_schedule_display()
+        taskpackage.schedule = taskpackageson.schedule
         taskpackage.newtaskpackagesonfornotice += 1
         taskpackage.updatetime = taskpackageson.createtime
         taskpackage.save()
@@ -247,3 +250,104 @@ class EchartScheduleSerializer(serializers.ModelSerializer):
     class Meta:
         model = EchartSchedule
         fields = ["taskpackage_schedule", "count"]
+
+
+class ScheduleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskPackageScheduleSet
+        fields = ["id", "schedule"]
+
+
+class TaskPackageChunkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskPackageChunk
+        fields = ["name", "file_chunk", "chunk", "chunks", "file_md5", "chunk_md5"]
+
+    def create(self, validated_data):
+        instance = TaskPackageChunk.objects.create(name=validated_data["name"],
+                                                   # file_chunk=self.context['request'].data.get('file'),
+                                                   file_chunk=validated_data["file_chunk"],
+                                                   chunk=validated_data["chunk"],
+                                                   chunks=validated_data["chunks"],
+                                                   file_md5=validated_data["file_md5"],
+                                                   chunk_md5=validated_data["chunk_md5"]
+                                                   )
+        # 检验文件块md5
+        if os.path.isfile(instance.file_chunk.path):
+            myhash = hashlib.md5()
+            f = open(instance.file_chunk.path, 'rb')
+            while True:
+                b = f.read(8096)
+                if not b:
+                    break
+                myhash.update(b)
+            f.close()
+            print myhash.hexdigest()
+            if myhash.hexdigest() == instance.chunk_md5:
+                print u"文件切片MD5校验通过"
+            else:
+                print u"文件切片MD5校验错误"
+        else:
+            print u"文件不存在"
+
+        # 合并文件
+        if validated_data["chunk"] == validated_data["chunks"] - 1:
+            path_list = os.path.join(BASE_DIR, instance.file_chunk.path).split("\\")
+            path_list.pop()
+            fromdir = "\\".join(path_list)  # 读取文件块路径
+            filename = instance.name  # 合成后文件名字
+            save_path = os.path.join(BASE_DIR, u'media\\file\\{0}\\{1}\\{2}'.format(
+                datetime.now().strftime("%m"),
+                datetime.now().strftime("%d"),
+                instance.name))  # 合成后存放路径
+            if not os.path.exists(save_path):  # 判断文件夹是否存在
+                os.makedirs(save_path)
+            outfile = open(os.path.join(save_path, filename), 'wb')  # 打开合并后存储文件夹
+            num = 0
+            files = TaskPackageChunk.objects.filter(name=instance.name).order_by("chunk")  # 读取文件块名字并根据块数排序
+            while num < instance.chunks:  # 判断合并文件次数
+                file = files.values_list("file_chunk")[num][0].split("/")[-1]  # 获取单个文件名
+                filepath = os.path.join(fromdir, file)
+                infile = open(filepath, 'rb')
+                data = infile.read()
+                outfile.write(data)
+                del data
+                num += 1
+                infile.close()
+            outfile.close()
+
+            # 校验合并后文件md5
+            file = save_path + "\\" + filename  # 获取合并后文件路径
+            if os.path.isfile(file):  # 判断文件是否存在
+                myhash = hashlib.md5()
+                f = open(file, 'rb')
+                while True:
+                    b = f.read(8096)
+                    if not b:
+                        break
+                    myhash.update(b)
+                f.close()
+                print myhash.hexdigest()
+                if myhash.hexdigest() == instance.file_md5:  # 判断MD5是否与前端传的数据一致
+                    print u"MD5校验通过"
+                else:
+                    print u"MD5校验错误"
+            else:
+                print u"文件不存在"
+            path = u'file/{0}/{1}/{2}/{3}'.format(datetime.now().strftime("%m"),
+                                                  datetime.now().strftime("%d"),
+                                                  instance.name,
+                                                  instance.name)
+            # 创建合成后文件表记录
+            instance_merge = TaskPackageSonMerge.objects.create(taskpackage_name=instance.name,
+                                                                md5=instance.file_md5)
+            instance_merge.file = path
+            instance_merge.save()
+
+            # 创建子版本表记录
+            instance_son = TaskPackageSon.objects.create(taskpackage_name=instance.name,
+                                                         md5=instance.file_md5)
+            instance_son.file=path
+            instance_son.save()
+        return instance
+

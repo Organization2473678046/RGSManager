@@ -2,16 +2,18 @@
 from __future__ import unicode_literals
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
-from taskpackages.models import TaskPackage, TaskPackageSon, TaskPackageOwner, EchartTaskPackage, EchartSchedule
+from taskpackages.models import TaskPackage, TaskPackageSon, TaskPackageOwner, EchartTaskPackage, EchartSchedule, \
+    TaskPackageScheduleSet, TaskPackageChunk
 from users.models import User
 from utils.permission import AdminPerssion
 from .serializers import TaskPackageSerializer, TaskPackageSonSerializer, TaskPackageOwnerSerializer, \
-    EchartTaskpackageSerializer, EchartScheduleSerializer
+    EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer, TaskPackageChunkSerializer
 
 
 class TaskPackagePagination(PageNumberPagination):
@@ -167,8 +169,10 @@ class EchartScheduleViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = EchartSchedule.objects.filter(count__gt=0)
     serializer_class = EchartScheduleSerializer
 
+
     def list(self, request, *args, **kwargs):
-        schedules = [choice[1] for choice in TaskPackageSon.SCHEDULECHOICE]
+
+        schedules = TaskPackageScheduleSet.objects.all()
         for schedule in schedules:
             count = TaskPackage.objects.filter(schedule=schedule).count()
             try:
@@ -183,3 +187,20 @@ class EchartScheduleViewSet(mixins.ListModelMixin, GenericViewSet):
         serializer = self.get_serializer(echartschedules, many=True)
 
         return Response(serializer.data)
+
+
+# 进度增删改查
+class ScheduleViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, GenericViewSet):
+
+    serializer_class = ScheduleSerializer
+    queryset = TaskPackageScheduleSet.objects.all()
+    permission_classes = [IsAuthenticated, AdminPerssion]
+
+
+
+# 文件分块上传
+class TaskPackageChunkViewSet(CreateModelMixin, ListModelMixin, GenericViewSet):
+    queryset = TaskPackageChunk.objects.all()
+    serializer_class = TaskPackageChunkSerializer
+
+

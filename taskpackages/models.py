@@ -14,6 +14,13 @@ def user_directory_path(instance, filename):
                                              datetime.now().strftime("%d"),
                                              datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"), filename)
 
+def file_chunk_path(instance, filename):
+    return 'file_chunk/{0}/{1}/{2}/{3}'.format(
+        datetime.now().strftime("%m"),
+        datetime.now().strftime("%d"),
+        instance.file_md5,
+        filename)
+
 
 
 @python_2_unicode_compatible
@@ -43,26 +50,48 @@ class TaskPackage(models.Model):
         return self.name
 
 
+# 合成分块后文件
+@python_2_unicode_compatible
+class TaskPackageSonMerge(models.Model):
+    file = models.FileField(upload_to=file_chunk_path, null=True, blank=True, verbose_name=u"文件切片")
+    taskpackage_name = models.CharField(max_length=150, null=True, verbose_name=u"主任务包名称")
+    user_username = models.CharField(max_length=150, null=True, verbose_name=u"作业员")  # 子版本上传者
+    version = models.CharField(max_length=100, null=True, blank=True, verbose_name=u"子任务包版本号")
+    describe = models.CharField(max_length=1000, null=True, blank=True, verbose_name=u"描述信息")
+    createtime = models.DateTimeField(auto_now_add=True, verbose_name=u"创建时间")
+    updatetime = models.DateTimeField(auto_now=True, verbose_name=u"更新时间")
+    schedule = models.CharField(max_length=32, default=u"未指定状态",verbose_name=u"任务包进度")
+
+    class Meta:
+        verbose_name = u"子任务包合并"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
+
+
+# 分块上传模型
+@python_2_unicode_compatible
+class TaskPackageChunk(models.Model):
+    name = models.CharField(max_length=32, null=True, verbose_name=u"文件切片")
+    file_chunk = models.FileField(upload_to=file_chunk_path, null=True, verbose_name=u"文件切片")
+    chunk = models.IntegerField(null=True, verbose_name=u"第几个")
+    chunks = models.IntegerField(null=True, verbose_name=u"共第几个")
+    file_md5 = models.CharField(max_length=128, null=True, verbose_name=u"MD5")
+    chunk_md5 = models.CharField(max_length=128, null=True, verbose_name="文件切块md5")
+
+    class Meta:
+        verbose_name = u"文件切片"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
+
+
+
 @python_2_unicode_compatible
 class TaskPackageSon(models.Model):
     """子任务包"""
-    # TODO 改为大写，去下划线
-    SCHEDULECHOICE = (
-        (0, u'未指定状态'),
-        (1, u'修改缝隙'),
-        (2, u'河网环修改'),
-        (3, u'有向点修改'),
-        (4, u'一对多修改'),
-        (5, u'匝道赋值'),
-        (6, u'同层拓扑'),
-        (7, u'不同层拓扑'),
-        (8, u'微短线修改'),
-        (9, u'微小面修改'),
-        (10, u'急锐角修改'),
-        (11, u'等高线拼接'),
-        (12, u'完成')
-    )
-
     taskpackage_name = models.CharField(max_length=150, null=True, verbose_name=u"主任务包名称")
     user_username = models.CharField(max_length=150, null=True, verbose_name=u"作业员")  # 子版本上传者
     version = models.CharField(max_length=100, null=True, blank=True, verbose_name=u"子任务包版本号")
@@ -72,6 +101,7 @@ class TaskPackageSon(models.Model):
     updatetime = models.DateTimeField(auto_now=True, verbose_name=u"更新时间")
     isdelete = models.BooleanField(default=False, verbose_name=u"逻辑删除")
     schedule = models.CharField(max_length=32, default=u"未指定状态",verbose_name=u"任务包进度")
+    md5 = models.CharField(max_length=128, null=True, verbose_name=u"MD5")
 
     class Meta:
         verbose_name = u'子任务包'
@@ -117,7 +147,14 @@ class EchartSchedule(models.Model):
         return self.taskpackage_schedule
 
 
-# 子任务包进度表
+# 进度表
 @python_2_unicode_compatible
-class Schedule(models.Model):
+class TaskPackageScheduleSet(models.Model):
     schedule = models.CharField(max_length=32, default=u"未指定状态",verbose_name=u"任务包进度")
+
+    class Meta:
+        verbose_name = u'进度表'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.schedule

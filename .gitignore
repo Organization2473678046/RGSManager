@@ -2,10 +2,10 @@
 
 
 
-media/
+#media/
 
-# /media/*
-# !/media/tt.py
+/media/*
+!/media/.gitkeep
 
 
 # local env files

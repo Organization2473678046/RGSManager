@@ -1,6 +1,7 @@
 .DS_Store
+/media/*
+!/media/tt.py
 
-media/
 
 # local env files
 .env.local

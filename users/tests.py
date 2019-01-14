@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import os
+
+from django.db.models import QuerySet
 from django.test import TestCase
 
 # Create your tests here.
@@ -12,12 +14,23 @@ django.setup()
 
 if __name__ == '__main__':
     from taskpackages.models import TaskPackage
-    obj1 = TaskPackage.objects.values("owner")
-    print obj1
-    obj = TaskPackage.objects.values("owner").distinct()
-    print len(obj)
-    print obj.count()
+    from taskpackages.models import RegionTask
+    # obj1 = TaskPackage.objects.values("owner")
+    # print obj1
+    # obj = TaskPackage.objects.values("owner").distinct()
+    # print len(obj)
+    # print obj.count()
+    #
+    # print obj
 
-    print obj
+    # taskpackage = TaskPackage.objects.get(name="task1",regiontask_name="东南区域")
+    # print taskpackage
 
+    # r = RegionTask.objects.filter(name="111")
+
+    # if not None:
+    #     print "2222"
+    # if r == QuerySet([]):
+    #     print 111
+    # print r
     pass

@@ -28,7 +28,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework.routers import DefaultRouter
 from users.views import UserListViewSet,UserViewSet
 from taskpackages.views import TaskPackageViewSet, TaskPackageSonViewSet, TaskPackageOwnerViewSet, \
-    EchartTaskpackageViewSet, EchartScheduleViewSet, ScheduleViewSet, TaskPackageChunkViewSet
+    EchartTaskpackageViewSet, EchartScheduleViewSet, ScheduleViewSet,RegionTaskView
 
 router = DefaultRouter()
 router.register(r'users', UserListViewSet, base_name='users')
@@ -39,16 +39,16 @@ router.register(r'taskpackageowners', TaskPackageOwnerViewSet, base_name='taskpa
 router.register(r'echarttaskpackages', EchartTaskpackageViewSet, base_name='echarttaskpackage')
 router.register(r'echartschedules', EchartScheduleViewSet, base_name='echartschedules')
 router.register(r'schedule', ScheduleViewSet, base_name='schedule')
-router.register(r'taskpackagechunk', TaskPackageChunkViewSet, base_name='file_chunk')
+router.register(r'regiontasks', RegionTaskView, base_name='regiontasks')
 
 
 urlpatterns = [
-    url(r'^v6/admin/', admin.site.urls),
-    # url(r'^v6/xadmin/', xadmin.site.urls),
-    url(r'^v6/login/$', obtain_jwt_token),
-    url(r'^v6/', include(router.urls)),
-    url(r'^v6/docs/', include_docs_urls(title=u"库管系统API")),
-    url(r'^v6/media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
-    url(r'^v6/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^v7/admin/', admin.site.urls),
+    # url(r'^v7/xadmin/', xadmin.site.urls),
+    url(r'^v7/login/$', obtain_jwt_token),
+    url(r'^v7/', include(router.urls)),
+    url(r'^v7/docs/', include_docs_urls(title=u"库管系统API")),
+    url(r'^v7/media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
+    url(r'^v7/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 

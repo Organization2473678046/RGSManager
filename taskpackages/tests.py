@@ -90,6 +90,8 @@ def taskpackage_insert(data):
             data[1], data[2], data[4], data[5], data[6], data[9], str(data[7]), str(data[8]),
             data[10], data[11], data[12], data[13], data[14])
     else:
+        # sql = u"-- insert into taskpackages_taskpackage (name,owner,exowner,mapnums,file,status,describe,createtime,updatetime,isdelete,mapnumcounts, schedule,reallyname) values ('%s','%s','%s','%s','%s',%r, '%s',%r, %r,%r,%d,'%s','%s')" % (
+        #     data[1], data[10], data[2], data[3], data[4], data[5], data[9], str(data[7]), str(data[8]), data[6])
         sql = u"insert into taskpackages_taskpackage (name,owner,exowner,mapnums,file,status,describe,createtime,updatetime,isdelete,mapnumcounts, schedule,newtaskpackagesonfornotice,reallyname) values ('%s','%s','%s','%s','%s',%r, '%s',%r, %r,%r,%d,'%s',%d,'%s')" % (
             data[1], data[2], data[3], data[4], data[5], data[6], data[9], str(data[7]), str(data[8]),
             data[10], data[11], data[12], data[13], data[14])
@@ -127,8 +129,8 @@ def taskpackageson_insert(data):
                             host="localhost",
                             port="5432")
     cur = conn.cursor()
-    schedule_list = ["未指定状态", "修改缝隙", "河网环修改", "有向点修改", "一对多修改", "匝道赋值", "同层拓扑", "不同层拓扑", "微短线修改", "微小面修改", "急锐角修改",
-                     "等高线拼接", "完成"]
+    schedule_list = ["未指定状态", "修改缝隙", "河网环修改", "有向点修改", "一对多修改", "匝道赋值", "同层拓扑", "不同层拓扑", "微短线修改", "微小面修改", "急锐角修改", "等高线拼接", "完成"]
+
     sql = u"insert into taskpackages_taskpackageson (taskpackage_name,user_username,version,file,describe,createtime,updatetime,isdelete, schedule) values ('%s','%s','%s','%s','%s',%r,%r,%r,%d)" % (
         data[1], data[7], data[2], data[6], data[5], str(data[3]), str(data[4]), data[8], schedule_list[data[9]])
     print sql
@@ -190,4 +192,5 @@ if __name__ == '__main__':
     # 迁移@功能表
     # get_taskpackageowner_data("taskpackages_taskpackageowner")
 
+    # get_data()
     pass

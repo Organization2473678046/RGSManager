@@ -12,8 +12,8 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RenameModel(
-            old_name='Schedule',
-            new_name='TaskPackageScheduleSet',
-        ),
+        # migrations.RenameModel(
+        #     old_name='Schedule',
+        #     new_name='TaskPackageScheduleSet',
+        # ),
     ]

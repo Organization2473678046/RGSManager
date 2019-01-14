@@ -26,9 +26,6 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 
-
-
-
 @app.task
 def clipfromsde(mapnumlist,MEDIA,taskname,taskpackage_id,taskpackageson_id):
 
@@ -79,7 +76,7 @@ def clipfromsde(mapnumlist,MEDIA,taskname,taskpackage_id,taskpackageson_id):
 
     outZipFile = os.path.join(MEDIA, taskdirnameup, taskname + u".zip")
     zipUpFolder(taskpath, outZipFile)
-    dbname=u"mmanageV6.0"
+    dbname=u"mmanageV3.0"
     tablename=u"taskpackages_taskpackage"
     taskpackagesontablename=u"taskpackages_taskpackageson"
     statusfieldname=u"status"

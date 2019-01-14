@@ -28,17 +28,17 @@ class Migration(migrations.Migration):
                 ('count', models.IntegerField(default=0, null=True, verbose_name='\u4efb\u52a1\u5305\u6570\u91cf')),
             ],
         ),
-        migrations.CreateModel(
-            name='Schedule',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('schedule', models.CharField(default='\u672a\u6307\u5b9a\u72b6\u6001', max_length=32, verbose_name='\u4efb\u52a1\u5305\u8fdb\u5ea6')),
-            ],
-            options={
-                'verbose_name': '\u8fdb\u5ea6\u8868',
-                'verbose_name_plural': '\u8fdb\u5ea6\u8868',
-            },
-        ),
+        # migrations.CreateModel(
+        #     name='Schedule',
+        #     fields=[
+        #         ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+        #         ('schedule', models.CharField(default='\u672a\u6307\u5b9a\u72b6\u6001', max_length=32, verbose_name='\u4efb\u52a1\u5305\u8fdb\u5ea6')),
+        #     ],
+        #     options={
+        #         'verbose_name': '\u8fdb\u5ea6\u8868',
+        #         'verbose_name_plural': '\u8fdb\u5ea6\u8868',
+        #     },
+        # ),
         migrations.AddField(
             model_name='taskpackage',
             name='mapnumcounts',

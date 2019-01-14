@@ -8,7 +8,7 @@ class AdminPerssion(BasePermission):
     message = "管理员权限才可以访问"
 
     def has_permission(self, request, view):
-        if request.user.isadmin is False:
+        if request.user.isadmin is False or request.user=="AnonymousUser":
             return False
         return True
 

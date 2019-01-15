@@ -21,7 +21,7 @@ class UserListViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, GenericVie
         if self.action == 'list':
             return User.objects.filter(isadmin=False)
         else:
-            return None
+            return []
 
 
 class UserViewSet(mixins.ListModelMixin, GenericViewSet):

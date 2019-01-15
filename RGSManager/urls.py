@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from rest_framework.authentication import SessionAuthentication
 
 """RGSManageV3 URL Configuration

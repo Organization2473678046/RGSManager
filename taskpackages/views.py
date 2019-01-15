@@ -43,11 +43,11 @@ class TaskPackageViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Generic
     """
     pagination_class = TaskPackagePagination
     serializer_class = TaskPackageSerializer
-    # filter_backends = [SearchFilter, DjangoFilterBackend, OrderingFilter]
-    filter_backends = [SearchFilter, OrderingFilter]
+    filter_backends = [SearchFilter, DjangoFilterBackend, OrderingFilter]
+    # filter_backends = [SearchFilter, OrderingFilter]
+    # filter_fields = ["describe", "name", "owner", "schedule","regiontask_name"]
     ordering_fields = ("id", "name", "owner", "mapnumcounts", "updatetime", "newtaskpackagesonfornotice")
     ordering = ("-newtaskpackagesonfornotice")
-    # filter_fields = ["describe", "name", "owner", "schedule"]
     search_fields = ('describe', 'name', 'owner', 'schedule', 'reallyname')
 
     def get_permissions(self):
@@ -57,14 +57,21 @@ class TaskPackageViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Generic
         return [IsAuthenticated()]
 
     def get_queryset(self):
-        user = self.request.user
-        if self.action == 'list':
-            regiontask_name = self.request.query_params.get("regiontask_name")
-            if user.isadmin:
-                return TaskPackage.objects.filter(regiontask_name=regiontask_name, isdelete=False)
-            else:
-                return TaskPackage.objects.filter(regiontask_name=regiontask_name, owner=user.username, isdelete=False)
-        return None
+        # 访问接口文档时,会访问这个函数,此时request is None,如果加了过滤之后,访问接口文档时会报警告
+        # UserWarning: <class 'taskpackages.views.TaskPackageViewSet'> is not compatible with schema generation
+        #   "{} is not compatible with schema generation".format(view.__class__)
+        print self.request
+        # 防止访问接口文档时报警告
+        if self.request is not None:
+            user = self.request.user
+            if self.action == 'list':
+                regiontask_name = self.request.query_params.get("regiontask_name")
+                if user.isadmin:
+                    return TaskPackage.objects.filter(regiontask_name=regiontask_name, isdelete=False)
+                else:
+                    return TaskPackage.objects.filter(regiontask_name=regiontask_name, owner=user.username, isdelete=False)
+            return None
+        return []
 
 
 class TaskPackageSonViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):
@@ -86,7 +93,7 @@ class TaskPackageSonViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Gene
                 if taskpackage.newtaskpackagesonfornotice != 0 and user.isadmin:
                     taskpackage.newtaskpackagesonfornotice = 0
                     taskpackage.save()
-            except TaskPackage.DoesNotExist as e:
+            except TaskPackage.DoesNotExist:
                 return []
             # try:
             #     taskpackage = TaskPackage.objects.get(name=taskpackage_name)
@@ -126,14 +133,14 @@ class TaskPackageOwnerViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, Ge
             taskpackage_name = self.request.query_params.get("taskpackage_name")
             regiontask_name = self.request.query_params.get("regiontask_name")
             try:
-                taskpackage = TaskPackage.objects.get(name=taskpackage_name)
+                taskpackage = TaskPackage.objects.get(name=taskpackage_name,regiontask_name=regiontask_name)
             except TaskPackage.DoesNotExist:
                 return []
             else:
                 if user.isadmin:
-                    return TaskPackageOwner.objects.filter(isdelete=False, taskpackage_name=taskpackage.name)
+                    return TaskPackageOwner.objects.filter(isdelete=False, taskpackage_name=taskpackage.name,regiontask_name=regiontask_name)
                 else:
-                    return TaskPackageOwner.objects.filter(owner=user.username, taskpackage_name=taskpackage.name,
+                    return TaskPackageOwner.objects.filter(owner=user.username, taskpackage_name=taskpackage.name,regiontask_name=regiontask_name,
                                                            isdelete=False)
         return None
 
@@ -218,7 +225,7 @@ class ScheduleViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Upd
 class RegionTaskView(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):
     """
     list: 获取所有任务区域
-    create: 划分任务区域
+    create: 创建任务区域
     """
     permission_classes = [IsAuthenticated, AdminPerssion]
     queryset = RegionTask.objects.all()

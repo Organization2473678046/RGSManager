@@ -24,12 +24,12 @@ class TaskPackage(models.Model):
     mapnums = models.CharField(max_length=65536, null=True, verbose_name=u"图号集")
     mapnumcounts = models.IntegerField(default=0, null=True, verbose_name=u"图幅数")
     file = models.FileField(upload_to=user_directory_path, null=True, verbose_name=u"任务包文件")
-    status = models.CharField(max_length=10, default='0', verbose_name=u"任务包状态")
+    status = models.CharField(max_length=100, default='0', verbose_name=u"任务包状态")
     describe = models.CharField(max_length=1000, null=True, verbose_name=u"描述信息")
     createtime = models.DateTimeField(auto_now_add=True, verbose_name=u"创建时间")
     updatetime = models.DateTimeField(auto_now=True, verbose_name=u"更新时间")
     isdelete = models.BooleanField(default=False, verbose_name=u"逻辑删除")
-    schedule = models.CharField(max_length=200, default=u"未指定状态", verbose_name=u"任务包进度")
+    schedule = models.CharField(max_length=200, default=u"未指定状态", verbose_name=u"任务包处理进度")
     # 子任务包创建后的消息提醒
     newtaskpackagesonfornotice = models.IntegerField(default=0, null=True, verbose_name=u"消息提醒")
     reallyname = models.CharField(max_length=150, default=None, null=True, verbose_name=u"作业员真实姓名")
@@ -71,7 +71,7 @@ class TaskPackageOwner(models.Model):
     taskpackage_name = models.CharField(max_length=150, null=True, verbose_name=u"主任务包名称")
     owner = models.CharField(max_length=150, verbose_name=u"作业员")
     exowner = models.CharField(max_length=150, null=True, blank=True, verbose_name=u"前作业员")
-    describe = models.CharField(max_length=200, null=True, blank=True, verbose_name=u"文件描述")
+    describe = models.CharField(max_length=1000, null=True, blank=True, verbose_name=u"文件描述")
     createtime = models.DateTimeField(auto_now_add=True, verbose_name=u"创建时间")
     regiontask_name = models.CharField(max_length=150,default=u"东南区域", verbose_name=u"任务区域")
     isdelete = models.BooleanField(default=False, verbose_name=u"逻辑删除")
@@ -86,7 +86,7 @@ class TaskPackageOwner(models.Model):
 
 @python_2_unicode_compatible
 class EchartTaskPackage(models.Model):
-    user_reallyname = models.CharField(max_length=150, null=True, verbose_name=u"作业员")
+    user_reallyname = models.CharField(max_length=200, null=True, verbose_name=u"作业员")
     count = models.IntegerField(default=0, null=True, verbose_name=u"任务包数量")
     regiontask_name = models.CharField(max_length=150,default=u"东南区域", verbose_name=u"任务区域")
 
@@ -122,6 +122,7 @@ class TaskPackageScheduleSet(models.Model):
 class RegionTask(models.Model):
     name = models.CharField(error_messages={"unique": u"任务包区域已存在"}, max_length=200, unique=True, null=True,
                             verbose_name=u"任务区域")
+    status = models.CharField(max_length=200, default="处理中", verbose_name=u"状态")
     file = models.FileField(upload_to=user_directory_path, null=True, blank=True, verbose_name=u"任务包文件")
     basemapservice = models.CharField(max_length=1000, null=True, verbose_name=u"底图服务")
     mapindexfeatureservice = models.CharField(max_length=1000, null=True, verbose_name=u"接图表要素服务")

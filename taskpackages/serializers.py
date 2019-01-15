@@ -40,7 +40,7 @@ class TaskPackageSerializer(serializers.ModelSerializer):
         username = obj.exowner
         try:
             user = User.objects.get(username=username)
-        except User.DoesNotExist as e:
+        except User.DoesNotExist:
             return None
         exreallyname = user.reallyname
         return exreallyname
@@ -117,7 +117,7 @@ class TaskPackageSonSerializer(serializers.ModelSerializer):
         username = obj.user_username
         try:
             user = User.objects.get(username=username)
-        except User.DoesNotExist as e:
+        except User.DoesNotExist:
             return None
         reallyname = user.reallyname
         return reallyname
@@ -191,7 +191,7 @@ class TaskPackageOwnerSerializer(serializers.ModelSerializer):
         username = obj.owner
         try:
             user = User.objects.get(username=username)
-        except User.DoesNotExist as e:
+        except User.DoesNotExist:
             return None
         reallyname = user.reallyname
         return reallyname
@@ -200,7 +200,7 @@ class TaskPackageOwnerSerializer(serializers.ModelSerializer):
         username = obj.exowner
         try:
             user = User.objects.get(username=username)
-        except User.DoesNotExist as e:
+        except User.DoesNotExist:
             return None
         exreallyname = user.reallyname
         return exreallyname

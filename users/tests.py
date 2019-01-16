@@ -23,14 +23,8 @@ if __name__ == '__main__':
     #
     # print obj
 
-    # taskpackage = TaskPackage.objects.get(name="task1",regiontask_name="东南区域")
-    # print taskpackage
+    taskpackage = TaskPackage.objects.get(name="task1",regiontask_name="东南区域")
+    print taskpackage
+    print taskpackage.regiontask_name
 
-    # r = RegionTask.objects.filter(name="111")
-
-    # if not None:
-    #     print "2222"
-    # if r == QuerySet([]):
-    #     print 111
-    # print r
     pass

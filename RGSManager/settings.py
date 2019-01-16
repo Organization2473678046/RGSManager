@@ -88,9 +88,6 @@ WSGI_APPLICATION = 'RGSManager.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-
-
-
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mmanageV7.0',
@@ -165,7 +162,6 @@ REST_FRAMEWORK = {
         # 'rest_framework.filters.SearchFilter',
         # 'rest_framework.filters.OrderingFilter',
     ),
-
 }
 
 JWT_AUTH = {

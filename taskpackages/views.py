@@ -5,6 +5,7 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 from taskpackages.models import TaskPackage, TaskPackageSon, TaskPackageOwner, EchartTaskPackage, EchartSchedule, \
@@ -156,7 +157,7 @@ class EchartTaskpackageViewSet(mixins.ListModelMixin, GenericViewSet):
     def list(self, request, *args, **kwargs):
         regiontask_name = self.request.query_params.get("regiontask_name")
         if not regiontask_name:
-            return Response("请选择任务区域")
+            return Response("请选择任务区域",status=status.HTTP_400_BAD_REQUEST)
         users = User.objects.all()
         for user in users:
             count = TaskPackage.objects.filter(owner=user.username, regiontask_name=regiontask_name).count()
@@ -187,7 +188,7 @@ class EchartScheduleViewSet(mixins.ListModelMixin, GenericViewSet):
     def list(self, request, *args, **kwargs):
         regiontask_name = self.request.query_params.get("regiontask_name")
         if not regiontask_name:
-            return Response("请选择任务区域")
+            return Response("请选择任务区域",status=status.HTTP_400_BAD_REQUEST)
 
         schedules = TaskPackageScheduleSet.objects.all()
         for schedule in schedules:
@@ -210,6 +211,12 @@ class EchartScheduleViewSet(mixins.ListModelMixin, GenericViewSet):
 
 class ScheduleViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin,
                       GenericViewSet):
+    """
+    list: 根据任务区域查询对应的进度
+    create: 创建进度
+    update: 修改进度
+    destroy: 删除进度
+    """
     serializer_class = ScheduleSerializer
     # queryset = TaskPackageScheduleSet.objects.all()
     permission_classes = [IsAuthenticated, AdminPerssion]

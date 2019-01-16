@@ -50,7 +50,7 @@ class TaskPackageSerializer(serializers.ModelSerializer):
         try:
             user = User.objects.get(username=owner)
         except User.DoesNotExist:
-            raise serializers.ValidationError("作业员不存在")
+            raise serializers.ValidationError(u"作业员 {} 不存在".format(owner))
         else:
             validated_data["reallyname"] = user.reallyname
 
@@ -58,7 +58,7 @@ class TaskPackageSerializer(serializers.ModelSerializer):
         try:
             regiontask = RegionTask.objects.get(name=regiontask_name)
         except RegionTask.DoesNotExist:
-            raise serializers.ValidationError(u"任务区域不存在")
+            raise serializers.ValidationError(u"任务区域 {} 不存在".format(regiontask_name))
 
         return validated_data
 
@@ -127,18 +127,18 @@ class TaskPackageSonSerializer(serializers.ModelSerializer):
         try:
             regiontask = RegionTask.objects.get(name=regiontask_name)
         except RegionTask.DoesNotExist:
-            raise serializers.ValidationError(u"任务区域不存在")
+            raise serializers.ValidationError(u"任务区域 {} 不存在".format(regiontask_name))
 
         taskpackage_name = validated_data.get("taskpackage_name")
         try:
-            taskpackage = TaskPackage.objects.filter(isdelete=False).get(name=taskpackage_name)
+            taskpackage = TaskPackage.objects.filter(isdelete=False).get(name=taskpackage_name,regiontask_name=regiontask_name)
         except TaskPackage.DoesNotExist:
-            raise serializers.ValidationError(u"任务包{}不存在".format(taskpackage_name))
+            raise serializers.ValidationError(u"{0}名为 {1} 的任务包不存在".format(regiontask_name,taskpackage_name))
         else:
             user = self.context["request"].user
             # 只有管理员和主任务包拥有者才能上该任务包的子版本
             if not user.isadmin and user.username != taskpackage.owner:
-                raise PermissionValidationError(u"用户{}无权限".format(user.username))
+                raise PermissionValidationError(u"用户 {} 无权限".format(user.username))
             validated_data["user_username"] = user.username
             validated_data["taskpackage"] = taskpackage
 
@@ -206,15 +206,21 @@ class TaskPackageOwnerSerializer(serializers.ModelSerializer):
         return exreallyname
 
     def validate(self, validated_data):
-        taskpackage_name = validated_data.get("taskpackage_name")
         regiontask_name = validated_data.get("regiontask_name")
+        try:
+            regiontask = RegionTask.objects.get(name=regiontask_name)
+        except RegionTask.DoesNotExist:
+            raise serializers.ValidationError(u"任务区域 {} 不存在".format(regiontask_name))
+
+        taskpackage_name = validated_data.get("taskpackage_name")
         try:
             taskpackage = TaskPackage.objects.get(name=taskpackage_name, regiontask_name=regiontask_name)
         except TaskPackage.DoesNotExist:
-            raise serializers.ValidationError(u"任务包{}不存在".format(taskpackage_name))
+            # raise serializers.ValidationError(u"任务包{}不存在".format(taskpackage_name))
+            raise serializers.ValidationError(u"{0}名为 {1} 的任务包不存在".format(regiontask_name,taskpackage_name))
         else:
             if validated_data["owner"] == taskpackage.owner:
-                raise serializers.ValidationError(u"该任务包已经在{}名下".format(validated_data["owner"]))
+                raise serializers.ValidationError(u"该任务包已经在 {} 名下".format(validated_data["owner"]))
 
             validated_data["taskpackage"] = taskpackage
             validated_data["exowner"] = taskpackage.owner

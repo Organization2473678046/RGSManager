@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+import os
+import zipfile
 from rest_framework import serializers
 from rest_framework.exceptions import APIException
 from models import TaskPackage, TaskPackageSon, TaskPackageOwner, EchartTaskPackage, EchartSchedule, \
@@ -7,6 +11,7 @@ from django.conf import settings
 from rest_framework import status
 from celery_app.clipfromsde import clipfromsde
 from users.models import User
+from django.conf import settings
 
 
 class PermissionValidationError(APIException):
@@ -131,9 +136,10 @@ class TaskPackageSonSerializer(serializers.ModelSerializer):
 
         taskpackage_name = validated_data.get("taskpackage_name")
         try:
-            taskpackage = TaskPackage.objects.filter(isdelete=False).get(name=taskpackage_name,regiontask_name=regiontask_name)
+            taskpackage = TaskPackage.objects.filter(isdelete=False).get(name=taskpackage_name,
+                                                                         regiontask_name=regiontask_name)
         except TaskPackage.DoesNotExist:
-            raise serializers.ValidationError(u"{0}名为 {1} 的任务包不存在".format(regiontask_name,taskpackage_name))
+            raise serializers.ValidationError(u"{0}名为 {1} 的任务包不存在".format(regiontask_name, taskpackage_name))
         else:
             user = self.context["request"].user
             # 只有管理员和主任务包拥有者才能上该任务包的子版本
@@ -217,7 +223,7 @@ class TaskPackageOwnerSerializer(serializers.ModelSerializer):
             taskpackage = TaskPackage.objects.get(name=taskpackage_name, regiontask_name=regiontask_name)
         except TaskPackage.DoesNotExist:
             # raise serializers.ValidationError(u"任务包{}不存在".format(taskpackage_name))
-            raise serializers.ValidationError(u"{0}名为 {1} 的任务包不存在".format(regiontask_name,taskpackage_name))
+            raise serializers.ValidationError(u"{0}名为 {1} 的任务包不存在".format(regiontask_name, taskpackage_name))
         else:
             if validated_data["owner"] == taskpackage.owner:
                 raise serializers.ValidationError(u"该任务包已经在 {} 名下".format(validated_data["owner"]))
@@ -277,3 +283,25 @@ class RegionTaskSerializer(serializers.ModelSerializer):
             "mapindexmapservice": {"read_only": True},
             "mapindexschedulemapservice": {"read_only": True},
         }
+
+    # def create(self, validated_data):
+    #     regiontask = RegionTask.objects.create(**validated_data)
+    #     file_path = regiontask.file.path
+    #     print file_path
+    #
+    #     # 需要进入celery进行空间库操作
+    #     # 解压文件
+    #     file_dir = os.path.dirname(file_path)
+    #     r = zipfile.is_zipfile(file_path)
+    #     if r:
+    #         fz = zipfile.ZipFile(file_path, 'r')
+    #         for file in fz.namelist():
+    #             fz.extract(file,file_dir)
+    #     else:
+    #         print('This is not zip')
+    #
+    #     filename = file_path.split("\\")[-1].split(".zip")[0]
+    #     unzipfile = os.path.join(file_dir,filename)
+    #     print unzipfile
+    #
+    #     return regiontask

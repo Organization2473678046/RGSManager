@@ -12,10 +12,10 @@ import django
 django.setup()
 
 if __name__ == "__main__":
-    from taskpackages.models import TaskPackage
-    tasks = TaskPackage.objects.all().values_list("name")
-    print tasks
-    print tasks[0]
-    print type(tasks[0])
+    # from taskpackages.models import TaskPackage
+    # tasks = TaskPackage.objects.all().values_list("name")
+    # print tasks
+    # print tasks[0]
+    # print type(tasks[0])
 
     pass

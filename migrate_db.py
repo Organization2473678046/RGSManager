@@ -82,13 +82,13 @@ def taskpackage_insert(data):
                             port="5432")
     cur = conn.cursor()
     if data[3] is None or data[3] == "None":
-        sql = u"insert into taskpackages_taskpackage (name,owner,mapnums,file,status,createtime,updatetime,describe,isdelete,mapnumcounts,newtaskpackagesonfornotice,reallyname,schedule,regiontask_name) values ('%s','%s','%s','%s',%r, %r, %r,'%s',%r,%d,%d,'%s','%s','东南区域')" % (
+        sql = u"insert into taskpackages_taskpackage (name,owner,mapnums,file,status,createtime,updatetime,describe,isdelete,mapnumcounts,newtaskpackagesonfornotice,reallyname,schedule,regiontask_name) values ('%s','%s','%s','%s',%r, %r, %r,'%s',%r,%d,%d,'%s','%s','东南区域1800幅')" % (
             data[1], data[2], data[4], data[5], data[6], str(data[7]), str(data[8]), data[9],
             data[10], data[11], data[12], data[13], data[14])
     else:
         # sql = u"insert into taskpackages_taskpackage (name,owner,exowner,mapnums,file,status,describe,createtime,updatetime,isdelete,mapnumcounts, schedule,reallyname) values ('%s','%s','%s','%s','%s',%r, '%s',%r, %r,%r,%d,'%s','%s')" % (
         #     data[1], data[10], data[2], data[3], data[4], data[5], data[9], str(data[7]), str(data[8]), data[6])
-        sql = u"insert into taskpackages_taskpackage (name,owner,exowner,mapnums,file,status,createtime,updatetime,describe,isdelete,mapnumcounts,newtaskpackagesonfornotice,reallyname,schedule,regiontask_name) values ('%s','%s','%s','%s','%s',%r, %r, %r,'%s',%r,%d,%d,'%s','%s','东南区域')" % (
+        sql = u"insert into taskpackages_taskpackage (name,owner,exowner,mapnums,file,status,createtime,updatetime,describe,isdelete,mapnumcounts,newtaskpackagesonfornotice,reallyname,schedule,regiontask_name) values ('%s','%s','%s','%s','%s',%r, %r, %r,'%s',%r,%d,%d,'%s','%s','东南区域1800幅')" % (
             data[1], data[2], data[3], data[4], data[5], data[6], str(data[7]), str(data[8]), data[9],
             data[10], data[11], data[12], data[13], data[14])
     cur.execute(sql)
@@ -126,7 +126,7 @@ def taskpackageson_insert(data):
                             port="5432")
     cur = conn.cursor()
 
-    sql = u"insert into taskpackages_taskpackageson (taskpackage_name,version,createtime,updatetime,describe,file,user_username,isdelete, schedule,regiontask_name) values ('%s','%s',%r,%r,'%s','%s','%s',%r,'%s','东南区域')" % (
+    sql = u"insert into taskpackages_taskpackageson (taskpackage_name,version,createtime,updatetime,describe,file,user_username,isdelete, schedule,regiontask_name) values ('%s','%s',%r,%r,'%s','%s','%s',%r,'%s','东南区域1800幅')" % (
         data[1], data[2], str(data[3]), str(data[4]), data[5], data[6], data[7], data[8], data[9])
     print sql
     cur.execute(sql)
@@ -163,10 +163,10 @@ def taskpackageowner_insert(data):
                             port="5432")
     cur = conn.cursor()
     if data[3] is None or data[3] == "None":
-        sql = u"insert into taskpackages_taskpackageowner (taskpackage_name,owner,createtime,describe,isdelete,regiontask_name) values ('%s','%s',%r,'%s',%r,'东南区域')" % (
+        sql = u"insert into taskpackages_taskpackageowner (taskpackage_name,owner,createtime,describe,isdelete,regiontask_name) values ('%s','%s',%r,'%s',%r,'东南区域1800幅')" % (
             data[1], data[2], str(data[4]), data[5], data[6])
     else:
-        sql = u"insert into taskpackages_taskpackageowner (taskpackage_name,owner,exowner,createtime,describe,isdelete,regiontask_name) values ('%s','%s','%s',%r,'%s',%r,'东南区域')" % (
+        sql = u"insert into taskpackages_taskpackageowner (taskpackage_name,owner,exowner,createtime,describe,isdelete,regiontask_name) values ('%s','%s','%s',%r,'%s',%r,'东南区域1800幅')" % (
             data[1], data[2], data[3], str(data[4]), data[5], data[6])
     print sql
     cur.execute(sql)
@@ -195,7 +195,7 @@ def get_taskpackageschedule_data(tablename):
 
 
 def taskpackageschedule_insert(data):
-    # taskpackages_taskpackagecheduleset 表数据的迁移
+    # taskpackages_taskpackagescheduleset 表数据的迁移
     conn = psycopg2.connect(dbname="mmanageV7.0",
                             user="postgres",
                             password="Lantucx2018",
@@ -203,7 +203,7 @@ def taskpackageschedule_insert(data):
                             port="5432")
     cur = conn.cursor()
 
-    sql = u"insert into taskpackages_taskpackagecheduleset (schedule,regiontask_name) values ('%s','东南区域')" % (
+    sql = u"insert into taskpackages_taskpackagescheduleset (schedule,regiontask_name) values ('%s','东南区域1800幅')" % (
         data[1])
     print sql
     cur.execute(sql)
@@ -225,7 +225,7 @@ if __name__ == '__main__':
     # get_taskpackageowner_data("taskpackages_taskpackageowner")
 
     # 迁移进度表
-    # get_taskpackageschedule_data("taskpackages_taskpackagecheduleset")
+    # get_taskpackageschedule_data("taskpackages_taskpackagescheduleset")
 
     # get_data()
     pass

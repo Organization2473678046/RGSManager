@@ -13,7 +13,7 @@ from taskpackages.models import TaskPackage, TaskPackageSon, TaskPackageOwner, E
 from users.models import User
 from utils.permission import AdminPerssion
 from .serializers import TaskPackageSerializer, TaskPackageSonSerializer, TaskPackageOwnerSerializer, \
-    EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer, RegionTaskSerializer
+    EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer,RegionTaskSerializer
 
 
 class TaskPackagePagination(PageNumberPagination):
@@ -219,7 +219,12 @@ class ScheduleViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Upd
     """
     serializer_class = ScheduleSerializer
     # queryset = TaskPackageScheduleSet.objects.all()
-    permission_classes = [IsAuthenticated, AdminPerssion]
+    # permission_classes = [IsAuthenticated, AdminPerssion]
+
+    def get_permissions(self):
+        if self.action == "list":
+            return [IsAuthenticated()]
+        return [IsAuthenticated(), AdminPerssion()]
 
     def get_queryset(self):
         if self.action == "list":
@@ -231,9 +236,24 @@ class ScheduleViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Upd
 
 class RegionTaskView(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):
     """
-    list: 获取所有任务区域
+    list: 获取所有任务区域;如果传递了区域名字regiontask_name参数,则值返回对应区域的信息
     create: 创建任务区域
     """
-    permission_classes = [IsAuthenticated, AdminPerssion]
-    queryset = RegionTask.objects.all()
+    # permission_classes = [IsAuthenticated, AdminPerssion]
     serializer_class = RegionTaskSerializer
+
+    def get_permissions(self):
+        if self.action == "list":
+            return [IsAuthenticated()]
+        return [IsAuthenticated(), AdminPerssion()]
+
+    def get_queryset(self):
+        if self.action == "list":
+            regiontask_name = self.request.query_params.get("regiontask_name")
+            if regiontask_name:
+                return RegionTask.objects.filter(name=regiontask_name)
+            else:
+                return RegionTask.objects.all()
+        else:
+            return None
+

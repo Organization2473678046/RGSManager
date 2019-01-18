@@ -124,6 +124,8 @@ class RegionTask(models.Model):
                             verbose_name=u"任务区域")
     status = models.CharField(max_length=200, default="处理中", verbose_name=u"状态")
     file = models.FileField(upload_to=user_directory_path, null=True, blank=True, verbose_name=u"任务包文件")
+    mapindexsde = models.CharField(max_length=1000,null=True,verbose_name="接图表sde")
+    rgssde = models.CharField(max_length=1000,null=True,verbose_name="rgssde")
     basemapservice = models.CharField(max_length=1000, null=True, verbose_name=u"底图服务")
     mapindexfeatureservice = models.CharField(max_length=1000, null=True, verbose_name=u"接图表要素服务")
     mapindexmapservice = models.CharField(max_length=1000, null=True, verbose_name=u"接图表地图服务")

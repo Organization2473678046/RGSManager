@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import os
 import zipfile
+import rarfile
 from rest_framework import serializers
 from rest_framework.exceptions import APIException
 from models import TaskPackage, TaskPackageSon, TaskPackageOwner, EchartTaskPackage, EchartSchedule, \
@@ -83,8 +84,11 @@ class TaskPackageSerializer(serializers.ModelSerializer):
         MEDIA = settings.MEDIA_ROOT
         mapnumlist = validated_data["mapnums"]
         taskname = validated_data["name"]
+        regiontask = RegionTask.objects.get(name=taskpackage.regiontask_name)
+        mapindexsdepath = regiontask.mapindexsde
+        rgssdepath = regiontask.rgssde
         # 进入celery进行作业包的异步裁切
-        clipfromsde.delay(mapnumlist, MEDIA, taskname, taskpackage.id, taskpackageson.id)
+        clipfromsde.delay(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpackage.id, taskpackageson.id)
 
         return taskpackage
 
@@ -276,7 +280,8 @@ class ScheduleSerializer(serializers.ModelSerializer):
 class RegionTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegionTask
-        fields = '__all__'
+        fields = ["id", "name", "file", "status", "basemapservice", "mapindexfeatureservice", "mapindexmapservice",
+                  "mapindexschedulemapservice"]
         extra_kwargs = {
             "basemapservice": {"read_only": True},
             "mapindexfeatureservice": {"read_only": True},
@@ -292,16 +297,18 @@ class RegionTaskSerializer(serializers.ModelSerializer):
     #     # 需要进入celery进行空间库操作
     #     # 解压文件
     #     file_dir = os.path.dirname(file_path)
-    #     r = zipfile.is_zipfile(file_path)
-    #     if r:
-    #         fz = zipfile.ZipFile(file_path, 'r')
-    #         for file in fz.namelist():
-    #             fz.extract(file,file_dir)
-    #     else:
-    #         print('This is not zip')
+    #     # r = zipfile.is_zipfile(file_path)
+    #     # if r:
+    #     #     fz = zipfile.ZipFile(file_path, 'r')
+    #     #     for file in fz.namelist():
+    #     #         fz.extract(file,file_dir)
+    #     # else:
+    #     #     print('This is not zip')
+    #     #
+    #     # filename = file_path.split("\\")[-1].split(".zip")[0]
+    #     # unzipfile = os.path.join(file_dir,filename)
+    #     # print unzipfile
     #
-    #     filename = file_path.split("\\")[-1].split(".zip")[0]
-    #     unzipfile = os.path.join(file_dir,filename)
-    #     print unzipfile
+    #
     #
     #     return regiontask

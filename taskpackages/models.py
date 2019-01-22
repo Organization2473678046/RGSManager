@@ -130,6 +130,9 @@ class RegionTask(models.Model):
     mapindexfeatureservice = models.CharField(max_length=1000, null=True, verbose_name=u"接图表要素服务")
     mapindexmapservice = models.CharField(max_length=1000, null=True, verbose_name=u"接图表地图服务")
     mapindexschedulemapservice = models.CharField(max_length=1000, null=True, verbose_name=u"接图表进度服务")
+    describe = models.CharField(max_length=2000, null=True, verbose_name=u"描述信息")
+    createtime = models.DateTimeField(auto_now_add=True, null=True,verbose_name=u"创建时间")
+
 
     class Meta:
         verbose_name = u'任务区域'

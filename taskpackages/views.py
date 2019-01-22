@@ -251,9 +251,9 @@ class RegionTaskView(mixins.ListModelMixin, mixins.CreateModelMixin, GenericView
         if self.action == "list":
             regiontask_name = self.request.query_params.get("regiontask_name")
             if regiontask_name:
-                return RegionTask.objects.filter(name=regiontask_name)
+                return RegionTask.objects.filter(name=regiontask_name).order_by('id')
             else:
-                return RegionTask.objects.all()
+                return RegionTask.objects.all().order_by('id')
         else:
             return None
 

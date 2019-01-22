@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import os
 import zipfile
-import rarfile
+from unrar import rarfile
 from rest_framework import serializers
 from rest_framework.exceptions import APIException
 from models import TaskPackage, TaskPackageSon, TaskPackageOwner, EchartTaskPackage, EchartSchedule, \
@@ -289,26 +289,37 @@ class RegionTaskSerializer(serializers.ModelSerializer):
             "mapindexschedulemapservice": {"read_only": True},
         }
 
-    # def create(self, validated_data):
-    #     regiontask = RegionTask.objects.create(**validated_data)
-    #     file_path = regiontask.file.path
-    #     print file_path
-    #
-    #     # 需要进入celery进行空间库操作
-    #     # 解压文件
-    #     file_dir = os.path.dirname(file_path)
-    #     # r = zipfile.is_zipfile(file_path)
-    #     # if r:
-    #     #     fz = zipfile.ZipFile(file_path, 'r')
-    #     #     for file in fz.namelist():
-    #     #         fz.extract(file,file_dir)
-    #     # else:
-    #     #     print('This is not zip')
-    #     #
-    #     # filename = file_path.split("\\")[-1].split(".zip")[0]
-    #     # unzipfile = os.path.join(file_dir,filename)
-    #     # print unzipfile
-    #
-    #
-    #
-    #     return regiontask
+    def create(self, validated_data):
+        regiontask = RegionTask.objects.create(**validated_data)
+        file_path = regiontask.file.path
+        print file_path
+
+        # 需要进入celery进行空间库操作
+        # 解压zip文件
+        file_dir = os.path.dirname(file_path)
+        # r = zipfile.is_zipfile(file_path)
+        # if r:
+        #     fz = zipfile.ZipFile(file_path, 'r')
+        #     for file in fz.namelist():
+        #         fz.extract(file,file_dir)
+        # else:
+        #     print('This is not zip')
+        #
+        # filename = file_path.split("\\")[-1].split(".zip")[0]
+        # unzipfile = os.path.join(file_dir,filename)
+        # print unzipfile
+
+        # 解压rar文件
+        f = rarfile.is_rarfile(file_path)
+        if f:
+            fz = rarfile.RarFile(file_path, 'r')
+            for file in fz.namelist():
+                fz.extract(file, file_dir)
+        else:
+            print('This is not rar')
+        filename = file_path.split("\\")[-1].split(".rar")[0]
+        unrarfile = os.path.join(file_dir,filename)
+        print unrarfile
+
+
+        return regiontask

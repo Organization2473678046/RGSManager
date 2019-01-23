@@ -52,6 +52,7 @@ class TaskPackageSerializer(serializers.ModelSerializer):
         return exreallyname
 
     def validate(self, validated_data):
+
         owner = validated_data.get("owner")
         try:
             user = User.objects.get(username=owner)
@@ -65,6 +66,15 @@ class TaskPackageSerializer(serializers.ModelSerializer):
             regiontask = RegionTask.objects.get(name=regiontask_name)
         except RegionTask.DoesNotExist:
             raise serializers.ValidationError(u"任务区域 {} 不存在".format(regiontask_name))
+
+        name = validated_data.get("name")
+        # regiontask_name = validated_data.get("regiontask_name")
+        try:
+            taskpackage = TaskPackage.objects.get(name=name, regiontask_name=regiontask_name)
+        except:
+            pass
+        else:
+            raise serializers.ValidationError(u"{0} 区域名为 {1} 的任务包已存在".format(regiontask_name, name))
 
         return validated_data
 

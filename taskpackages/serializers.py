@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+import os
+import zipfile
+from unrar import rarfile
 from rest_framework import serializers
 from rest_framework.exceptions import APIException
 from models import TaskPackage, TaskPackageSon, TaskPackageOwner, EchartTaskPackage, EchartSchedule, \
@@ -7,6 +12,7 @@ from django.conf import settings
 from rest_framework import status
 from celery_app.clipfromsde import clipfromsde
 from users.models import User
+from django.conf import settings
 
 
 class PermissionValidationError(APIException):
@@ -46,6 +52,7 @@ class TaskPackageSerializer(serializers.ModelSerializer):
         return exreallyname
 
     def validate(self, validated_data):
+
         owner = validated_data.get("owner")
         try:
             user = User.objects.get(username=owner)
@@ -59,6 +66,15 @@ class TaskPackageSerializer(serializers.ModelSerializer):
             regiontask = RegionTask.objects.get(name=regiontask_name)
         except RegionTask.DoesNotExist:
             raise serializers.ValidationError(u"任务区域 {} 不存在".format(regiontask_name))
+
+        name = validated_data.get("name")
+        # regiontask_name = validated_data.get("regiontask_name")
+        try:
+            taskpackage = TaskPackage.objects.get(name=name, regiontask_name=regiontask_name)
+        except:
+            pass
+        else:
+            raise serializers.ValidationError(u"{0} 区域名为 {1} 的任务包已存在".format(regiontask_name, name))
 
         return validated_data
 
@@ -78,8 +94,11 @@ class TaskPackageSerializer(serializers.ModelSerializer):
         MEDIA = settings.MEDIA_ROOT
         mapnumlist = validated_data["mapnums"]
         taskname = validated_data["name"]
+        regiontask = RegionTask.objects.get(name=taskpackage.regiontask_name)
+        mapindexsdepath = regiontask.mapindexsde
+        rgssdepath = regiontask.rgssde
         # 进入celery进行作业包的异步裁切
-        clipfromsde.delay(mapnumlist, MEDIA, taskname, taskpackage.id, taskpackageson.id)
+        clipfromsde.delay(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpackage.id, taskpackageson.id)
 
         return taskpackage
 
@@ -131,9 +150,10 @@ class TaskPackageSonSerializer(serializers.ModelSerializer):
 
         taskpackage_name = validated_data.get("taskpackage_name")
         try:
-            taskpackage = TaskPackage.objects.filter(isdelete=False).get(name=taskpackage_name,regiontask_name=regiontask_name)
+            taskpackage = TaskPackage.objects.filter(isdelete=False).get(name=taskpackage_name,
+                                                                         regiontask_name=regiontask_name)
         except TaskPackage.DoesNotExist:
-            raise serializers.ValidationError(u"{0}名为 {1} 的任务包不存在".format(regiontask_name,taskpackage_name))
+            raise serializers.ValidationError(u"{0}名为 {1} 的任务包不存在".format(regiontask_name, taskpackage_name))
         else:
             user = self.context["request"].user
             # 只有管理员和主任务包拥有者才能上该任务包的子版本
@@ -217,7 +237,7 @@ class TaskPackageOwnerSerializer(serializers.ModelSerializer):
             taskpackage = TaskPackage.objects.get(name=taskpackage_name, regiontask_name=regiontask_name)
         except TaskPackage.DoesNotExist:
             # raise serializers.ValidationError(u"任务包{}不存在".format(taskpackage_name))
-            raise serializers.ValidationError(u"{0}名为 {1} 的任务包不存在".format(regiontask_name,taskpackage_name))
+            raise serializers.ValidationError(u"{0}名为 {1} 的任务包不存在".format(regiontask_name, taskpackage_name))
         else:
             if validated_data["owner"] == taskpackage.owner:
                 raise serializers.ValidationError(u"该任务包已经在 {} 名下".format(validated_data["owner"]))
@@ -266,14 +286,74 @@ class ScheduleSerializer(serializers.ModelSerializer):
         model = TaskPackageScheduleSet
         fields = ["id", "schedule", "regiontask_name"]
 
+    def validate(self, validated_data):
+        # 防止同一个项目区域内,进度名字重复
+        print self.context['view'].action
+        schedule = validated_data.get("schedule")
+        regiontask_name = validated_data.get("regiontask_name")
+
+        print self.context['view'].kwargs
+        if self.context['view'].action == 'update':
+            id = self.context['view'].kwargs.get('pk')
+            try:
+                taskPackageschedule = TaskPackageScheduleSet.objects.get(id=id)
+            except:
+                pass
+            else:
+                regiontask_name = taskPackageschedule.regiontask_name
+
+        print regiontask_name
+        try:
+            taskPackageschedule = TaskPackageScheduleSet.objects.get(schedule=schedule, regiontask_name=regiontask_name)
+        except:
+            pass
+        else:
+            raise serializers.ValidationError(u"{0} 名为 {1} 的进度已存在".format(regiontask_name, schedule))
+        return validated_data
+
 
 class RegionTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegionTask
-        fields = '__all__'
+        fields = ["id", "name", "file", "status", "basemapservice", "mapindexfeatureservice", "mapindexmapservice",
+                  "mapindexschedulemapservice"]
         extra_kwargs = {
             "basemapservice": {"read_only": True},
             "mapindexfeatureservice": {"read_only": True},
             "mapindexmapservice": {"read_only": True},
             "mapindexschedulemapservice": {"read_only": True},
         }
+
+    def create(self, validated_data):
+        regiontask = RegionTask.objects.create(**validated_data)
+        file_path = regiontask.file.path
+        print file_path
+
+        # 需要进入celery进行空间库操作
+        # 解压zip文件
+        file_dir = os.path.dirname(file_path)
+        # r = zipfile.is_zipfile(file_path)
+        # if r:
+        #     fz = zipfile.ZipFile(file_path, 'r')
+        #     for file in fz.namelist():
+        #         fz.extract(file,file_dir)
+        # else:
+        #     print('This is not zip')
+        #
+        # filename = file_path.split("\\")[-1].split(".zip")[0]
+        # unzipfile = os.path.join(file_dir,filename)
+        # print unzipfile
+
+        # 解压rar文件
+        f = rarfile.is_rarfile(file_path)
+        if f:
+            fz = rarfile.RarFile(file_path, 'r')
+            for file in fz.namelist():
+                fz.extract(file, file_dir)
+        else:
+            print('This is not rar')
+        filename = file_path.split("\\")[-1].split(".rar")[0]
+        unrarfile = os.path.join(file_dir, filename)
+        print unrarfile
+
+        return regiontask

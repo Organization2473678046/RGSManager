@@ -1,25 +1,4 @@
 # -*- coding: utf-8 -*-
-# from __future__ import unicode_literals
-#
-# from django.test import TestCase
-#
-# import os
-# import sys
-#
-# if not os.environ.get("DJANGO_SETTINGS_MODULE"):
-#     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "RGSManager.settings")
-# import django
-# django.setup()
-#
-# if __name__ == "__main__":
-#     # from taskpackages.models import TaskPackage
-#     # tasks = TaskPackage.objects.all().values_list("name")
-#     # print tasks
-#     # print tasks[0]
-#     # print type(tasks[0])
-#     pass
-
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -29,7 +8,7 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
 
-class UntitledTestCase(unittest.TestCase):
+class TaskOwnersTestCase(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
@@ -37,19 +16,44 @@ class UntitledTestCase(unittest.TestCase):
         self.verificationErrors = []
         self.accept_next_alert = True
 
-    def test_untitled_test_case(self):
+    def test_task_owners_test_case(self):
         driver = self.driver
         driver.get("http://192.168.3.120:8000/v7/")
+        time.sleep(2)
         driver.find_element_by_link_text("Log in").click()
+        time.sleep(2)
         driver.find_element_by_id("id_username").click()
         driver.find_element_by_id("id_username").clear()
         driver.find_element_by_id("id_username").send_keys("root")
+        time.sleep(2)
+        driver.find_element_by_id("id_password").click()
         driver.find_element_by_id("id_password").clear()
         driver.find_element_by_id("id_password").send_keys("root12345")
-        driver.find_element_by_id("id_password").send_keys(Keys.ENTER)
+        time.sleep(2)
+        driver.find_element_by_id("submit-id-submit").click()
+        time.sleep(2)
+        driver.get("http://192.168.3.120:8000/v7/taskpackageowners/?regiontask_name=东南区域&taskpackage_name=task11")
+        time.sleep(5)
+        driver.find_element_by_link_text("2").click()
+        time.sleep(3)
+        driver.find_element_by_name("taskpackage_name").click()
+        driver.find_element_by_name("taskpackage_name").clear()
+        driver.find_element_by_name("taskpackage_name").send_keys("task12")
+        time.sleep(2)
+        driver.find_element_by_name("owner").click()
+        driver.find_element_by_name("owner").clear()
+        driver.find_element_by_name("owner").send_keys("worker7")
+        time.sleep(2)
+        driver.find_element_by_name("describe").click()
+        driver.find_element_by_name("regiontask_name").click()
+        driver.find_element_by_name("regiontask_name").clear()
+        driver.find_element_by_name("regiontask_name").send_keys(u"东南区域")
+        time.sleep(2)
+        driver.find_element_by_id("content").click()
+        time.sleep(5)
         driver.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)=concat('', '\"', '')])[1]/following::span[1]").click()
-
+            u"(.//*[normalize-space(text()) and normalize-space(.)='任务区域'])[1]/following::button[1]").click()
+        time.sleep(10)
     def is_element_present(self, how, what):
         try:
             self.driver.find_element(by=how, value=what)

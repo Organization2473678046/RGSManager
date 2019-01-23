@@ -1,25 +1,4 @@
 # -*- coding: utf-8 -*-
-# from __future__ import unicode_literals
-#
-# from django.test import TestCase
-#
-# import os
-# import sys
-#
-# if not os.environ.get("DJANGO_SETTINGS_MODULE"):
-#     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "RGSManager.settings")
-# import django
-# django.setup()
-#
-# if __name__ == "__main__":
-#     # from taskpackages.models import TaskPackage
-#     # tasks = TaskPackage.objects.all().values_list("name")
-#     # print tasks
-#     # print tasks[0]
-#     # print type(tasks[0])
-#     pass
-
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -29,7 +8,7 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
 
-class UntitledTestCase(unittest.TestCase):
+class RegiontaskTestCase(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
@@ -37,18 +16,41 @@ class UntitledTestCase(unittest.TestCase):
         self.verificationErrors = []
         self.accept_next_alert = True
 
-    def test_untitled_test_case(self):
+    def test_regiontask_test_case(self):
         driver = self.driver
         driver.get("http://192.168.3.120:8000/v7/")
+        time.sleep(2)
         driver.find_element_by_link_text("Log in").click()
+        time.sleep(2)
         driver.find_element_by_id("id_username").click()
         driver.find_element_by_id("id_username").clear()
         driver.find_element_by_id("id_username").send_keys("root")
+        time.sleep(2)
         driver.find_element_by_id("id_password").clear()
         driver.find_element_by_id("id_password").send_keys("root12345")
         driver.find_element_by_id("id_password").send_keys(Keys.ENTER)
+        time.sleep(10)
         driver.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)=concat('', '\"', '')])[1]/following::span[1]").click()
+            "(.//*[normalize-space(text()) and normalize-space(.)=concat('', '\"', '')])[17]/following::span[1]").click()
+        time.sleep(10)
+        driver.find_element_by_name("name").click()
+        driver.find_element_by_name("name").clear()
+        driver.find_element_by_name("name").send_keys(u"华东1")
+        time.sleep(2)
+        # driver.find_element_by_name("file").click()  会报错
+        driver.find_element_by_name("file").clear()
+        driver.find_element_by_name("file").send_keys("D:\\mmanageV7.0.tar")
+        driver.find_element_by_name("status").click()
+        time.sleep(2)
+        driver.find_element_by_xpath(
+            u"(.//*[normalize-space(text()) and normalize-space(.)='状态'])[1]/following::button[1]").click()
+        time.sleep(5)
+        driver.get("http://192.168.3.120:8000/v7/regiontasks/")
+        time.sleep(10)
+
+        driver.find_element_by_link_text("root").click()
+        driver.find_element_by_link_text("Log out").click()
+        time.sleep(10)
 
     def is_element_present(self, how, what):
         try:

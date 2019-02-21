@@ -2,18 +2,20 @@
 from __future__ import unicode_literals
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.mixins import CreateModelMixin, ListModelMixin
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 from taskpackages.models import TaskPackage, TaskPackageSon, TaskPackageOwner, EchartTaskPackage, EchartSchedule, \
-    TaskPackageScheduleSet, RegionTask
+    TaskPackageScheduleSet, RegionTask, RegionTaskChunk
 from users.models import User
 from utils.permission import AdminPerssion
 from .serializers import TaskPackageSerializer, TaskPackageSonSerializer, TaskPackageOwnerSerializer, \
-    EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer, RegionTaskSerializer
-
+    EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer, RegionTaskSerializer, \
+    RegionTaskChunkSerializer
 
 class TaskPackagePagination(PageNumberPagination):
     page_size = 10
@@ -60,16 +62,16 @@ class TaskPackageViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Generic
         # 访问接口文档时,会访问这个函数,此时request is None,如果加了过滤之后,访问接口文档时会报警告
         # UserWarning: <class 'taskpackages.views.TaskPackageViewSet'> is not compatible with schema generation
         #   "{} is not compatible with schema generation".format(view.__class__)
-        print self.request
+        # print self.request
         # 防止访问接口文档时报警告
         if self.request is not None:
             user = self.request.user
             if self.action == 'list':
                 regiontask_name = self.request.query_params.get("regiontask_name")
                 if user.isadmin:
-                    return TaskPackage.objects.filter(regiontask_name=regiontask_name, isdelete=False)
+                    return TaskPackage.objects.filter(regiontask_name=regiontask_name, isdelete=False).order_by("id")
                 else:
-                    return TaskPackage.objects.filter(regiontask_name=regiontask_name, owner=user.username, isdelete=False)
+                    return TaskPackage.objects.filter(regiontask_name=regiontask_name, owner=user.username, isdelete=False).order_by("id")
             return None
         return []
 
@@ -156,7 +158,7 @@ class EchartTaskpackageViewSet(mixins.ListModelMixin, GenericViewSet):
     def list(self, request, *args, **kwargs):
         regiontask_name = self.request.query_params.get("regiontask_name")
         if not regiontask_name:
-            return Response("请选择任务区域")
+            return Response("请选择任务区域",status=status.HTTP_400_BAD_REQUEST)
         users = User.objects.all()
         for user in users:
             count = TaskPackage.objects.filter(owner=user.username, regiontask_name=regiontask_name).count()
@@ -187,7 +189,7 @@ class EchartScheduleViewSet(mixins.ListModelMixin, GenericViewSet):
     def list(self, request, *args, **kwargs):
         regiontask_name = self.request.query_params.get("regiontask_name")
         if not regiontask_name:
-            return Response("请选择任务区域")
+            return Response("请选择任务区域",status=status.HTTP_400_BAD_REQUEST)
 
         schedules = TaskPackageScheduleSet.objects.all()
         for schedule in schedules:
@@ -210,9 +212,20 @@ class EchartScheduleViewSet(mixins.ListModelMixin, GenericViewSet):
 
 class ScheduleViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin,
                       GenericViewSet):
+    """
+    list: 根据任务区域查询对应的进度
+    create: 创建进度
+    update: 修改进度
+    destroy: 删除进度
+    """
     serializer_class = ScheduleSerializer
     # queryset = TaskPackageScheduleSet.objects.all()
-    permission_classes = [IsAuthenticated, AdminPerssion]
+    # permission_classes = [IsAuthenticated, AdminPerssion]
+
+    def get_permissions(self):
+        if self.action == "list":
+            return [IsAuthenticated()]
+        return [IsAuthenticated(), AdminPerssion()]
 
     def get_queryset(self):
         if self.action == "list":
@@ -222,11 +235,64 @@ class ScheduleViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Upd
             return TaskPackageScheduleSet.objects.all()
 
 
-class RegionTaskView(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):
+class RegionTaskView(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin, GenericViewSet):
     """
-    list: 获取所有任务区域
+    list: 获取所有任务区域;如果传递了区域名字regiontask_name参数,则值返回对应区域的信息
     create: 创建任务区域
     """
-    permission_classes = [IsAuthenticated, AdminPerssion]
-    queryset = RegionTask.objects.all()
+    # permission_classes = [IsAuthenticated, AdminPerssion]
     serializer_class = RegionTaskSerializer
+
+    def get_permissions(self):
+        if self.action == "list":
+            return [IsAuthenticated()]
+        return [IsAuthenticated(), AdminPerssion()]
+
+    def get_queryset(self):
+        if self.action == "list":
+            regiontask_name = self.request.query_params.get("regiontask_name")
+            if regiontask_name:
+                return RegionTask.objects.filter(name=regiontask_name).order_by('id')
+            else:
+                return RegionTask.objects.all().order_by('id')
+        elif self.action=="update":
+            return RegionTask.objects.filter(id = self.request.parser_context["kwargs"]["pk"])
+        else:
+            return None
+
+
+class RegionTaskChunkUploadView(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):
+    """
+    分块上传文件
+    """
+    # permission_classes = [IsAuthenticated, AdminPerssion]
+    serializer_class = RegionTaskChunkSerializer
+
+    def get_permissions(self):
+        if self.action == "list":
+            return [IsAuthenticated()]
+        return [IsAuthenticated(), AdminPerssion()]
+
+    def get_queryset(self):
+        if self.action == "list":
+            regiontask_name = self.request.query_params.get("regiontask_name")
+            if regiontask_name:
+                return RegionTaskChunk.objects.filter(name=regiontask_name).order_by('id')
+            else:
+                return RegionTaskChunk.objects.all().order_by('id')
+        else:
+            return None
+
+
+
+
+
+
+
+
+"""
+# 子任务包文件分块上传
+class TaskPackageChunkViewSet(CreateModelMixin, ListModelMixin, GenericViewSet):
+    queryset = TaskPackageChunk.objects.all()
+    serializer_class = TaskPackageChunkSerializer
+"""

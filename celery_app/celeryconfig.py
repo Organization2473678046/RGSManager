@@ -39,6 +39,8 @@ CELERY_DEFAULT_QUEUE='clip_tasks'
 
 CELERY_IMPORTS=(
     'celery_app.clipfromsde',
+    'celery_app.createregiontask'
+    # 'celery_app.regionchunk'
 )
 
 #防止死锁
@@ -52,4 +54,6 @@ CELERY_CONCURRENCY=2
 
 #每个worker最多执行100个任务被销毁
 CELERY_MAX_TASKS_PER_CHILD=100
+
+
 

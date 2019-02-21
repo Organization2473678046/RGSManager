@@ -88,12 +88,9 @@ WSGI_APPLICATION = 'RGSManager.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-
-
-
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mmanageV7.0',
+        'NAME': 'mmanageV8.0',
         'USER': 'postgres',
         'PASSWORD': 'Lantucx2018',
         'HOST': 'localhost',
@@ -165,14 +162,13 @@ REST_FRAMEWORK = {
         # 'rest_framework.filters.SearchFilter',
         # 'rest_framework.filters.OrderingFilter',
     ),
-
 }
 
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
 }
 
-MEDIA_URL = '/v7/media/'
+MEDIA_URL = '/v8/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # APPEND_SLASH = False

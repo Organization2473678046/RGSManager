@@ -17,6 +17,7 @@ from .serializers import TaskPackageSerializer, TaskPackageSonSerializer, TaskPa
     EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer, RegionTaskSerializer, \
     RegionTaskChunkSerializer
 
+
 class TaskPackagePagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'limit'
@@ -35,6 +36,20 @@ class TaskPackageOwnerPagination(PageNumberPagination):
     page_size = 5
     page_size_query_param = 'limit'
     max_page_size = 10
+    page_query_param = 'page'
+
+
+class SchedulePagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'limit'
+    max_page_size = 20
+    page_query_param = 'page'
+
+
+class RegionTaskPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'limit'
+    max_page_size = 20
     page_query_param = 'page'
 
 
@@ -71,7 +86,8 @@ class TaskPackageViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Generic
                 if user.isadmin:
                     return TaskPackage.objects.filter(regiontask_name=regiontask_name, isdelete=False).order_by("id")
                 else:
-                    return TaskPackage.objects.filter(regiontask_name=regiontask_name, owner=user.username, isdelete=False).order_by("id")
+                    return TaskPackage.objects.filter(regiontask_name=regiontask_name, owner=user.username,
+                                                      isdelete=False).order_by("id")
             return None
         return []
 
@@ -112,7 +128,7 @@ class TaskPackageSonViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Gene
                                                              regiontask_name=regiontask_name, isdelete=False)
                     else:
                         return []
-        return None
+        return Noney
 
 
 class TaskPackageOwnerViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, GenericViewSet):
@@ -135,14 +151,16 @@ class TaskPackageOwnerViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, Ge
             taskpackage_name = self.request.query_params.get("taskpackage_name")
             regiontask_name = self.request.query_params.get("regiontask_name")
             try:
-                taskpackage = TaskPackage.objects.get(name=taskpackage_name,regiontask_name=regiontask_name)
+                taskpackage = TaskPackage.objects.get(name=taskpackage_name, regiontask_name=regiontask_name)
             except TaskPackage.DoesNotExist:
                 return []
             else:
                 if user.isadmin:
-                    return TaskPackageOwner.objects.filter(isdelete=False, taskpackage_name=taskpackage.name,regiontask_name=regiontask_name)
+                    return TaskPackageOwner.objects.filter(isdelete=False, taskpackage_name=taskpackage.name,
+                                                           regiontask_name=regiontask_name)
                 else:
-                    return TaskPackageOwner.objects.filter(owner=user.username, taskpackage_name=taskpackage.name,regiontask_name=regiontask_name,
+                    return TaskPackageOwner.objects.filter(owner=user.username, taskpackage_name=taskpackage.name,
+                                                           regiontask_name=regiontask_name,
                                                            isdelete=False)
         return None
 
@@ -158,7 +176,7 @@ class EchartTaskpackageViewSet(mixins.ListModelMixin, GenericViewSet):
     def list(self, request, *args, **kwargs):
         regiontask_name = self.request.query_params.get("regiontask_name")
         if not regiontask_name:
-            return Response("请选择任务区域",status=status.HTTP_400_BAD_REQUEST)
+            return Response("请选择任务区域", status=status.HTTP_400_BAD_REQUEST)
         users = User.objects.all()
         for user in users:
             count = TaskPackage.objects.filter(owner=user.username, regiontask_name=regiontask_name).count()
@@ -189,7 +207,7 @@ class EchartScheduleViewSet(mixins.ListModelMixin, GenericViewSet):
     def list(self, request, *args, **kwargs):
         regiontask_name = self.request.query_params.get("regiontask_name")
         if not regiontask_name:
-            return Response("请选择任务区域",status=status.HTTP_400_BAD_REQUEST)
+            return Response("请选择任务区域", status=status.HTTP_400_BAD_REQUEST)
 
         schedules = TaskPackageScheduleSet.objects.all()
         for schedule in schedules:
@@ -219,6 +237,12 @@ class ScheduleViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Upd
     destroy: 删除进度
     """
     serializer_class = ScheduleSerializer
+    pagination_class = SchedulePagination
+    filter_backends = [SearchFilter, DjangoFilterBackend, OrderingFilter]
+    ordering_fields = ("id", "schedule")
+    ordering = ("id",)
+    search_fields = ("id", "schedule")
+
     # queryset = TaskPackageScheduleSet.objects.all()
     # permission_classes = [IsAuthenticated, AdminPerssion]
 
@@ -239,9 +263,15 @@ class RegionTaskView(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Upda
     """
     list: 获取所有任务区域;如果传递了区域名字regiontask_name参数,则值返回对应区域的信息
     create: 创建任务区域
+    update: 更新任务区域信息
     """
     # permission_classes = [IsAuthenticated, AdminPerssion]
     serializer_class = RegionTaskSerializer
+    pagination_class = RegionTaskPagination
+    filter_backends = [SearchFilter, DjangoFilterBackend, OrderingFilter]
+    ordering_fields = ("id", "name", 'status', 'describe', 'createtime')
+    ordering = ("id",)
+    search_fields = ("id", "name", 'status', 'describe', 'createtime')
 
     def get_permissions(self):
         if self.action == "list":
@@ -252,11 +282,12 @@ class RegionTaskView(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Upda
         if self.action == "list":
             regiontask_name = self.request.query_params.get("regiontask_name")
             if regiontask_name:
-                return RegionTask.objects.filter(name=regiontask_name).order_by('id')
+                return RegionTask.objects.filter(name=regiontask_name)
             else:
-                return RegionTask.objects.all().order_by('id')
-        elif self.action=="update":
-            return RegionTask.objects.filter(id = self.request.parser_context["kwargs"]["pk"])
+                return RegionTask.objects.all()
+        elif self.action == "update":
+            # return RegionTask.objects.filter(id=self.request.parser_context["kwargs"]["pk"])
+            return RegionTask.objects.all()
         else:
             return None
 
@@ -282,12 +313,6 @@ class RegionTaskChunkUploadView(mixins.ListModelMixin, mixins.CreateModelMixin, 
                 return RegionTaskChunk.objects.all().order_by('id')
         else:
             return None
-
-
-
-
-
-
 
 
 """

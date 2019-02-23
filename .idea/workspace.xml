@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f9b5f5d-a84d-4341-a601-a79ce4f258d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/taskpackages/migrations/0023_auto_20190222_1029.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RGSManager/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/RGSManager/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RGSManager/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/RGSManager/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/celery_app/createregiontask.py" beforeDir="false" afterPath="$PROJECT_DIR$/celery_app/createregiontask.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrate_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/migrate_db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskpackages/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/taskpackages/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskpackages/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/taskpackages/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskpackages/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/taskpackages/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskpackages/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/taskpackages/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,12 +23,13 @@
     <SUITE FILE_PATH="coverage/RGSManageV5$tests.coverage" NAME="tests Coverage Results" MODIFIED="1546657035803" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/taskpackages" />
     <SUITE FILE_PATH="coverage/RGSManager$file_chunk.coverage" NAME="file_chunk Coverage Results" MODIFIED="1550023805283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/RGSManager$tests__1_.coverage" NAME="tests (1) Coverage Results" MODIFIED="1547707056964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/taskpackages" />
-    <SUITE FILE_PATH="coverage/RGSManager$createregiontask.coverage" NAME="createregiontask Coverage Results" MODIFIED="1550668080279" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/celery_app" />
+    <SUITE FILE_PATH="coverage/RGSManager$createregiontask.coverage" NAME="createregiontask Coverage Results" MODIFIED="1550820814706" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/celery_app" />
     <SUITE FILE_PATH="coverage/RGSManageV5$unittest.coverage" NAME="unittest Coverage Results" MODIFIED="1546519931085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RGSManager$migrate_db.coverage" NAME="migrate_db Coverage Results" MODIFIED="1550489007361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RGSManager$migrate_db_V7.coverage" NAME="migrate_db_V7 Coverage Results" MODIFIED="1547542453550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RGSManager$regionchunk.coverage" NAME="regionchunk Coverage Results" MODIFIED="1550124361984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/celery_app" />
-    <SUITE FILE_PATH="coverage/RGSManager$tests.coverage" NAME="tests Coverage Results" MODIFIED="1547621856926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/users" />
+    <SUITE FILE_PATH="coverage/RGSManager$1111.coverage" NAME="1111 Coverage Results" MODIFIED="1550820473892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/celery_app" />
+    <SUITE FILE_PATH="coverage/RGSManager$tests.coverage" NAME="tests Coverage Results" MODIFIED="1550802438516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/taskpackages" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -296,6 +306,34 @@
           <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.create.new" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="570" />
+          <entry key="py@RGSManager" value="8" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="CommandLine" value="6" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="Python" value="570" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="7" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="7" />
+        </counts>
+      </usages-collector>
     </session>
   </component>
   <component name="FavoritesManager">
@@ -303,11 +341,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/taskpackages/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="1" selection-start-line="1" selection-end-line="5" selection-end-column="29" />
+            <state relative-caret-position="270">
+              <caret line="138" column="80" lean-forward="true" selection-start-line="138" selection-start-column="80" selection-end-line="138" selection-end-column="80" />
+              <folding>
+                <element signature="e#24#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/taskpackages/tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
@@ -318,22 +368,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/taskpackages/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7416">
-              <caret line="328" selection-start-line="328" selection-end-line="328" />
+            <state relative-caret-position="235">
+              <caret line="316" column="41" lean-forward="true" selection-start-line="316" selection-start-column="41" selection-end-line="316" selection-end-column="41" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
+                <element signature="e#13977#19484#0" />
+                <marker date="1550821657385" expanded="true" signature="11909:11918" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/migrate_db.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="677">
+              <caret line="245" column="14" lean-forward="true" selection-start-line="245" selection-start-column="14" selection-end-line="245" selection-end-column="14" />
+              <folding>
+                <element signature="e#60#99#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/taskpackages/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="257" column="35" selection-start-line="257" selection-start-column="35" selection-end-line="257" selection-end-column="35" />
+            <state relative-caret-position="-3403">
+              <caret line="134" column="7" selection-start-line="134" selection-start-column="7" selection-end-line="134" selection-end-column="7" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
+                <element signature="e#11071#11748#0" />
+                <element signature="e#11757#11954#1" />
               </folding>
             </state>
           </provider>
@@ -342,23 +408,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/celery_app/createregiontask.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
+            <state relative-caret-position="-79">
+              <caret line="69" column="35" lean-forward="true" selection-start-line="69" selection-start-column="35" selection-end-line="69" selection-end-column="35" />
               <folding>
-                <element signature="e#103#113#0" expanded="true" />
+                <element signature="e#100#110#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/celery_app/ziptools.py">
+        <entry file="file://$PROJECT_DIR$/RGSManager/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-              <folding>
-                <element signature="e#276#286#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-2736">
+              <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -393,6 +456,9 @@
       <find>service_name</find>
       <find>print</find>
       <find>clipfromsde</find>
+      <find>v8</find>
+      <find>v8.0</find>
+      <find>V7.0</find>
     </findStrings>
     <replaceStrings>
       <replace>V5</replace>
@@ -402,13 +468,15 @@
       <replace>regiontask_name</replace>
       <replace>6.0</replace>
       <replace>7.0</replace>
+      <replace>v9</replace>
+      <replace>V8.0</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="V7" />
+        <entry key="$PROJECT_DIR$" value="V8.1" />
       </map>
     </option>
   </component>
@@ -430,20 +498,21 @@
         <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/users/tests.py" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/taskpackages/tests.py" />
         <option value="$PROJECT_DIR$/启动celery.bat" />
         <option value="$PROJECT_DIR$/users/models.py" />
-        <option value="$PROJECT_DIR$/RGSManager/settings.py" />
         <option value="$PROJECT_DIR$/utils/file_chunk.py" />
         <option value="$PROJECT_DIR$/celery_app/clipfromsde.py" />
         <option value="$PROJECT_DIR$/celery_app/regionchunk.py" />
         <option value="$PROJECT_DIR$/celery_app/celeryconfig.py" />
-        <option value="$PROJECT_DIR$/RGSManager/urls.py" />
-        <option value="$PROJECT_DIR$/migrate_db.py" />
-        <option value="$PROJECT_DIR$/taskpackages/views.py" />
         <option value="$PROJECT_DIR$/taskpackages/models.py" />
-        <option value="$PROJECT_DIR$/taskpackages/serializers.py" />
+        <option value="$PROJECT_DIR$/taskpackages/tests.py" />
+        <option value="$PROJECT_DIR$/RGSManager/urls.py" />
+        <option value="$PROJECT_DIR$/RGSManager/settings.py" />
+        <option value="$PROJECT_DIR$/taskpackages/views.py" />
+        <option value="$PROJECT_DIR$/celery_app/1111.py" />
         <option value="$PROJECT_DIR$/celery_app/createregiontask.py" />
+        <option value="$PROJECT_DIR$/taskpackages/serializers.py" />
+        <option value="$PROJECT_DIR$/migrate_db.py" />
       </list>
     </option>
   </component>
@@ -454,9 +523,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="953" />
+    <option name="x" value="745" />
+    <option name="y" value="145" />
     <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="height" value="920" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -479,6 +549,66 @@
             <path>
               <item name="RGSManager" type="b2602c69:ProjectViewProjectNode" />
               <item name="RGSManager" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RGSManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RGSManager" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RGSManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RGSManager" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="2019" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RGSManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RGSManager" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="2019" type="462c0819:PsiDirectoryNode" />
+              <item name="02" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RGSManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RGSManager" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="2019" type="462c0819:PsiDirectoryNode" />
+              <item name="02" type="462c0819:PsiDirectoryNode" />
+              <item name="22" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RGSManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RGSManager" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="2019" type="462c0819:PsiDirectoryNode" />
+              <item name="02" type="462c0819:PsiDirectoryNode" />
+              <item name="22" type="462c0819:PsiDirectoryNode" />
+              <item name="2019-02-22-14-50-42-196000" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RGSManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RGSManager" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="2019" type="462c0819:PsiDirectoryNode" />
+              <item name="02" type="462c0819:PsiDirectoryNode" />
+              <item name="22" type="462c0819:PsiDirectoryNode" />
+              <item name="2019-02-22-15-07-03-030000" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RGSManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RGSManager" type="462c0819:PsiDirectoryNode" />
+              <item name="RGSManager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RGSManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RGSManager" type="462c0819:PsiDirectoryNode" />
               <item name="taskpackages" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -489,13 +619,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../RGSManager" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PycharmProjects\V9\RGSManager\media\data\2019\02\22\2019-02-22-14-50-42-196000" />
       <recent name="D:\PycharmProjects\RGSManager\celery_app" />
       <recent name="D:\PycharmProjects\RGSManager" />
     </key>
@@ -513,6 +644,28 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.createregiontask">
+    <configuration name="1111" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RGSManager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/celery_app" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/celery_app/1111.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="createregiontask" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RGSManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -527,28 +680,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/celery_app/createregiontask.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="file_chunk" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="RGSManager" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/file_chunk.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -601,7 +732,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="tests (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="tests" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RGSManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -615,28 +746,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/taskpackages/tests.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="tests" type="PythonConfigurationType" factoryName="Python">
-      <module name="RGSManager" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/users" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/users/tests.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -659,8 +768,8 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8080" />
-      <option name="host" value="192.168.3.120" />
+      <option name="port" value="8000" />
+      <option name="host" value="192.168.3.113" />
       <option name="additionalOptions" value="" />
       <option name="browserUrl" value="" />
       <option name="runTestServer" value="false" />
@@ -671,20 +780,19 @@
     </configuration>
     <list>
       <item itemvalue="Django server.RGSManager" />
-      <item itemvalue="Python.tests" />
-      <item itemvalue="Python.tests (1)" />
       <item itemvalue="Python.migrate_db" />
-      <item itemvalue="Python.file_chunk" />
       <item itemvalue="Python.regionchunk" />
       <item itemvalue="Python.createregiontask" />
+      <item itemvalue="Python.tests" />
+      <item itemvalue="Python.1111" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.createregiontask" />
+        <item itemvalue="Python.1111" />
+        <item itemvalue="Python.tests" />
         <item itemvalue="Python.migrate_db" />
         <item itemvalue="Python.regionchunk" />
-        <item itemvalue="Python.file_chunk" />
-        <item itemvalue="Python.tests (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -734,13 +842,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49932525" visible="true" weight="0.2692802" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49932525" visible="true" weight="0.16645244" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5006748" weight="0.12403599" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32793522" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4993573" weight="0.32534248" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4993573" weight="0.32523617" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39041096" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -749,8 +858,8 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="manage.py@RGSManageV5" order="9" weight="0.6174785" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50064266" side_tool="true" weight="0.32700893" />
-      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32876712" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.34375" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32793522" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.34278002" />
       <window_info anchor="bottom" id="Python Console" order="13" weight="0.32648402" />
       <window_info anchor="bottom" id="Reviews" order="14" />
       <window_info anchor="bottom" id="manage.py@RGSManager" order="15" weight="0.39811066" />
@@ -778,6 +887,32 @@
       </list>
     </option>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -787,15 +922,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="添加任务区域" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/celery_app/createregiontask.py</url>
-          <line>40</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="regiontask_filepath.split('/')" language="Python" />
@@ -860,7 +986,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/taskpackages/migrations/0004_auto_20190114_1440.py" />
     <entry file="file://$PROJECT_DIR$/taskpackages/migrations/0001_initial.py" />
     <entry file="file://$PROJECT_DIR$/taskpackages/migrations/0002_auto_20190107_1430.py" />
     <entry file="file://$PROJECT_DIR$/taskpackages/migrations/0003_auto_20190107_1626.py" />
@@ -924,9 +1049,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/taskpackages/tests.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://C:/Program Files (x86)/ArcGIS/Desktop10.2/arcpy/arcpy/geoprocessing/_base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -984,31 +1106,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RGSManager/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/ArcGIS10.2/Lib/site-packages/celery/app/task.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="427" selection-start-line="427" selection-end-line="427" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RGSManager/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/migrate_db.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="657">
-          <caret line="258" lean-forward="true" selection-start-line="258" selection-end-line="258" />
         </state>
       </provider>
     </entry>
@@ -1054,36 +1155,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/taskpackages/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="1" selection-start-line="1" selection-end-line="5" selection-end-column="29" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/taskpackages/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7416">
-          <caret line="328" selection-start-line="328" selection-end-line="328" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/celery_app/createregiontask.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
-          <folding>
-            <element signature="e#103#113#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/celery_app/ziptools.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
@@ -1094,10 +1165,88 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/taskpackages/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RGSManager/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RGSManager/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2736">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/celery_app/1111.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="14" lean-forward="true" selection-end-line="68" />
+          <folding>
+            <element signature="e#103#113#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/celery_app/createregiontask.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-79">
+          <caret line="69" column="35" lean-forward="true" selection-start-line="69" selection-start-column="35" selection-end-line="69" selection-end-column="35" />
+          <folding>
+            <element signature="e#100#110#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/taskpackages/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="257" column="35" selection-start-line="257" selection-start-column="35" selection-end-line="257" selection-end-column="35" />
+        <state relative-caret-position="-3403">
+          <caret line="134" column="7" selection-start-line="134" selection-start-column="7" selection-end-line="134" selection-end-column="7" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+            <element signature="e#11071#11748#0" />
+            <element signature="e#11757#11954#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/taskpackages/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="316" column="41" lean-forward="true" selection-start-line="316" selection-start-column="41" selection-end-line="316" selection-end-column="41" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+            <element signature="e#13977#19484#0" />
+            <marker date="1550821657385" expanded="true" signature="11909:11918" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrate_db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="677">
+          <caret line="245" column="14" lean-forward="true" selection-start-line="245" selection-start-column="14" selection-end-line="245" selection-end-column="14" />
+          <folding>
+            <element signature="e#60#99#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/taskpackages/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="138" column="80" lean-forward="true" selection-start-line="138" selection-start-column="80" selection-end-line="138" selection-end-column="80" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
           </folding>

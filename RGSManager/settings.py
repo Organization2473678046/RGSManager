@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'RGSManager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mmanageV8.0',
+        'NAME': 'mmanageV9.0',
         'USER': 'postgres',
         'PASSWORD': 'Lantucx2018',
         'HOST': 'localhost',
@@ -157,18 +157,18 @@ REST_FRAMEWORK = {
     # 定义错误处理方法
     'EXCEPTION_HANDLER': 'utils.exceptionhandler.exception_handler',
     # 过滤条件
-    'DEFAULT_FILTER_BACKENDS': (
-        # 'django_filters.rest_framework.DjangoFilterBackend',
-        # 'rest_framework.filters.SearchFilter',
-        # 'rest_framework.filters.OrderingFilter',
-    ),
+    # 'DEFAULT_FILTER_BACKENDS': (
+    #     'django_filters.rest_framework.DjangoFilterBackend',
+    #     'rest_framework.filters.SearchFilter',
+    #     'rest_framework.filters.OrderingFilter',
+    # ),
 }
 
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
 }
 
-MEDIA_URL = '/v8/media/'
+MEDIA_URL = '/v9/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # APPEND_SLASH = False

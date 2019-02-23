@@ -1,13 +1,14 @@
 #!C:/Python27/ArcGIS10.2/python.exe
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 # from __future__ import unicode_literals
-
 
 import sys
 import os
 import arcpy
 import shutil
 import datetime
+
+import chardet
 import psycopg2
 from unrar import rarfile
 import time
@@ -21,33 +22,48 @@ import zipfile
 
 @app.task
 def createregiontask(regiontask_id, regiontask_filepath, service_name):
+    # str_type = chardet.detect(regiontask_filepath)
+    # print str_type['encoding'], "-----------"
     # 解压文件
-    file_dir = os.path.dirname(regiontask_filepath)
+    file_dir = os.path.dirname(regiontask_filepath)  # 解压后文件保存路径
+    # 压缩包名字
+    file_name = os.path.basename(regiontask_filepath)
+    print file_name
     print regiontask_filepath
+    # str_type = chardet.detect(regiontask_filepath)
+    # print str_type['encoding'], "-----------"
+    # regiontask_filepath = os.path.normpath(regiontask_filepath)
     z = zipfile.is_zipfile(regiontask_filepath)
     r = rarfile.is_rarfile(regiontask_filepath)
     if z:
-        save_list = regiontask_filepath.split(u"/")
-        save_list.pop()
-        save_path = u"/".join(save_list)
+        # save_list = regiontask_filepath.split(u"/")
+        # save_list.pop()
+        # save_path = u"/".join(save_list)
         print regiontask_filepath
 
-        rar_command = '"C:\Program Files\WinRAR\WinRAR.exe" x %s %s' % (regiontask_filepath, file_dir)
+        # rar_command = '"C:\Program Files\WinRAR\WinRAR.exe" x %s %s' % (regiontask_filepath, file_dir)
+        rar_command = '"D:\Program Files\WinRAR\WinRAR.exe" x %s %s' % (regiontask_filepath, file_dir)
         rar_command = rar_command.encode('gbk')
-        print rar_command
+        # print rar_command
         os.system(rar_command)
-        print u"解压zip成功{0}".format(regiontask_id)
+        print rar_command.decode('gbk')
+        # print u"解压zip成功{0}".format(regiontask_id)
+        print u"解压 {0} 成功".format(file_name)
 
     elif r:
         fz = rarfile.RarFile(regiontask_filepath, 'r')
         for file in fz.namelist():
             fz.extract(file, file_dir)
-        filename = regiontask_filepath.split("\\")[-1].split(".rar")[0]
-        file_path = os.path.join(file_dir, filename)
-        print u"解压rar成功{0}".format(regiontask_id)
+        # filename = regiontask_filepath.split("\\")[-1].split(".rar")[0]
+        # file_path = os.path.join(file_dir, filename)
+        # print u"解压rar成功{0}".format(regiontask_id)
+        print u"解压 {0} 成功".format(file_name)
     else:
         print('This is not zip or rar')
         return False
+
+    print '结束'.encode('gbk')
+    return
 
     time_ymdhms = datetime.datetime.now().strftime(u"%Y%m%d%H%M%S")
     # os.listdir 返回指定目录下的所有文件和目录名。
@@ -132,9 +148,9 @@ def ARCGIS_add_field(mapindexsde):
     tablename = os.path.join(SCRIPT_DIR, mapindexsde, mapindexsde + u".DLG_50000", mapindexsde + jtbname)
 
     arcpy.AddField_management(in_table=tablename, field_name=field_name, field_type="TEXT", field_precision="#",
-                              field_scale="#", field_length="#", field_alias="#", field_is_nullable="NULLABLE",
+                              field_scale="#", field_length="100", field_alias="#", field_is_nullable="NULLABLE",
                               field_is_required="NON_REQUIRED", field_domain="#")
-    print u"添加{0}字段成功".format(field_name)
+    print u"添加 {0} 字段成功".format(field_name)
 
 
 # 发布服务
@@ -195,6 +211,7 @@ def Postgres_change(SQL):
     conn.commit()
     conn.close()
 
+
 def aa(regiontask_filepath):
     file_dir = os.path.dirname(regiontask_filepath)
 
@@ -208,4 +225,11 @@ if __name__ == "__main__":
 
     # createregiontask(5, u'G:/RGSManager/media/data/2019/02/19/2019-02-19-14-48-04-601000/arcgis数据库.zip', service_name)
     # ARCGIS_service(service_name)
-    createregiontask(1, u'G:/RGSManager/media/data/2019/02/20/2019-02-20-17-35-43-515000/arcgis数据库.zip', service_name)
+    # createregiontask(1, u'G:/RGSManager/media/data/2019/02/20/2019-02-20-17-35-43-515000/arcgis数据库.zip', service_name)
+    # createregiontask(1,
+    #                  u'D:/PycharmProjects/V9/RGSManager/media/data/2019/02/22/2019-02-22-14-50-42-196000/mmanageV7.rar',
+    #                  "111")
+
+    createregiontask(1,
+                     u'D:/PycharmProjects/V9/RGSManager/media/data/2019/02/22/2019-02-22-14-50-42-196000/测试一下.zip',
+                     "111")

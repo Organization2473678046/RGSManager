@@ -286,28 +286,52 @@ class ScheduleSerializer(serializers.ModelSerializer):
         model = TaskPackageScheduleSet
         fields = ["id", "schedule", "regiontask_name"]
 
-    def validate(self, attrs):
-        action = self.context["view"].action
-        if action == "create":
+    def validate(self, validated_data):
+        # action = self.context["view"].action
+        # if action == "create":
+        #     try:
+        #         TaskPackageScheduleSet.objects.get(schedule=attrs["schedule"], regiontask_name=attrs["regiontask_name"])
+        #     except:
+        #         pass
+        #     else:
+        #         raise serializers.ValidationError(
+        #             "新增进度失败，区域“{0}”下进度“{1}”重复".format(attrs["regiontask_name"], attrs["schedule"]))
+        #     return attrs
+        # else:
+        #     schedule_id = self.context["request"].parser_context["kwargs"]["pk"]
+        #     try:
+        #         instance = TaskPackageScheduleSet.objects.get(id=schedule_id)
+        #         regiontask_name = instance.regiontask_name
+        #         TaskPackageScheduleSet.objects.get(schedule=attrs["schedule"], regiontask_name=regiontask_name)
+        #     except:
+        #         pass
+        #     else:
+        #         raise serializers.ValidationError("修改进度失败，区域“{0}”下进度“{1}”重复".format(regiontask_name, attrs["schedule"]))
+        #     return attrs
+
+        # 防止同一个项目区域内,进度名字重复
+        print self.context['view'].action
+        schedule = validated_data.get("schedule")
+        regiontask_name = validated_data.get("regiontask_name")
+
+        print self.context['view'].kwargs
+        if self.context['view'].action == 'update':
+            id = self.context['view'].kwargs.get('pk')
             try:
-                TaskPackageScheduleSet.objects.get(schedule=attrs["schedule"], regiontask_name=attrs["regiontask_name"])
+                taskPackageschedule = TaskPackageScheduleSet.objects.get(id=id)
             except:
                 pass
             else:
-                raise serializers.ValidationError(
-                    "新增进度失败，区域“{0}”下进度“{1}”重复".format(attrs["regiontask_name"], attrs["schedule"]))
-            return attrs
+                regiontask_name = taskPackageschedule.regiontask_name
+
+        print regiontask_name
+        try:
+            taskPackageschedule = TaskPackageScheduleSet.objects.get(schedule=schedule, regiontask_name=regiontask_name)
+        except:
+            pass
         else:
-            schedule_id = self.context["request"].parser_context["kwargs"]["pk"]
-            try:
-                instance = TaskPackageScheduleSet.objects.get(id=schedule_id)
-                regiontask_name = instance.regiontask_name
-                TaskPackageScheduleSet.objects.get(schedule=attrs["schedule"], regiontask_name=regiontask_name)
-            except:
-                pass
-            else:
-                raise serializers.ValidationError("修改进度失败，区域“{0}”下进度“{1}”重复".format(regiontask_name, attrs["schedule"]))
-            return attrs
+            raise serializers.ValidationError(u"{0} 名为 {1} 的进度已存在".format(regiontask_name, schedule))
+        return validated_data
 
 
 class RegionTaskSerializer(serializers.ModelSerializer):
@@ -329,6 +353,7 @@ class RegionTaskSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+        print regiontask.file.path
 
         createregiontask.delay(regiontask.id, regiontask.file.path, regiontask.name)
         return regiontask

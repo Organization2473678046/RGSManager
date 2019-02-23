@@ -131,7 +131,7 @@ class TaskPackageScheduleSet(models.Model):
 # 任务包区域表
 @python_2_unicode_compatible
 class RegionTask(models.Model):
-    name = models.CharField(error_messages={"unique": u"任务区域已存在"}, max_length=200, unique=True, null=True,
+    name = models.CharField(error_messages={"unique": u"项目区域已存在"}, max_length=200, unique=True, null=True,
                             verbose_name=u"任务区域")
     status = models.CharField(max_length=200, default="处理中", verbose_name=u"状态")
     file = models.FileField(upload_to=user_directory_path, null=True, blank=True, verbose_name=u"任务包文件")
@@ -142,7 +142,7 @@ class RegionTask(models.Model):
     mapindexmapservice = models.CharField(max_length=1000, null=True, verbose_name=u"接图表地图服务")
     mapindexschedulemapservice = models.CharField(max_length=1000, null=True, verbose_name=u"接图表进度服务")
     describe = models.CharField(max_length=2000, null=True, verbose_name=u"描述信息")
-    createtime = models.DateTimeField(auto_now_add=True, null=True, verbose_name=u"创建时间")
+    createtime = models.DateTimeField(auto_now_add=True,verbose_name=u"创建时间")
     md5 = models.CharField(max_length=32, null=True, verbose_name=u"文件MD5")
 
 

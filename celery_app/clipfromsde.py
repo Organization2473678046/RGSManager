@@ -32,13 +32,12 @@ def clipfromsde(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpa
                                                      datetime.now().strftime("%m"),
                                                      datetime.now().strftime("%d"),
                                                      datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"), taskname)
-
     # taskdirname=u"user/{0}/{1}".format(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"), taskname)
-    taskdirnameup = u"data/{0}/{1}/{2}/{3}".format(datetime.now().strftime("%Y"),
-                                                   datetime.now().strftime("%m"),
-                                                   datetime.now().strftime("%d"),
-                                                   datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"))
-
+    # taskdirnameup = u"data/{0}/{1}/{2}/{3}".format(datetime.now().strftime("%Y"),
+    #                                                datetime.now().strftime("%m"),
+    #                                                datetime.now().strftime("%d"),
+    #                                                datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"))
+    taskdirnameup = os.path.dirname(taskdirname)
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     # 三楼服务器sde
     # rgsde = u"rgs20181206202724.sde"
@@ -88,7 +87,7 @@ def clipfromsde(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpa
 
     outZipFile = os.path.join(MEDIA, taskdirnameup, taskname + u".zip")
     zipUpFolder(taskpath, outZipFile)
-    dbname = u"mmanageV8.0"
+    dbname = u"mmanageV9.0"
     tablename = u"taskpackages_taskpackage"
     taskpackagesontablename = u"taskpackages_taskpackageson"
     statusfieldname = u"status"
@@ -96,7 +95,7 @@ def clipfromsde(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpa
     MEDIAfilepath = taskdirnameup + u"/" + taskname + u".zip"
     changeDJdbtasktable(dbname, tablename, taskpackage_id, statusfieldname, filefieldname, MEDIAfilepath,
                         taskpackageson_id, taskpackagesontablename)
-    changSDEmapindex(mapnumlist, mapindexsde)
+    changeSDEmapindex(mapnumlist, mapindexsde)
     return True
 
 
@@ -125,7 +124,7 @@ def changeDJdbtasktable(dbname, tablename, taskpackage_id, statusfieldname, file
     conn.close()
 
 
-def changSDEmapindex(mapnumlist, mapindexsde):
+def changeSDEmapindex(mapnumlist, mapindexsde):
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     workspace = os.path.join(SCRIPT_DIR, mapindexsde)
     sde_conn = arcpy.ArcSDESQLExecute(workspace)
@@ -148,4 +147,4 @@ def changSDEmapindex(mapnumlist, mapindexsde):
 if __name__ == "__main__":
     # clipfromsde()
     # changeDJdbtasktable(u"mmanageV1.0",u"taskpackages_taskpackage",1,u"status",u"file",u"user_1/npm_lazy.rar")
-    changSDEmapindex(u"I49E019021,I49E019022,I49E019023")
+    changeSDEmapindex(u"I49E019021,I49E019022,I49E019023")

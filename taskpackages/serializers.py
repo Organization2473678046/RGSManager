@@ -313,6 +313,7 @@ class ScheduleSerializer(serializers.ModelSerializer):
         print self.context['view'].action
         schedule = validated_data.get("schedule")
         regiontask_name = validated_data.get("regiontask_name")
+        print regiontask_name
 
         print self.context['view'].kwargs
         if self.context['view'].action == 'update':
@@ -324,6 +325,7 @@ class ScheduleSerializer(serializers.ModelSerializer):
             else:
                 regiontask_name = taskPackageschedule.regiontask_name
 
+        print schedule
         print regiontask_name
         try:
             taskPackageschedule = TaskPackageScheduleSet.objects.get(schedule=schedule, regiontask_name=regiontask_name)
@@ -352,6 +354,7 @@ class RegionTaskSerializer(serializers.ModelSerializer):
         return regiontask
 
     def update(self, instance, validated_data):
+        # print validated_data
         regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
         print regiontask.file.path
 

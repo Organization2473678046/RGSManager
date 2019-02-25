@@ -28,9 +28,22 @@ if __name__ == "__main__":
     #     i += 1
     # pass
 
-    taskPackageschedule = TaskPackageScheduleSet.objects.get(schedule='匝道赋值', regiontask_name='东南区域1800幅')
-    print taskPackageschedule
+    # taskPackageschedule = TaskPackageScheduleSet.objects.get(schedule='匝道赋值', regiontask_name='东南区域1800幅')
+    # print taskPackageschedule
 
+    count = 1
+    while True:
+        count += 1
+        try:
+            # arcpy.UploadServiceDefinition_server(sd, con)
+            TaskPackageScheduleSet.objects.get(id=1)
+        except:
+            print '没查到'
+        else:
+            print "Service successfully published"
+            # if os.path.exists(sd):
+            #     os.remove(sd)
+            break
 
 
 

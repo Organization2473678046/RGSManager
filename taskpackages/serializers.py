@@ -342,6 +342,7 @@ class RegionTaskSerializer(serializers.ModelSerializer):
         fields = ["id", "name", "file", "status", "basemapservice", "mapindexfeatureservice", "mapindexmapservice",
                   "mapindexschedulemapservice", "describe", "createtime"]
         extra_kwargs = {
+            # "file":{"allow_null": False},
             "basemapservice": {"read_only": True},
             "mapindexfeatureservice": {"read_only": True},
             "mapindexmapservice": {"read_only": True},
@@ -356,9 +357,11 @@ class RegionTaskSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         # print validated_data
         regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
-        print regiontask.file.path
+        # if hasattr(regiontask.file,'path'):
+        if validated_data['file'] is not None:
+            # print regiontask.file.path
+            createregiontask.delay(regiontask.id, regiontask.file.path)
 
-        createregiontask.delay(regiontask.id, regiontask.file.path, regiontask.name)
         return regiontask
 
 

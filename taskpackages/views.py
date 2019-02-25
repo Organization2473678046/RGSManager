@@ -64,8 +64,8 @@ class TaskPackageViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Generic
     # filter_backends = [SearchFilter, OrderingFilter]
     # filter_fields = ["describe", "name", "owner", "schedule","regiontask_name"]
     ordering_fields = ("id", "name", "owner", "mapnumcounts", "updatetime", "newtaskpackagesonfornotice")
-    ordering = ("-newtaskpackagesonfornotice")
-    search_fields = ('describe', 'name', 'owner', 'schedule', 'reallyname')
+    ordering = ("-newtaskpackagesonfornotice",)
+    search_fields = ('describe', 'name', 'owner', "mapnums", 'schedule', 'reallyname')
 
     def get_permissions(self):
         if self.action == "create":
@@ -84,10 +84,13 @@ class TaskPackageViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Generic
             if self.action == 'list':
                 regiontask_name = self.request.query_params.get("regiontask_name")
                 if user.isadmin:
-                    return TaskPackage.objects.filter(regiontask_name=regiontask_name, isdelete=False).order_by("id")
+                    # return TaskPackage.objects.filter(regiontask_name=regiontask_name, isdelete=False).order_by("id")
+                    return TaskPackage.objects.filter(regiontask_name=regiontask_name, isdelete=False)
                 else:
+                    # return TaskPackage.objects.filter(regiontask_name=regiontask_name, owner=user.username,
+                    #                                   isdelete=False).order_by("id")
                     return TaskPackage.objects.filter(regiontask_name=regiontask_name, owner=user.username,
-                                                      isdelete=False).order_by("id")
+                                                  isdelete=False)
             return None
         return []
 

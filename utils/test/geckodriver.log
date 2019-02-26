@@ -1,30 +1,24 @@
-1551099000259	mozrunner::runner	INFO	Running command: "D:\\火狐浏览器\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\rust_mozprofile.JEAaf4i7ErP8"
-1551099000858	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
-1551099000858	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
-1551099002481	Marionette	INFO	Listening on port 56374
-1551099002976	Marionette	WARN	TLS certificate errors will be ignored for this session
-1551099013840	Marionette	INFO	Stopped listening on port 56374
-[Child 83228, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
-[Child 83228, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium[
-###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
-
-[GPU 8
+1551168091080	mozrunner::runner	INFO	Running command: "D:\\火狐浏览器\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\rust_mozprofile.P4SfBCznfawj"
+1551168091678	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1551168091678	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1551168093034	Marionette	INFO	Listening on port 54471
+1551168093194	Marionette	WARN	TLS certificate errors will be ignored for this session
+1551168097017	Marionette	INFO	Stopped listening on port 54471
+[Parent 49792, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 48532, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[[CChild 48532, Chrome_Chhild 48528, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 48528, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromiu[Parent 48760, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 48476, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 48476, Chro[GPU 48152,
 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
 
- WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
-[Child 8070
-###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+t] Error: Channel error: cannot send/recv
 
-[GP
+Channel::SendAndWait] Error: Channel error: cannot send/recv
+
+ipt error: resource://gre/modules/Sqlite.jsm, line 841: Error: Connection is not open.
+[GPU 43004, Chrome_ChildTh
 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
 
-d 80192, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/buiJavaScript error: resource://gre/modules/Sqlite.jsm, line 841: Error: Connection is not open.
-[GPU 790nel::SendAndWait] Error: Channel error: cannot send/recv
-
-_win.cc, line 346
-[GPU 
-###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
-
-
-###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+essageChannel::SendAndWait] Error: Channel error: cannot send/recv
 

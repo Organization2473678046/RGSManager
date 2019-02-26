@@ -8,9 +8,7 @@ import unittest
 
 
 class Test_Login(unittest.TestCase):
-    """
-    测试/user /users 登录登出，返回的用户信息，以及各个接口的权限
-    """
+
     def setUp(self):
         # 初始化信息
         self.driver = webdriver.Firefox()
@@ -28,15 +26,20 @@ class Test_Login(unittest.TestCase):
         self.response_permission = "身份认证信息未提供"
 
     def test_user(self):
+        """测试各个接口权限,未登陆下无权限"""
         driver = self.driver
         driver.get(self.base_url)
         # 验证所有接口权限
         response_message_xpath = "/html/body/div/div[2]/div/div[2]/div[4]/pre/span[7]"
         for num in range(2, 10):
             url_xpath = "/html/body/div/div[2]/div/div[2]/div[4]/pre/a[{0}]/span".format(num)
-            self.test_permission(driver, url_xpath, response_message_xpath)
+            self.test_permission(url_xpath, response_message_xpath)
 
+    def test_login(self):
+        """测试登陆与登出"""
         # 登录
+        driver = self.driver
+        driver.get(self.base_url)
         driver.find_element_by_link_text("Log in").click()
         driver.find_element_by_id("id_username").click()
         driver.find_element_by_id("id_username").clear()
@@ -92,8 +95,9 @@ class Test_Login(unittest.TestCase):
         self.driver.quit()
         self.assertEqual([], self.verificationErrors)
 
-    def test_permission(self,driver, url_xpath, response_message_xpath):
+    def test_permission(self, url_xpath, response_message_xpath):
         # 测试各接口权限
+        driver = self.driver
         driver.find_element_by_xpath(url_xpath).click()
         text = driver.find_element_by_xpath(response_message_xpath).text
         self.assertIn(self.response_permission, text, msg="返回的权限验证信息{0}与预期不一致".format(text))

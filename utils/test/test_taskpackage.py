@@ -10,11 +10,8 @@ import unittest
 from random import randint
 
 
+class Test_taskpackage(unittest.TestCase):
 
-class Test_Login(unittest.TestCase):
-    """
-    测试/taskpackage 接口
-    """
 
     def setUp(self):
         data_dict = {
@@ -39,16 +36,19 @@ class Test_Login(unittest.TestCase):
         self.error_username = "error"
         self.error_password = "error"
         self.response_permission = "身份认证信息未提供"
+        self.response_worker = '"count":'
         self.data_dict = data_dict
         self.reponse_list = ["201", self.data_dict["name"], self.data_dict["regiontask_name"], self.data_dict["describe"]]
         self.order_data1_list = ["task{0}".format(num) for num in range(1, 11)]
         self.order_data2_list = ["task{0}".format(num) for num in range(11, 21)]
 
-    def test_create_taskpackage(self):
-        # 管理员权限
+    def test_taskpackage_admin_create(self):
+        """验证管理员创建记录并校验返回数据与输入数据一致性,测试任务包为task1,验证登出后权限"""
+        # 验证管理员创建记录并校验
+        # 验证登出后无权限访问数据
         driver = self.driver
         driver.get(self.base_url)
-        # 登录
+        # 管理员登录
         driver.find_element_by_link_text("Log in").click()
         driver.find_element_by_id("id_username").click()
         driver.find_element_by_id("id_username").clear()
@@ -86,11 +86,33 @@ class Test_Login(unittest.TestCase):
         driver.find_element_by_name("regiontask_name").clear()
         driver.find_element_by_name("regiontask_name").send_keys(self.data_dict.get("regiontask_name"))
         driver.find_element_by_xpath("//div[@id='post-object-form']/form/fieldset/div[11]/button").click()
-        # 验证是否可以创建新的记录
+        # 验证新记录是否正确
         text = driver.find_elements_by_class_name("prettyprint")[1].text
         for response_text in self.reponse_list:
             self.assertIn(response_text, text, msg="返回的权限验证信息{0}与预期不一致".format(text))
+        # 登出后判断是否残留权限
+        driver.find_element_by_link_text(self.username_admin).click()
+        driver.find_element_by_link_text("Log out").click()
+        text = driver.find_element_by_xpath("/html/body/div/div[2]/div/div[2]/div[4]/pre/span[7]").text
+        self.assertIn(self.response_permission, text, msg="返回的权限验证信息{0}与预期不一致".format(text))
+        driver.find_element_by_link_text("Api Root").click()
 
+
+    def test_taskpackage_list_admin(self):
+        """验证按照id排序分页1，2页的数据一致性，登录权限为管理员，验证登出后权限"""
+        driver = self.driver
+        driver.get(self.base_url)
+        # 管理员登录
+        driver.find_element_by_link_text("Log in").click()
+        driver.find_element_by_id("id_username").click()
+        driver.find_element_by_id("id_username").clear()
+        driver.find_element_by_id("id_username").send_keys(self.username_admin)
+        driver.find_element_by_id("id_password").clear()
+        driver.find_element_by_id("id_password").send_keys(self.password)
+        driver.find_element_by_id("id_password").send_keys(Keys.ENTER)
+        # 通过获取登录后的用户名来断言是否登录成功
+        text = driver.find_element_by_class_name("dropdown-toggle").text
+        self.assertEqual(text, self.username_admin, msg=u"登录用户名错误或者没有捕捉到用户名")
 
         # 验证按id排序后得到的数据是否为task1~task10
         driver.get(self.base_url + "&ordering=id")
@@ -112,9 +134,11 @@ class Test_Login(unittest.TestCase):
         driver.find_element_by_link_text("Api Root").click()
 
 
+    def test_taskpackage_list_worker(self):
+        """验证作业员访问得到的数据，由于数据经常变动，此项数据暂不可使用"""
         driver = self.driver
         driver.get(self.base_url)
-        # 登录
+        # 作业员登录
         driver.find_element_by_link_text("Log in").click()
         driver.find_element_by_id("id_username").click()
         driver.find_element_by_id("id_username").clear()
@@ -126,6 +150,9 @@ class Test_Login(unittest.TestCase):
         text = driver.find_element_by_class_name("dropdown-toggle").text
         self.assertEqual(text, self.username_worker, msg=u"登录用户名错误或者没有捕捉到用户名")
         driver.get(self.base_url)
+        # 验证返回数量应该为0
+        text = driver.find_elements_by_class_name("prettyprint")[1].text
+        self.assertIn(self.response_worker, text, msg="返回的权限验证信息{0}与预期不一致".format(text))
 
         # 登出后判断是否残留权限
         driver.find_element_by_link_text(self.username_worker).click()

@@ -274,7 +274,6 @@ class EchartTaskpackageSerializer(serializers.ModelSerializer):
         fields = ["user_reallyname", "count", "regiontask_name"]
 
 
-
 class EchartScheduleSerializer(serializers.ModelSerializer):
     class Meta:
         model = EchartSchedule
@@ -343,6 +342,7 @@ class RegionTaskSerializer(serializers.ModelSerializer):
                   "mapindexschedulemapservice", "describe", "createtime"]
         extra_kwargs = {
             # "file":{"allow_null": False},
+            "status": {"read_only": True},
             "basemapservice": {"read_only": True},
             "mapindexfeatureservice": {"read_only": True},
             "mapindexmapservice": {"read_only": True},
@@ -355,14 +355,49 @@ class RegionTaskSerializer(serializers.ModelSerializer):
         return regiontask
 
     def update(self, instance, validated_data):
-        # print validated_data
-        regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
-        # if hasattr(regiontask.file,'path'):
-        if validated_data['file'] is not None:
-            # print regiontask.file.path
-            createregiontask.delay(regiontask.id, regiontask.file.path)
+        print instance.status
+        print type(instance.file)
 
-        return regiontask
+        if instance.status == u'处理中':
+            regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+            # if validated_data['file'] is not None:
+            if hasattr(regiontask.file, 'path'):
+                createregiontask.delay(regiontask.id, regiontask.file.path)
+            return regiontask
+        else:
+            return instance
+
+
+    # if not hasattr(instance.file,'path'):
+    #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+    #     if hasattr(regiontask.file, 'path'):
+    #         createregiontask.delay(regiontask.id, regiontask.file.path)
+    # elif hasattr(instance.file,'path') and instance.status == u'处理完成':
+    #     validated_data['file'] = instance.file
+    #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+    # elif hasattr(instance.file,'path') and instance.status == u'处理中':
+    #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+    #     if hasattr(regiontask.file, 'path'):
+    #         pass
+
+
+    # if validated_data['file'] is not None:
+    #     if instance.status == u'处理中':
+    #         regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+    #         createregiontask.delay(regiontask.id, regiontask.file.path)
+    #     elif instance.status == u'处理完成':
+    #         validated_data['file'] = instance.file
+    #         regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+
+    # regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+    # if hasattr(regiontask.file,'path'):
+    # if validated_data['file'] is not None and regiontask.status == u'处理中':
+    #     # print regiontask.file.path
+    #     createregiontask.delay(regiontask.id, regiontask.file.path)
+    #     return regiontask
+    # else:
+    #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+    # return instance
 
 
 class RegionTaskChunkSerializer(serializers.ModelSerializer):
@@ -491,37 +526,6 @@ class RegionTaskChunkSerializer(serializers.ModelSerializer):
             #     raise serializers.ValidationError("“{0}”地图区域记录修改失败".format(instance.name))
 
         return instance
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 """

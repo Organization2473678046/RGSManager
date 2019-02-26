@@ -8,7 +8,6 @@ import arcpy
 import json
 import urllib
 import urllib2
-import shutil
 from datetime import datetime
 import psycopg2
 from unrar import rarfile
@@ -41,7 +40,7 @@ def createregiontask(regiontask_id, regiontask_filepath):
         # save_list = regiontask_filepath.split(u"/")
         # save_list.pop()
         # save_path = u"/".join(save_list)
-        print regiontask_filepath
+        # print regiontask_filepath
 
         # rar_command = '"C:\Program Files\WinRAR\WinRAR.exe" x %s %s' % (regiontask_filepath, file_dir)
         # -ibck: 后台运行; -o+:覆盖已存在文件
@@ -61,9 +60,6 @@ def createregiontask(regiontask_id, regiontask_filepath):
         print('This is not zip or rar')
         return False
 
-    # print '结束'.encode('gbk')
-    # return
-
     time_ymdhms = datetime.now().strftime(u"%Y%m%d%H%M%S")
     # os.listdir 返回指定目录下的所有文件和目录名。
     dir_list = os.listdir(file_dir)
@@ -78,25 +74,25 @@ def createregiontask(regiontask_id, regiontask_filepath):
                     gdbpath = os.path.join(dir_abspath, subdir)
                     datatype = u"mapindex"
                     ARCGIS_create_database(gdbpath, time_ymdhms, datatype)
-                    print u"创建mapindex数据库成功"
+                    # print u"创建mapindex数据库成功"
                 elif subdir.startswith(u"RGS"):
                     gdbpath = os.path.join(dir_abspath, subdir)
                     datatype = u"rgs"
                     ARCGIS_create_database(gdbpath, time_ymdhms, datatype)
-                    print u"创建rgs数据库成功"
+                    # print u"创建rgs数据库成功"
 
         if dir.startswith(u"接图表"):
             gdbpath = os.path.join(file_dir, dir)
             datatype = u"mapindex"
             ARCGIS_create_database(gdbpath, time_ymdhms, datatype)
-            print u"创建mapindex数据库成功"
+            # print u"创建mapindex数据库成功"
         elif dir.startswith(u"RGS"):
             gdbpath = os.path.join(file_dir, dir)
             datatype = u"rgs"
             ARCGIS_create_database(gdbpath, time_ymdhms, datatype)
-            print u"创建rgs数据库成功"
+            # print u"创建rgs数据库成功"
 
-    # return u'创建空间库'
+    print u'创建空间库成功'
 
     mapindexsde = "mapindex" + time_ymdhms + ".sde"
     rgssde = "rgs" + time_ymdhms + ".sde"
@@ -118,11 +114,14 @@ def createregiontask(regiontask_id, regiontask_filepath):
     # print u"暂不可自动发服务，请手动修改字段所需属性，注册版本，保存MXD文件，注册PG数据源，共享服务"
 
     # 发布服务
-    ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde)
+    is_successfull = ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde)
 
-    # 填充postgresql中对应字段
-    Posrgres_change_regiontask(regiontask_id, service_name, mapindexsde, rgssde)
-    return True
+    if is_successfull:
+        # 填充postgresql中对应字段
+        Posrgres_change_regiontask(regiontask_id, service_name, mapindexsde, rgssde)
+        return True
+    else:
+        return False
 
 
 # 创建空间数据库
@@ -169,8 +168,8 @@ def ARCGIS_create_database(gdbpath, time_ymdhms, datatype):
                 arcpy.Copy_management(fcpath, sdedspath)
                 # arcpy.AddMessage(fcpath)
 
-    print u"创建空间库成功"
-    return True
+    # print u"创建空间库成功"
+    # return True
 
 
 # 添加字段
@@ -274,10 +273,12 @@ def ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde):
                 if os.path.exists(sd):
                     os.remove(sd)
                 break
+        return True
     else:
         # 如果sddraft分析包含错误，则显示它们
         print analysis['errors']
         print "Service could not be published because errors were found during analysis."
+        return False
 
 
 # 修改mxd文件数据源

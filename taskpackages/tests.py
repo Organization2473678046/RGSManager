@@ -31,87 +31,25 @@ if __name__ == "__main__":
     # taskPackageschedule = TaskPackageScheduleSet.objects.get(schedule='匝道赋值', regiontask_name='东南区域1800幅')
     # print taskPackageschedule
 
-    count = 1
-    while True:
-        count += 1
-        try:
-            # arcpy.UploadServiceDefinition_server(sd, con)
-            TaskPackageScheduleSet.objects.get(id=1)
-        except:
-            print '没查到'
-        else:
-            print "Service successfully published"
-            # if os.path.exists(sd):
-            #     os.remove(sd)
-            break
+    # count = 1
+    # while True:
+    #     count += 1
+    #     try:
+    #         # arcpy.UploadServiceDefinition_server(sd, con)
+    #         TaskPackageScheduleSet.objects.get(id=1)
+    #     except:
+    #         print '没查到'
+    #     else:
+    #         print "Service successfully published"
+    #         # if os.path.exists(sd):
+    #         #     os.remove(sd)
+    #         break
 
 
+    # 批量修改status
+    # regiontasks = RegionTask.objects.all().order_by('id')[1:]
+    # for regiontask in regiontasks:
+    #     regiontask.status = '处理中'
+    #     regiontask.save()
+    pass
 
-
-
-
-
-# django测试模块使用
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
-import unittest, time, re
-#
-#
-# class UntitledTestCase(unittest.TestCase):
-#     def setUp(self):
-#         self.driver = webdriver.Firefox()
-#         self.driver.implicitly_wait(30)
-#         self.base_url = "https://www.katalon.com/"
-#         self.verificationErrors = []
-#         self.accept_next_alert = True
-#
-#     def test_untitled_test_case(self):
-#         driver = self.driver
-#         driver.get("http://192.168.3.120:8000/v7/")
-#         driver.find_element_by_link_text("Log in").click()
-#         driver.find_element_by_id("id_username").click()
-#         driver.find_element_by_id("id_username").clear()
-#         driver.find_element_by_id("id_username").send_keys("root")
-#         driver.find_element_by_id("id_password").clear()
-#         driver.find_element_by_id("id_password").send_keys("root12345")
-#         driver.find_element_by_id("id_password").send_keys(Keys.ENTER)
-#         driver.find_element_by_xpath(
-#             "(.//*[normalize-space(text()) and normalize-space(.)=concat('', '\"', '')])[1]/following::span[1]").click()
-#
-#     def is_element_present(self, how, what):
-#         try:
-#             self.driver.find_element(by=how, value=what)
-#         except NoSuchElementException as e:
-#             return False
-#         return True
-#
-#     def is_alert_present(self):
-#         try:
-#             self.driver.switch_to_alert()
-#         except NoAlertPresentException as e:
-#             return False
-#         return True
-#
-#     def close_alert_and_get_its_text(self):
-#         try:
-#             alert = self.driver.switch_to_alert()
-#             alert_text = alert.text
-#             if self.accept_next_alert:
-#                 alert.accept()
-#             else:
-#                 alert.dismiss()
-#             return alert_text
-#         finally:
-#             self.accept_next_alert = True
-#
-#     def tearDown(self):
-#         self.driver.quit()
-#         self.assertEqual([], self.verificationErrors)
-#
-#
-# if __name__ == "__main__":
-#     unittest.main()

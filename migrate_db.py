@@ -82,15 +82,15 @@ def taskpackage_insert(data):
                             port="5432")
     cur = conn.cursor()
     if data[3] is None or data[3] == "None":
-        sql = u"insert into taskpackages_taskpackage (name,owner,mapnums,file,status,createtime,updatetime,describe,isdelete,mapnumcounts,newtaskpackagesonfornotice,reallyname,schedule,regiontask_name) values ('%s','%s','%s','%s',%r, %r, %r,'%s',%r,%d,%d,'%s','%s','东南区域1800幅')" % (
+        sql = u"insert into taskpackages_taskpackage (name,owner,mapnums,file,status,createtime,updatetime,describe,isdelete,mapnumcounts,newtaskpackagesonfornotice,reallyname,schedule,regiontask_name) values ('%s','%s','%s','%s',%r, %r, %r,'%s',%r,%d,%d,'%s','%s','%s')" % (
             data[1], data[2], data[4], data[5], data[6], str(data[7]), str(data[8]), data[9],
-            data[10], data[11], data[12], data[13], data[14])
+            data[10], data[11], data[12], data[13], data[14], data[15])
     else:
         # sql = u"insert into taskpackages_taskpackage (name,owner,exowner,mapnums,file,status,describe,createtime,updatetime,isdelete,mapnumcounts, schedule,reallyname) values ('%s','%s','%s','%s','%s',%r, '%s',%r, %r,%r,%d,'%s','%s')" % (
         #     data[1], data[10], data[2], data[3], data[4], data[5], data[9], str(data[7]), str(data[8]), data[6])
-        sql = u"insert into taskpackages_taskpackage (name,owner,exowner,mapnums,file,status,createtime,updatetime,describe,isdelete,mapnumcounts,newtaskpackagesonfornotice,reallyname,schedule,regiontask_name) values ('%s','%s','%s','%s','%s',%r, %r, %r,'%s',%r,%d,%d,'%s','%s','东南区域1800幅')" % (
+        sql = u"insert into taskpackages_taskpackage (name,owner,exowner,mapnums,file,status,createtime,updatetime,describe,isdelete,mapnumcounts,newtaskpackagesonfornotice,reallyname,schedule,regiontask_name) values ('%s','%s','%s','%s','%s',%r, %r, %r,'%s',%r,%d,%d,'%s','%s','%s')" % (
             data[1], data[2], data[3], data[4], data[5], data[6], str(data[7]), str(data[8]), data[9],
-            data[10], data[11], data[12], data[13], data[14])
+            data[10], data[11], data[12], data[13], data[14], data[15])
     cur.execute(sql)
 
     conn.commit()
@@ -126,8 +126,8 @@ def taskpackageson_insert(data):
                             port="5432")
     cur = conn.cursor()
 
-    sql = u"insert into taskpackages_taskpackageson (taskpackage_name,version,createtime,updatetime,describe,file,user_username,isdelete, schedule,regiontask_name) values ('%s','%s',%r,%r,'%s','%s','%s',%r,'%s','东南区域1800幅')" % (
-        data[1], data[2], str(data[3]), str(data[4]), data[5], data[6], data[7], data[8], data[9])
+    sql = u"insert into taskpackages_taskpackageson (taskpackage_name,version,createtime,updatetime,describe,file,user_username,isdelete, schedule,regiontask_name) values ('%s','%s',%r,%r,'%s','%s','%s',%r,'%s','%s')" % (
+        data[1], data[2], str(data[3]), str(data[4]), data[5], data[6], data[7], data[8], data[9], data[10])
     print sql
     cur.execute(sql)
     conn.commit()
@@ -163,11 +163,11 @@ def taskpackageowner_insert(data):
                             port="5432")
     cur = conn.cursor()
     if data[3] is None or data[3] == "None":
-        sql = u"insert into taskpackages_taskpackageowner (taskpackage_name,owner,createtime,describe,isdelete,regiontask_name) values ('%s','%s',%r,'%s',%r,'东南区域1800幅')" % (
-            data[1], data[2], str(data[4]), data[5], data[6])
+        sql = u"insert into taskpackages_taskpackageowner (taskpackage_name,owner,createtime,describe,isdelete,regiontask_name) values ('%s','%s',%r,'%s',%r,'%s')" % (
+            data[1], data[2], str(data[4]), data[5], data[6], data[7])
     else:
-        sql = u"insert into taskpackages_taskpackageowner (taskpackage_name,owner,exowner,createtime,describe,isdelete,regiontask_name) values ('%s','%s','%s',%r,'%s',%r,'东南区域1800幅')" % (
-            data[1], data[2], data[3], str(data[4]), data[5], data[6])
+        sql = u"insert into taskpackages_taskpackageowner (taskpackage_name,owner,exowner,createtime,describe,isdelete,regiontask_name) values ('%s','%s','%s',%r,'%s',%r,'%s')" % (
+            data[1], data[2], data[3], str(data[4]), data[5], data[6], data[7])
     print sql
     cur.execute(sql)
     conn.commit()
@@ -203,8 +203,8 @@ def taskpackageschedule_insert(data):
                             port="5432")
     cur = conn.cursor()
 
-    sql = u"insert into taskpackages_taskpackagescheduleset (schedule,regiontask_name) values ('%s','东南区域1800幅')" % (
-        data[1])
+    sql = u"insert into taskpackages_taskpackagescheduleset (schedule,regiontask_name) values ('%s','%s')" % (
+        data[1], data[2])
     print sql
     cur.execute(sql)
     conn.commit()
@@ -239,14 +239,23 @@ def taskpackageregiontask_insert(data):
                             host="localhost",
                             port="5432")
     cur = conn.cursor()
-    print data
-    for a in data:
-        if a is None or a == "None":
-            a = "0"
-    print data
+    # print data
+    # for a in data:
+    #     if a is None or a == "None":
+    #         a = ""
+    # print data
 
-    sql = u"insert into taskpackages_regiontask (name, file, basemapservice, mapindexfeatureservice, mapindexmapservice, mapindexschedulemapservice, status, mapindexsde, rgssde) values('%s','%s','%s','%s','%s','%s','%s','%s','%s')" % (data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9])
-          # u" ('%s','%s','%s','%s','%s','%s','%s','%s','%s',%r)" % (data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10])
+    # sql = u"insert into taskpackages_regiontask (name, file, basemapservice, mapindexfeatureservice, mapindexmapservice, mapindexschedulemapservice, status, mapindexsde, rgssde,createtime,describe,md5) values('%s','%s','%s','%s','%s','%s','%s','%s','%s',%r,'%s','%s')" % (
+    # data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9],data[10],data[11],data[12])
+
+
+    if data[11] is None or data[11] =='None':
+        sql = u"insert into taskpackages_regiontask (name,basemapservice,status,createtime) values('%s','http://192.168.3.120:6080/arcgis/rest/services/ditu/MapServer',%s',%r)" % (
+            data[1], data[7], str(data[10]))
+        print '1111'
+    else:
+        sql = u"insert into taskpackages_regiontask (name,basemapservice,status,createtime,describe) values('%s','http://192.168.3.120:6080/arcgis/rest/services/ditu/MapServer','%s',%r,'%s')" % (
+           data[1],data[7],str(data[10]),data[11])
 
     print sql
     cur.execute(sql)

@@ -32,7 +32,7 @@ class TaskPackageSerializer(serializers.ModelSerializer):
         model = TaskPackage
         fields = ["id", "name", "owner", "exowner", "mapnums", "mapnumcounts", "file", "status", "createtime",
                   "updatetime", "describe", "schedule", "exreallyname", "reallyname", "newtaskpackagesonfornotice",
-                  "regiontask_name"]
+                  "regiontask_name",'taskuuid']
         extra_kwargs = {
             "name": {"required": True, "allow_null": False, "help_text": u"主任务包名字"},
             "owner": {"required": True, "allow_null": False, "help_text": u"作业员"},
@@ -99,8 +99,10 @@ class TaskPackageSerializer(serializers.ModelSerializer):
         regiontask = RegionTask.objects.get(name=taskpackage.regiontask_name)
         mapindexsdepath = regiontask.mapindexsde
         rgssdepath = regiontask.rgssde
-        # 进入celery进行作业包的异步裁切
-        clipfromsde.delay(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpackage.id, taskpackageson.id)
+        if mapindexsdepath is not None and rgssdepath is not None:
+            if os.path.exists(mapindexsdepath) and os.path.exists(rgssdepath):
+                # 进入celery进行作业包的异步裁切
+                clipfromsde.delay(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpackage.id, taskpackageson.id)
 
         return taskpackage
 
@@ -336,6 +338,8 @@ class ScheduleSerializer(serializers.ModelSerializer):
 
 
 class RegionTaskSerializer(serializers.ModelSerializer):
+    # filemd5 = serializers.CharField(max_length=128, null=True, verbose_name=u"MD5")
+    # chunkmd5 = serializers.CharField(max_length=128, null=True, verbose_name="文件切块md5")
     class Meta:
         model = RegionTask
         fields = ["id", "name", "file", "status", "basemapservice", "mapindexfeatureservice", "mapindexmapservice",
@@ -368,6 +372,36 @@ class RegionTaskSerializer(serializers.ModelSerializer):
             return instance
 
 
+    # if not hasattr(instance.file,'path'):
+    #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+    #     if hasattr(regiontask.file, 'path'):
+    #         createregiontask.delay(regiontask.id, regiontask.file.path)
+    # elif hasattr(instance.file,'path') and instance.status == u'处理完成':
+    #     validated_data['file'] = instance.file
+    #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+    # elif hasattr(instance.file,'path') and instance.status == u'处理中':
+    #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+    #     if hasattr(regiontask.file, 'path'):
+    #         pass
+
+
+    # if validated_data['file'] is not None:
+    #     if instance.status == u'处理中':
+    #         regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+    #         createregiontask.delay(regiontask.id, regiontask.file.path)
+    #     elif instance.status == u'处理完成':
+    #         validated_data['file'] = instance.file
+    #         regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+
+    # regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+    # if hasattr(regiontask.file,'path'):
+    # if validated_data['file'] is not None and regiontask.status == u'处理中':
+    #     # print regiontask.file.path
+    #     createregiontask.delay(regiontask.id, regiontask.file.path)
+    #     return regiontask
+    # else:
+    #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+    # return instance
 
 
 class RegionTaskChunkSerializer(serializers.ModelSerializer):

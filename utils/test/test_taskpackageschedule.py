@@ -8,89 +8,93 @@ import unittest
 import constant
 
 
-class Test_Login(unittest.TestCase):
-
+class Test_taskpackageSchedule(unittest.TestCase):
     def setUp(self):
-        # 初始化信息
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = constant.BASE_URL
+        self.base_url = constant.BASE_URL + "schedule/?regiontask_name=东南区域1800幅"
         self.verificationErrors = []
         self.accept_next_alert = True
         self.username_admin = constant.USERNAME_ADMIN
         self.username_worker = constant.USERNAME_WORKER
-        self.response_list_admin_message = ["200", self.username_admin, "true", "管理员"]
-        self.response_list_worker_message = ["200", self.username_worker, "false", "作业员"]
         self.password = constant.PASSWORD
-        self.error_username = "error"
-        self.error_password = "error"
+        self.data_dict = constant.TEST_DATA_SCHEDULE
+        self.data_list1 = constant.TEST_LIST1_SCHEDULE
+        self.data_list2 = constant.TEST_LIST2_SCHEDULE
+        self.response_data = ["201", self.data_dict.get("schedule"), self.data_dict.get("regiontask_name")]
         self.response_permission = "身份认证信息未提供"
 
-    def test_user(self):
-        """测试各个接口权限,未登陆下无权限"""
-        driver = self.driver
-        driver.get(self.base_url)
-        # 验证所有接口权限
-        response_message_xpath = "/html/body/div/div[2]/div/div[2]/div[4]/pre/span[7]"
-        for num in range(2, 10):
-            url_xpath = "/html/body/div/div[2]/div/div[2]/div[4]/pre/a[{0}]/span".format(num)
-            self.test_permission(url_xpath, response_message_xpath)
 
-    def test_login_logout_admin(self):
-        """测试登陆与登出,获取用户信息"""
-        # 登录
+    def test_get_schedule(self):
+        """获取进度，验证进度以及分页是否正确"""
         driver = self.driver
         driver.get(self.base_url)
         driver.find_element_by_link_text("Log in").click()
-        driver.find_element_by_id("id_username").click()
         driver.find_element_by_id("id_username").clear()
         driver.find_element_by_id("id_username").send_keys(self.username_admin)
+        driver.find_element_by_id("id_password").click()
         driver.find_element_by_id("id_password").clear()
         driver.find_element_by_id("id_password").send_keys(self.password)
         driver.find_element_by_id("id_password").send_keys(Keys.ENTER)
         # 通过获取登录后的用户名来断言是否登录成功
         text = driver.find_element_by_class_name("dropdown-toggle").text
         self.assertEqual(text, self.username_admin, msg=u"登录用户名错误或者没有捕捉到用户名")
-        # 获取用户信息
-        driver.find_element_by_xpath("/html/body/div/div[2]/div/div[2]/div[4]/pre/a[2]/span").click()
-        text = driver.find_element_by_class_name("response-info").text
-        # 接收response数据
-        for response_text in self.response_list_admin_message:
-            # 断言的状态码与用户信息
-            self.assertIn(response_text, text, msg="返回用户信息{0}与预期不一致".format(text))
+
+        # 验证返回第一页数据
+        driver = self.driver
+        driver.get(self.base_url)
+        text = driver.find_elements_by_class_name("prettyprint")[1].text
+        for response_text in self.data_list1:
+            self.assertIn(response_text, text, msg="返回的验证信息{0}与预期不一致".format(text))
+
+        # 验证第二页数据
+        driver.find_element_by_link_text(u"»").click()
+        text = driver.find_elements_by_class_name("prettyprint")[1].text
+        for response_text in self.data_list2:
+            self.assertIn(response_text, text, msg="返回的验证信息{0}与预期不一致".format(text))
+
+        # 登出后判断是否残留权限
         driver.find_element_by_link_text(self.username_admin).click()
         driver.find_element_by_link_text("Log out").click()
-        # 登出后判断是否残留权限
         text = driver.find_element_by_xpath("/html/body/div/div[2]/div/div[2]/div[4]/pre/span[7]").text
         self.assertIn(self.response_permission, text, msg="返回的权限验证信息{0}与预期不一致".format(text))
+        driver.find_element_by_link_text("Api Root").click()
 
-    def test_login_logout_worker(self):
-        """测试登陆与登出,获取用户信息"""
-        # 登录
+    def test_create_schedile(self):
+        """创建进度，验证创建后返回信息是否正确"""
         driver = self.driver
         driver.get(self.base_url)
         driver.find_element_by_link_text("Log in").click()
-        driver.find_element_by_id("id_username").click()
         driver.find_element_by_id("id_username").clear()
-        driver.find_element_by_id("id_username").send_keys(self.username_worker)
+        driver.find_element_by_id("id_username").send_keys(self.username_admin)
+        driver.find_element_by_id("id_password").click()
         driver.find_element_by_id("id_password").clear()
         driver.find_element_by_id("id_password").send_keys(self.password)
         driver.find_element_by_id("id_password").send_keys(Keys.ENTER)
         # 通过获取登录后的用户名来断言是否登录成功
         text = driver.find_element_by_class_name("dropdown-toggle").text
-        self.assertEqual(text, self.username_worker, msg=u"登录用户名错误或者没有捕捉到用户名")
-        # 获取用户信息
-        driver.find_element_by_xpath("/html/body/div/div[2]/div/div[2]/div[4]/pre/a[2]/span").click()
-        text = driver.find_element_by_class_name("response-info").text
-        # 接收response数据
-        for response_text in self.response_list_worker_message:
-            # 断言的状态码与用户信息
-            self.assertIn(response_text, text, msg="返回用户信息{0}与预期不一致".format(text))
-        driver.find_element_by_link_text(self.username_worker).click()
-        driver.find_element_by_link_text("Log out").click()
+        self.assertEqual(text, self.username_admin, msg=u"登录用户名错误或者没有捕捉到用户名")
+
+        driver.find_element_by_name("schedule").click()
+        driver.find_element_by_name("schedule").clear()
+        driver.find_element_by_name("schedule").send_keys(self.data_dict.get("schedule"))
+        driver.find_element_by_name("regiontask_name").click()
+        driver.find_element_by_name("regiontask_name").clear()
+        driver.find_element_by_name("regiontask_name").send_keys(self.data_dict.get("regiontask_name"))
+        driver.find_element_by_xpath("//div[@id='post-object-form']/form/fieldset/div[3]/button").click()
+        # 验证@返回数据
+        text = driver.find_elements_by_class_name("prettyprint")[1].text
+        for response_text in self.response_data:
+            self.assertIn(response_text, text, msg="返回的验证信息{0}与预期不一致".format(text))
+        SQL = "DELETE FROM taskpackages_taskpackagescheduleset WHERE schedule='{0}'".format(self.data_dict.get("schedule"))
+        constant.clear(SQL=SQL)
+
         # 登出后判断是否残留权限
+        driver.find_element_by_link_text(self.username_admin).click()
+        driver.find_element_by_link_text("Log out").click()
         text = driver.find_element_by_xpath("/html/body/div/div[2]/div/div[2]/div[4]/pre/span[7]").text
         self.assertIn(self.response_permission, text, msg="返回的权限验证信息{0}与预期不一致".format(text))
+        driver.find_element_by_link_text("Api Root").click()
 
 
     def is_element_present(self, how, what):
@@ -120,19 +124,8 @@ class Test_Login(unittest.TestCase):
             self.accept_next_alert = True
 
     def tearDown(self):
-        # 测试结束，恢复环境
         self.driver.quit()
         self.assertEqual([], self.verificationErrors)
-
-    def test_permission(self, url_xpath, response_message_xpath):
-        # 测试各接口权限
-        driver = self.driver
-        driver.find_element_by_xpath(url_xpath).click()
-        text = driver.find_element_by_xpath(response_message_xpath).text
-        self.assertIn(self.response_permission, text, msg="返回的权限验证信息{0}与预期不一致".format(text))
-        driver.find_element_by_link_text("Api Root").click()
-
-
 
 
 if __name__ == "__main__":

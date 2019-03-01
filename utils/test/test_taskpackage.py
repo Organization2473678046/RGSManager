@@ -1,51 +1,37 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
-from random import randint
+import constant
 
 
 class Test_taskpackage(unittest.TestCase):
 
-
     def setUp(self):
-        data_dict = {
-            "name": "任务包{0}号".format(randint(99, 999999)),
-            "owner": "worker",
-            "mapnums": "1,2,3,4",
-            "mapnumcounts": "4",
-            "status": "1",
-            "describe": "THIS IS DESCRIBE",
-            "schedule": "一对多修改",
-            "regiontask_name": "东南区域1800幅"
-        }
+
         # 初始化信息
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = u"http://192.168.3.120:8000/v8/taskpackages/?regiontask_name=东南区域1800幅"
+        self.base_url = constant.BASE_URL + u"taskpackages/?regiontask_name=东南区域1800幅"
         self.verificationErrors = []
         self.accept_next_alert = True
-        self.username_admin = "root"
-        self.username_worker = "worker"
-        self.password = "root12345"
-        self.error_username = "error"
-        self.error_password = "error"
+        self.username_admin = constant.USERNAME_ADMIN
+        self.username_worker = constant.USERNAME_WORKER
+        self.password = constant.PASSWORD
         self.response_permission = "身份认证信息未提供"
-        self.response_worker = '"count":'
-        self.data_dict = data_dict
-        self.reponse_list = ["201", self.data_dict["name"], self.data_dict["regiontask_name"], self.data_dict["describe"]]
-        self.order_data1_list = ["task{0}".format(num) for num in range(1, 11)]
-        self.order_data2_list = ["task{0}".format(num) for num in range(11, 21)]
+        self.data_dict = constant.TEST_DATA
+        self.reponse_list = ["201", self.data_dict["name"], self.data_dict["regiontask_name"],
+                             self.data_dict["describe"]]
+        self.order_data1_list = constant.ORDER_DATA_LIST1
+        self.order_data2_list = constant.ORDER_DATA_LIST2
+        self.order_data3_list = constant.ORDER_DATA_LIST3
 
-    def test_taskpackage_admin_create(self):
+    def test_taskpackage_create_admin(self):
         """验证管理员创建记录并校验返回数据与输入数据一致性,测试任务包为task1,验证登出后权限"""
-        # 验证管理员创建记录并校验
-        # 验证登出后无权限访问数据
         driver = self.driver
         driver.get(self.base_url)
         # 管理员登录
@@ -90,13 +76,19 @@ class Test_taskpackage(unittest.TestCase):
         text = driver.find_elements_by_class_name("prettyprint")[1].text
         for response_text in self.reponse_list:
             self.assertIn(response_text, text, msg="返回的权限验证信息{0}与预期不一致".format(text))
+
+        # 清除测试记录
+        sql = "DELETE FROM taskpackages_taskpackage WHERE name='{0}'".format(self.data_dict.get("name"))
+        constant.clear(SQL=sql)
+        sql = "DELETE FROM taskpackages_taskpackageson WHERE taskpackage_name='{0}'".format(self.data_dict.get("name"))
+        constant.clear(SQL=sql)
+
         # 登出后判断是否残留权限
         driver.find_element_by_link_text(self.username_admin).click()
         driver.find_element_by_link_text("Log out").click()
         text = driver.find_element_by_xpath("/html/body/div/div[2]/div/div[2]/div[4]/pre/span[7]").text
         self.assertIn(self.response_permission, text, msg="返回的权限验证信息{0}与预期不一致".format(text))
         driver.find_element_by_link_text("Api Root").click()
-
 
     def test_taskpackage_list_admin(self):
         """验证按照id排序分页1，2页的数据一致性，登录权限为管理员，验证登出后权限"""
@@ -135,7 +127,7 @@ class Test_taskpackage(unittest.TestCase):
 
 
     def test_taskpackage_list_worker(self):
-        """验证作业员访问得到的数据，由于数据经常变动，此项数据暂不可使用"""
+        """验证作业员访问得到的数据，按照id排序后1，2页"""
         driver = self.driver
         driver.get(self.base_url)
         # 作业员登录
@@ -149,10 +141,19 @@ class Test_taskpackage(unittest.TestCase):
         # 通过获取登录后的用户名来断言是否登录成功
         text = driver.find_element_by_class_name("dropdown-toggle").text
         self.assertEqual(text, self.username_worker, msg=u"登录用户名错误或者没有捕捉到用户名")
-        driver.get(self.base_url)
-        # 验证返回数量应该为0
+
+        # 验证按id排序后得到的数据是否为task1~task10
+        driver.get(self.base_url + "&ordering=id")
         text = driver.find_elements_by_class_name("prettyprint")[1].text
-        self.assertIn(self.response_worker, text, msg="返回的权限验证信息{0}与预期不一致".format(text))
+        for order_data_text in self.order_data1_list:
+            self.assertIn(order_data_text, text, msg="返回的排序数据{0}与预期不一致".format(text))
+
+        # 验证按照id排序第二页数据是否为task1~task15
+        driver.find_element_by_link_text("»").click()
+        text = driver.find_elements_by_class_name("prettyprint")[1].text
+        for order_data_text in self.order_data3_list:
+            self.assertIn(order_data_text, text, msg="返回的排序数据{0}与预期不一致".format(text))
+
 
         # 登出后判断是否残留权限
         driver.find_element_by_link_text(self.username_worker).click()
@@ -192,9 +193,6 @@ class Test_taskpackage(unittest.TestCase):
         # 测试结束，清除环境
         self.driver.quit()
         self.assertEqual([], self.verificationErrors)
-
-
-
 
 
 if __name__ == "__main__":

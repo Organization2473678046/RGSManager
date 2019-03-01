@@ -189,11 +189,11 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>测试报告</h1>
-<p class='attribute'><strong>Start Time:</strong> 2019-02-26 15:04:39</p>
-<p class='attribute'><strong>Duration:</strong> 0:00:42.328000</p>
-<p class='attribute'><strong>Status:</strong> Pass 3</p>
+<p class='attribute'><strong>Start Time:</strong> 2019-02-28 10:02:30</p>
+<p class='attribute'><strong>Duration:</strong> 0:01:21.189000</p>
+<p class='attribute'><strong>Status:</strong> Pass 5 Error 1</p>
 
-<p class='description'>用例执行情况：</p>
+<p class='description'>测试用例包含用户接口,主任务包接口，子任务包接口</p>
 </div>
 
 
@@ -222,53 +222,89 @@ function showOutput(id, name) {
 </tr>
 
 <tr class='passClass'>
-    <td>utils.test.test_login.Test_Login</td>
-    <td>1</td>
-    <td>1</td>
+    <td>utils.test.test_taskpackage.Test_taskpackage</td>
+    <td>3</td>
+    <td>3</td>
     <td>0</td>
     <td>0</td>
-    <td><a href="javascript:showClassDetail('c1',1)">Detail</a></td>
+    <td><a href="javascript:showClassDetail('c1',3)">Detail</a></td>
 </tr>
 
 <tr id='pt1.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_user</div></td>
+    <td class='none'><div class='testcase'>test_taskpackage_create_admin: 验证管理员创建记录并校验返回数据与输入数据一致性,测试任务包为task1,验证登出后权限</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr class='passClass'>
-    <td>utils.test.test_taskpackage.Test_taskpackage</td>
-    <td>1</td>
-    <td>1</td>
-    <td>0</td>
-    <td>0</td>
-    <td><a href="javascript:showClassDetail('c2',1)">Detail</a></td>
-</tr>
-
-<tr id='pt2.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_taskpackage</div></td>
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_taskpackage_list_admin: 验证按照id排序分页1，2页的数据一致性，登录权限为管理员，验证登出后权限</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr class='passClass'>
+<tr id='pt1.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_taskpackage_list_worker: 验证作业员访问得到的数据，按照id排序后1，2页</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr class='errorClass'>
     <td>utils.test.test_taskpackageson.Test_taskpackageSon</td>
-    <td>1</td>
-    <td>1</td>
+    <td>3</td>
+    <td>2</td>
     <td>0</td>
-    <td>0</td>
-    <td><a href="javascript:showClassDetail('c3',1)">Detail</a></td>
+    <td>1</td>
+    <td><a href="javascript:showClassDetail('c2',3)">Detail</a></td>
 </tr>
 
-<tr id='pt3.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_taskpackageson</div></td>
+<tr id='ft2.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_taskpackageson_admin: 验证管理员创建上传记录，对比记录准确性,管理员root,任务包task16,验证登出后无权访问数据</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.1')" >
+        error</a>
+
+    <div id='div_ft2.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft2.1: Traceback (most recent call last):
+  File "D:\code\RGSManager\utils\test\test_taskpackageson.py", line 42, in test_taskpackageson_admin
+    driver.get(self.base_url)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 333, in get
+    self.execute(Command.GET, {'url': url})
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+WebDriverException: Message: Reached error page: about:neterror?e=connectionFailure&amp;u=http%3A//192.168.3.120%3A8081/v9/taskpackagesons/%3Fregiontask_name%3D%25E4%25B8%259C%25E5%258D%2597%25E5%258C%25BA%25E5%259F%259F1800%25E5%25B9%2585%26taskpackage_name%3Dtask16&amp;c=UTF-8&amp;f=regular&amp;d=Firefox%20%E6%97%A0%E6%B3%95%E5%BB%BA%E7%AB%8B%E5%88%B0%20192.168.3.120%3A8081%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E8%BF%9E%E6%8E%A5%E3%80%82
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt2.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_taskpackageson_worker_false: 验证作业员上传不属于自己的任务包,作业员worker,任务包task16，验证登出后权限</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt2.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_taskpackageson_worker_true: 验证作业员上传属于自己的作业包,作业员worker,任务包task1</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
 <tr id='total_row'>
     <td>Total</td>
-    <td>3</td>
-    <td>3</td>
+    <td>6</td>
+    <td>5</td>
     <td>0</td>
-    <td>0</td>
+    <td>1</td>
     <td>&nbsp;</td>
 </tr>
 </table>

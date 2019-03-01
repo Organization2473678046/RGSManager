@@ -189,11 +189,11 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>测试报告</h1>
-<p class='attribute'><strong>Start Time:</strong> 2019-02-26 15:04:39</p>
-<p class='attribute'><strong>Duration:</strong> 0:00:42.328000</p>
-<p class='attribute'><strong>Status:</strong> Pass 3</p>
+<p class='attribute'><strong>Start Time:</strong> 2019-02-28 09:22:36</p>
+<p class='attribute'><strong>Duration:</strong> 0:00:37.613000</p>
+<p class='attribute'><strong>Status:</strong> Pass 1 Error 1</p>
 
-<p class='description'>用例执行情况：</p>
+<p class='description'>测试用例包含用户接口,主任务包接口，子任务包接口</p>
 </div>
 
 
@@ -221,54 +221,63 @@ function showOutput(id, name) {
     <td>View</td>
 </tr>
 
-<tr class='passClass'>
-    <td>utils.test.test_login.Test_Login</td>
-    <td>1</td>
+<tr class='errorClass'>
+    <td>utils.test.test_taskpackageschedule.Test_taskpackageSchedule</td>
+    <td>2</td>
     <td>1</td>
     <td>0</td>
-    <td>0</td>
-    <td><a href="javascript:showClassDetail('c1',1)">Detail</a></td>
+    <td>1</td>
+    <td><a href="javascript:showClassDetail('c1',2)">Detail</a></td>
 </tr>
 
 <tr id='pt1.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_user</div></td>
+    <td class='none'><div class='testcase'>test_get_schedule: 获取进度，验证进度以及分页是否正确</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr class='passClass'>
-    <td>utils.test.test_taskpackage.Test_taskpackage</td>
-    <td>1</td>
-    <td>1</td>
-    <td>0</td>
-    <td>0</td>
-    <td><a href="javascript:showClassDetail('c2',1)">Detail</a></td>
-</tr>
+<tr id='ft1.2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_create_schedile: 创建进度，验证创建后返回信息是否正确</div></td>
+    <td colspan='5' align='center'>
 
-<tr id='pt2.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_taskpackage</div></td>
-    <td colspan='5' align='center'>pass</td>
-</tr>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.2')" >
+        error</a>
 
-<tr class='passClass'>
-    <td>utils.test.test_taskpackageson.Test_taskpackageSon</td>
-    <td>1</td>
-    <td>1</td>
-    <td>0</td>
-    <td>0</td>
-    <td><a href="javascript:showClassDetail('c3',1)">Detail</a></td>
-</tr>
+    <div id='div_ft1.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.2: Traceback (most recent call last):
+  File "D:\code\RGSManager\utils\test\test_taskpackageschedule.py", line 70, in test_create_schedile
+    driver.find_element_by_name("schedule").click()
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\selenium\webdriver\remote\webelement.py", line 80, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\selenium\webdriver\remote\webelement.py", line 633, in _execute
+    return self._parent.execute(command, params)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+ElementNotInteractableException: Message: Element &lt;input class="form-control" name="schedule" type="text"&gt; could not be scrolled into view
 
-<tr id='pt3.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_taskpackageson</div></td>
-    <td colspan='5' align='center'>pass</td>
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
 <tr id='total_row'>
     <td>Total</td>
-    <td>3</td>
-    <td>3</td>
+    <td>2</td>
+    <td>1</td>
     <td>0</td>
-    <td>0</td>
+    <td>1</td>
     <td>&nbsp;</td>
 </tr>
 </table>

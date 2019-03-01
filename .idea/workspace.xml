@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3f9b5f5d-a84d-4341-a601-a79ce4f258d0" name="Default Changelist" comment="" />
+    <list default="true" id="3f9b5f5d-a84d-4341-a601-a79ce4f258d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/utils/test/constant.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/test/test_taskpackageregiontask.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/test/test_taskpackageschedule.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/result.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/test/geckodriver.log" beforeDir="false" afterPath="$PROJECT_DIR$/utils/test/geckodriver.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/test/get_taskpackage_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/test/test_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/test/test_all.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/test/test_login.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/test/test_login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/test/test_taskpackage.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/test/test_taskpackage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/test/test_taskpackageowner.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/test/test_taskpackageowner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/test/test_taskpackageson.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/test/test_taskpackageson.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -9,25 +22,41 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/RGSManager$migrate_db_V7.coverage" NAME="migrate_db_V7 Coverage Results" MODIFIED="1547542453550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackage_Test_Login_test_user.coverage" NAME="Unittests for test_taskpackage.Test_Login.test_user Coverage Results" MODIFIED="1551085995371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/taskpackages/pubilc" />
-    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_login_Test_Login_test_user_test_case.coverage" NAME="Unittests for test_login.Test_Login.test_user_test_case Coverage Results" MODIFIED="1551080577396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/users/pubilc" />
-    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_login_Test_Login_test_user.coverage" NAME="Unittests for test_login.Test_Login.test_user Coverage Results" MODIFIED="1551093147322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/users/pubilc" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_login_Test_Login_test_user.coverage" NAME="Unittests for test_login.Test_Login.test_user Coverage Results" MODIFIED="1551148970044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageson_Test_taskpackageSon_test_create_taskpackage.coverage" NAME="Unittests for test_taskpackageson.Test_taskpackageSon.test_create_taskpackage Coverage Results" MODIFIED="1551161229261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$test_all.coverage" NAME="test_all Coverage Results" MODIFIED="1551344436270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
     <SUITE FILE_PATH="coverage/RGSManager$migrate_db.coverage" NAME="migrate_db Coverage Results" MODIFIED="1550489007361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_login_UserTestCase_test_user_test_case.coverage" NAME="Unittests for test_login.UserTestCase.test_user_test_case Coverage Results" MODIFIED="1551073205459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/users/pubilc" />
-    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackage_Test_Login_test_create_taskpackage.coverage" NAME="Unittests for test_taskpackage.Test_Login.test_create_taskpackage Coverage Results" MODIFIED="1551098996384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/taskpackages/pubilc" />
-    <SUITE FILE_PATH="coverage/RGSManager$Unittests_in_test_taskpackage_py.coverage" NAME="Unittests in test_taskpackage.py Coverage Results" MODIFIED="1551083440999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/taskpackages/pubilc" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackage_Test_Login_test_create_taskpackage.coverage" NAME="Unittests for test_taskpackage.Test_Login.test_create_taskpackage Coverage Results" MODIFIED="1551143023865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
     <SUITE FILE_PATH="coverage/RGSManager$createregiontask.coverage" NAME="createregiontask Coverage Results" MODIFIED="1550668080279" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/celery_app" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageschedule_Test_taskpackageOwner.coverage" NAME="Unittests for test_taskpackageschedule.Test_taskpackageOwner Coverage Results" MODIFIED="1551316614040" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageson_Test_taskpackage_test_create_taskpackage.coverage" NAME="Unittests for test_taskpackageson.Test_taskpackage.test_create_taskpackage Coverage Results" MODIFIED="1551150421030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
     <SUITE FILE_PATH="coverage/RGSManager$file_chunk.coverage" NAME="file_chunk Coverage Results" MODIFIED="1550023805283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_login_Test_Login.coverage" NAME="Unittests for test_login.Test_Login Coverage Results" MODIFIED="1551093020910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/users/pubilc" />
-    <SUITE FILE_PATH="coverage/RGSManageV5$tests.coverage" NAME="tests Coverage Results" MODIFIED="1546657035803" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/taskpackages" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackage_Test_taskpackage_test_taskpackage_create_admin.coverage" NAME="Unittests for test_taskpackage.Test_taskpackage.test_taskpackage_create_admin Coverage Results" MODIFIED="1551237035429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_login_Test_Login.coverage" NAME="Unittests for test_login.Test_Login Coverage Results" MODIFIED="1551165349310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageregiontask_Test_taskpackageRegiontask.coverage" NAME="Unittests for test_taskpackageregiontask.Test_taskpackageRegiontask Coverage Results" MODIFIED="1551335094850" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageregiontask_Test_taskpackageRegiontask_test_regiontask_create.coverage" NAME="Unittests for test_taskpackageregiontask.Test_taskpackageRegiontask.test_regiontask_create Coverage Results" MODIFIED="1551344378502" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
     <SUITE FILE_PATH="coverage/RGSManager$regionchunk.coverage" NAME="regionchunk Coverage Results" MODIFIED="1550124361984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/celery_app" />
-    <SUITE FILE_PATH="coverage/RGSManager$Unittests_in_test_login_py.coverage" NAME="Unittests in test_login.py Coverage Results" MODIFIED="1551073810919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/users/pubilc" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_in_test_login_py.coverage" NAME="Unittests in test_login.py Coverage Results" MODIFIED="1551142822235" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageschedule_UntitledTestCase.coverage" NAME="Unittests for test_taskpackageschedule.UntitledTestCase Coverage Results" MODIFIED="1551316515967" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
     <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_login_UserTestCase.coverage" NAME="Unittests for test_login.UserTestCase Coverage Results" MODIFIED="1551073503476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/users/pubilc" />
     <SUITE FILE_PATH="coverage/RGSManager$tests__1_.coverage" NAME="tests (1) Coverage Results" MODIFIED="1547707056964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/taskpackages" />
     <SUITE FILE_PATH="coverage/RGSManager$tests.coverage" NAME="tests Coverage Results" MODIFIED="1547621856926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/users" />
     <SUITE FILE_PATH="coverage/RGSManageV5$unittest.coverage" NAME="unittest Coverage Results" MODIFIED="1546519931085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackage_Test_Login.coverage" NAME="Unittests for test_taskpackage.Test_Login Coverage Results" MODIFIED="1551095809498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/taskpackages/pubilc" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackage_Test_Login.coverage" NAME="Unittests for test_taskpackage.Test_Login Coverage Results" MODIFIED="1551145608391" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageowner_UntitledTestCase_test_untitled_test_case.coverage" NAME="Unittests for test_taskpackageowner.UntitledTestCase.test_untitled_test_case Coverage Results" MODIFIED="1551271778689" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$migrate_db_V7.coverage" NAME="migrate_db_V7 Coverage Results" MODIFIED="1547542453550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackage_Test_Login_test_user.coverage" NAME="Unittests for test_taskpackage.Test_Login.test_user Coverage Results" MODIFIED="1551085995371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/taskpackages/pubilc" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_login_Test_Login_test_user_test_case.coverage" NAME="Unittests for test_login.Test_Login.test_user_test_case Coverage Results" MODIFIED="1551080577396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/users/pubilc" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_login_UserTestCase_test_user_test_case.coverage" NAME="Unittests for test_login.UserTestCase.test_user_test_case Coverage Results" MODIFIED="1551073205459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/users/pubilc" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageschedule_UntitledTestCase_test_create_schedile.coverage" NAME="Unittests for test_taskpackageschedule.UntitledTestCase.test_create_schedile Coverage Results" MODIFIED="1551316461728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_in_test_taskpackage_py.coverage" NAME="Unittests in test_taskpackage.py Coverage Results" MODIFIED="1551148665225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageowner_UntitledTestCase.coverage" NAME="Unittests for test_taskpackageowner.UntitledTestCase Coverage Results" MODIFIED="1551271124596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageson_Test_taskpackageSon.coverage" NAME="Unittests for test_taskpackageson.Test_taskpackageSon Coverage Results" MODIFIED="1551158981398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageson_Test_taskpackageSon_test_taskpackageson.coverage" NAME="Unittests for test_taskpackageson.Test_taskpackageSon.test_taskpackageson Coverage Results" MODIFIED="1551164177143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageowner_Test_taskpackageOwner_test_taskpackageowner.coverage" NAME="Unittests for test_taskpackageowner.Test_taskpackageOwner.test_taskpackageowner Coverage Results" MODIFIED="1551316635702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_login_Test_Login_test_permission.coverage" NAME="Unittests for test_login.Test_Login.test_permission Coverage Results" MODIFIED="1551142883708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
+    <SUITE FILE_PATH="coverage/RGSManageV5$tests.coverage" NAME="tests Coverage Results" MODIFIED="1546657035803" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/taskpackages" />
+    <SUITE FILE_PATH="coverage/RGSManager$Unittests_for_test_taskpackageson_Test_taskpackage.coverage" NAME="Unittests for test_taskpackageson.Test_taskpackage Coverage Results" MODIFIED="1551150464218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils/test" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -140,39 +169,44 @@
     <session id="961304733">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
-          <entry key="project.open.time.0" value="3" />
+          <entry key="project.closed" value="11" />
+          <entry key="project.open.time.0" value="4" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.7" value="2" />
-          <entry key="project.open.time.8" value="5" />
-          <entry key="project.open.time.9" value="3" />
-          <entry key="project.opened" value="15" />
+          <entry key="project.open.time.8" value="6" />
+          <entry key="project.open.time.9" value="4" />
+          <entry key="project.opened" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="bat" value="1" />
-          <entry key="py" value="63" />
+          <entry key="html" value="3" />
+          <entry key="log" value="1" />
+          <entry key="py" value="93" />
           <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="63" />
+          <entry key="HTML" value="3" />
+          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="Python" value="93" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Django Console" value="254" />
-          <entry key="py" value="5682" />
+          <entry key="html" value="1" />
+          <entry key="py" value="10019" />
           <entry key="txt" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+          <entry key="HTML" value="1" />
           <entry key="PLAIN_TEXT" value="17" />
-          <entry key="Python" value="5936" />
+          <entry key="Python" value="10273" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -303,11 +337,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/users/pubilc/test_login.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/test/constant.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="99" column="47" selection-start-line="99" selection-end-line="100" />
+            <state relative-caret-position="2134">
+              <caret line="97" column="17" selection-start-line="97" selection-start-column="17" selection-end-line="97" selection-end-column="17" />
+              <folding>
+                <element signature="e#24#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utils/test/test_all.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
@@ -316,10 +362,49 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/taskpackages/tests.py">
+        <entry file="file://$PROJECT_DIR$/utils/test/test_taskpackageson.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+            <state relative-caret-position="-389">
+              <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
+              <folding>
+                <element signature="e#24#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/test/test_taskpackageowner.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="20" column="36" selection-start-line="20" selection-end-line="21" />
+              <folding>
+                <element signature="e#24#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/test/test_taskpackageschedule.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="88" selection-start-line="88" selection-end-line="89" selection-end-column="31" />
+              <folding>
+                <element signature="e#24#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/test/test_taskpackageregiontask.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-169">
+              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+              <folding>
+                <element signature="e#24#63#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -329,6 +414,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Python Script" />
       </list>
     </option>
@@ -354,6 +440,9 @@
       <find>service_name</find>
       <find>print</find>
       <find>clipfromsde</find>
+      <find>test_permission</find>
+      <find>is_element_present</find>
+      <find>is_alert_present</find>
     </findStrings>
     <replaceStrings>
       <replace>V5</replace>
@@ -405,6 +494,15 @@
         <option value="$PROJECT_DIR$/taskpackages/models.py" />
         <option value="$PROJECT_DIR$/taskpackages/serializers.py" />
         <option value="$PROJECT_DIR$/celery_app/createregiontask.py" />
+        <option value="$PROJECT_DIR$/result.html" />
+        <option value="$PROJECT_DIR$/utils/test/test_login.py" />
+        <option value="$PROJECT_DIR$/utils/test/test_taskpackageson.py" />
+        <option value="$PROJECT_DIR$/utils/test/test_taskpackage.py" />
+        <option value="$PROJECT_DIR$/utils/test/test_taskpackageowner.py" />
+        <option value="$PROJECT_DIR$/utils/test/constant.py" />
+        <option value="$PROJECT_DIR$/utils/test/test_taskpackageschedule.py" />
+        <option value="$PROJECT_DIR$/utils/test/test_all.py" />
+        <option value="$PROJECT_DIR$/utils/test/test_taskpackageregiontask.py" />
       </list>
     </option>
   </component>
@@ -414,10 +512,13 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="953" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -435,7 +536,13 @@
             <path>
               <item name="RGSManager" type="b2602c69:ProjectViewProjectNode" />
               <item name="RGSManager" type="462c0819:PsiDirectoryNode" />
-              <item name="taskpackages" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RGSManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RGSManager" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -444,6 +551,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../RGSManager - 副本" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -452,6 +560,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\RGSManager\utils\test" />
       <recent name="D:\PycharmProjects\RGSManager\celery_app" />
       <recent name="D:\PycharmProjects\RGSManager" />
     </key>
@@ -468,8 +577,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.createregiontask">
-    <configuration name="createregiontask" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.test_all">
+    <configuration name="test_all" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RGSManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -477,100 +586,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/celery_app" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils/test" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/celery_app/createregiontask.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="file_chunk" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="RGSManager" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/file_chunk.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="migrate_db" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="RGSManager" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/migrate_db.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="regionchunk" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="RGSManager" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/celery_app" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/celery_app/regionchunk.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="tests (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="RGSManager" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/taskpackages" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/taskpackages/tests.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/test/test_all.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -625,22 +646,82 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests for test_taskpackageowner.Test_taskpackageOwner.test_taskpackageowner" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="RGSManager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_taskpackageowner.Test_taskpackageOwner.test_taskpackageowner&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_taskpackageregiontask.Test_taskpackageRegiontask" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="RGSManager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_taskpackageregiontask.Test_taskpackageRegiontask&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_taskpackageregiontask.Test_taskpackageRegiontask.test_regiontask_create" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="RGSManager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_taskpackageregiontask.Test_taskpackageRegiontask.test_regiontask_create&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_taskpackageschedule.Test_taskpackageOwner" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="RGSManager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_taskpackageschedule.Test_taskpackageOwner&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Django server.RGSManager" />
       <item itemvalue="Python.tests" />
-      <item itemvalue="Python.tests (1)" />
-      <item itemvalue="Python.migrate_db" />
-      <item itemvalue="Python.file_chunk" />
-      <item itemvalue="Python.regionchunk" />
-      <item itemvalue="Python.createregiontask" />
+      <item itemvalue="Python.test_all" />
+      <item itemvalue="Python tests.Unittests for test_taskpackageschedule.Test_taskpackageOwner" />
+      <item itemvalue="Python tests.Unittests for test_taskpackageowner.Test_taskpackageOwner.test_taskpackageowner" />
+      <item itemvalue="Python tests.Unittests for test_taskpackageregiontask.Test_taskpackageRegiontask" />
+      <item itemvalue="Python tests.Unittests for test_taskpackageregiontask.Test_taskpackageRegiontask.test_regiontask_create" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.createregiontask" />
-        <item itemvalue="Python.migrate_db" />
-        <item itemvalue="Python.regionchunk" />
-        <item itemvalue="Python.file_chunk" />
-        <item itemvalue="Python.tests (1)" />
+        <item itemvalue="Python.test_all" />
+        <item itemvalue="Python tests.Unittests for test_taskpackageregiontask.Test_taskpackageRegiontask.test_regiontask_create" />
+        <item itemvalue="Python tests.Unittests for test_taskpackageregiontask.Test_taskpackageRegiontask" />
+        <item itemvalue="Python tests.Unittests for test_taskpackageowner.Test_taskpackageOwner.test_taskpackageowner" />
+        <item itemvalue="Python tests.Unittests for test_taskpackageschedule.Test_taskpackageOwner" />
       </list>
     </recent_temporary>
   </component>
@@ -679,6 +760,38 @@
     <option name="localTasksCounter" value="4" />
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="Unittests_for_test_taskpackageowner_UntitledTestCase_test_untitled_test_case - 2019.02.27 at 20h 49m 23s.xml">
+      <configuration name="Unittests for test_taskpackageowner.UntitledTestCase.test_untitled_test_case" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_taskpackageowner_UntitledTestCase_test_untitled_test_case - 2019.02.27 at 20h 49m 54s.xml">
+      <configuration name="Unittests for test_taskpackageowner.UntitledTestCase.test_untitled_test_case" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_taskpackageschedule_UntitledTestCase_test_create_schedile - 2019.02.28 at 09h 14m 23s.xml">
+      <configuration name="Unittests for test_taskpackageschedule.UntitledTestCase.test_create_schedile" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_taskpackageschedule_UntitledTestCase - 2019.02.28 at 09h 14m 55s.xml">
+      <configuration name="Unittests for test_taskpackageschedule.UntitledTestCase" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_taskpackageschedule_UntitledTestCase - 2019.02.28 at 09h 15m 26s.xml">
+      <configuration name="Unittests for test_taskpackageschedule.UntitledTestCase" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_taskpackageschedule_Test_taskpackageOwner - 2019.02.28 at 09h 16m 55s.xml">
+      <configuration name="Unittests for test_taskpackageschedule.Test_taskpackageOwner" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_taskpackageowner_Test_taskpackageOwner_test_taskpackageowner - 2019.02.28 at 09h 17m 16s.xml">
+      <configuration name="Unittests for test_taskpackageowner.Test_taskpackageOwner.test_taskpackageowner" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_taskpackageregiontask_Test_taskpackageRegiontask - 2019.02.28 at 14h 25m 08s.xml">
+      <configuration name="Unittests for test_taskpackageregiontask.Test_taskpackageRegiontask" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_taskpackageregiontask_Test_taskpackageRegiontask_test_regiontask_create - 2019.02.28 at 14h 33m 13s.xml">
+      <configuration name="Unittests for test_taskpackageregiontask.Test_taskpackageRegiontask.test_regiontask_create" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_taskpackageregiontask_Test_taskpackageRegiontask_test_regiontask_create - 2019.02.28 at 16h 59m 39s.xml">
+      <configuration name="Unittests for test_taskpackageregiontask.Test_taskpackageRegiontask.test_regiontask_create" configurationId="tests" />
+    </history-entry>
+  </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
@@ -690,14 +803,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49932525" visible="true" weight="0.25590128" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49932525" weight="0.44345897" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5006748" weight="0.12403599" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32793522" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4993573" weight="0.32534248" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39041096" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4993573" visible="true" weight="0.3158482" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3560268" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32924107" />
@@ -706,7 +820,7 @@
       <window_info anchor="bottom" id="manage.py@RGSManageV5" order="9" weight="0.6174785" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50064266" side_tool="true" weight="0.32700893" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32876712" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.4955357" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.40625" />
       <window_info anchor="bottom" id="Python Console" order="13" weight="0.32648402" />
       <window_info anchor="bottom" id="Reviews" order="14" />
       <window_info anchor="bottom" id="manage.py@RGSManager" order="15" weight="0.39811066" />
@@ -750,11 +864,18 @@
           <line>40</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/utils/test/test_taskpackageson.py</url>
+          <line>144</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="regiontask_filepath.split('/')" language="Python" />
+        <watch expression="cur = conn.cursor()" language="Python" />
+        <watch expression="SQL" language="Python" />
       </configuration>
       <configuration name="Python.DjangoServer">
         <watch expression="RegionTask.objects.filter(id = self.request.parser_context[&quot;kwargs&quot;][&quot;pk&quot;])" language="Python" />
@@ -763,6 +884,16 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>SQL</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>cur = conn.cursor()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>regiontask_filepath.split('/')</expression-string>
         <language-id>Python</language-id>
@@ -803,62 +934,9 @@
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>file_dir</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>fz.extract(file, file_dir)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/taskpackages/migrations/0004_auto_20190114_1440.py" />
-    <entry file="file://$PROJECT_DIR$/taskpackages/migrations/0001_initial.py" />
-    <entry file="file://$PROJECT_DIR$/taskpackages/migrations/0002_auto_20190107_1430.py" />
-    <entry file="file://$PROJECT_DIR$/taskpackages/migrations/0003_auto_20190107_1626.py" />
-    <entry file="file://$PROJECT_DIR$/RGSManager/wsgi.py" />
-    <entry file="file://C:/Python27/ArcGIS10.2/Lib/site-packages/django_filters/rest_framework/backends.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-139">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.2/system/python_stubs/1248084663/sys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore" />
-    <entry file="file://$PROJECT_DIR$/migrate_db_V7.py" />
-    <entry file="file://C:/Python27/ArcGIS10.2/Lib/site-packages/django/db/models/query.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1021">
-          <caret line="703" column="8" selection-start-line="703" selection-start-column="8" selection-end-line="703" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/ArcGIS10.2/Lib/site-packages/pip-10.0.1-py2.7.egg/pip/_vendor/urllib3/util/ssl_.py" />
-    <entry file="file://D:/ClipTask/requirement.txt" />
-    <entry file="file://$PROJECT_DIR$/README" />
-    <entry file="file://$PROJECT_DIR$/users/serializers.py" />
-    <entry file="file://$PROJECT_DIR$/users/models.py" />
-    <entry file="file://$PROJECT_DIR$/users/geckodriver.log" />
-    <entry file="file://$PROJECT_DIR$/users/views.py" />
-    <entry file="file://$PROJECT_DIR$/xadmin-requirement.txt" />
-    <entry file="file://C:/Python27/ArcGIS10.2/Lib/importlib/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package111.txt" />
     <entry file="file://$PROJECT_DIR$/taskpackages/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -877,13 +955,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="752">
           <caret line="76" column="37" lean-forward="true" selection-start-line="76" selection-start-column="37" selection-end-line="76" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/taskpackages/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -944,13 +1015,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RGSManager/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/ArcGIS10.2/Lib/site-packages/celery/app/task.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -962,13 +1026,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="392">
           <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/migrate_db.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="657">
-          <caret line="258" lean-forward="true" selection-start-line="258" selection-end-line="258" />
         </state>
       </provider>
     </entry>
@@ -1014,26 +1071,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/taskpackages/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" selection-start-line="1" selection-end-line="5" selection-end-column="29" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/taskpackages/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6798">
-          <caret line="328" selection-start-line="328" selection-end-line="328" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/celery_app/createregiontask.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
@@ -1048,16 +1085,200 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
           <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/ArcGIS10.2/Lib/unittest/loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/result.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-66" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/pubilc/test_login.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="934">
+          <caret line="99" column="47" selection-start-line="99" selection-end-line="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RGSManager/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/taskpackages/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-287">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/ArcGIS10.2/Lib/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="330" selection-start-line="330" selection-end-line="330" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrate_db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/ArcGIS10.2/Lib/site-packages/psycopg2/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-469">
+          <caret line="84" column="4" selection-start-line="84" selection-start-column="4" selection-end-line="84" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/test/test_login.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="37" lean-forward="true" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/taskpackages/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3014">
+          <caret line="13" column="45" lean-forward="true" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="92" />
           <folding>
-            <element signature="e#276#286#0" expanded="true" />
+            <element signature="e#24#63#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/taskpackages/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="312" column="6" selection-start-line="312" selection-start-column="6" selection-end-line="312" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/ArcGIS10.2/Lib/site-packages/rest_framework/generics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="47" column="30" lean-forward="true" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/ArcGIS10.2/Lib/site-packages/rest_framework/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4092">
+          <caret line="200" column="8" selection-start-line="200" selection-start-column="8" selection-end-line="200" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/taskpackages/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="257" column="35" selection-start-line="257" selection-start-column="35" selection-end-line="257" selection-end-column="35" />
+        <state relative-caret-position="2897">
+          <caret line="243" column="30" lean-forward="true" selection-start-line="243" selection-start-column="30" selection-end-line="243" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/ArcGIS10.2/Lib/site-packages/selenium/webdriver/remote/webdriver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="495" selection-start-line="495" selection-end-line="495" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/test/test_taskpackage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="36" selection-start-line="36" selection-end-line="46" selection-end-column="77" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/test/test_taskpackageson.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-389">
+          <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/test/geckodriver.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="20" column="3" lean-forward="true" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/test/get_taskpackage_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/_jb_runner_tools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="186" selection-start-line="186" selection-end-line="186" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/test/constant.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2134">
+          <caret line="97" column="17" selection-start-line="97" selection-start-column="17" selection-end-line="97" selection-end-column="17" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/test/test_taskpackageowner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="20" column="36" selection-start-line="20" selection-end-line="21" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/test/test_taskpackageschedule.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="88" selection-start-line="88" selection-end-line="89" selection-end-column="31" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/test/test_taskpackageregiontask.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-169">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/test/test_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
           </folding>

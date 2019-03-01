@@ -189,11 +189,11 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>测试报告</h1>
-<p class='attribute'><strong>Start Time:</strong> 2019-02-26 15:04:39</p>
-<p class='attribute'><strong>Duration:</strong> 0:00:42.328000</p>
+<p class='attribute'><strong>Start Time:</strong> 2019-02-27 16:48:47</p>
+<p class='attribute'><strong>Duration:</strong> 0:00:36.776000</p>
 <p class='attribute'><strong>Status:</strong> Pass 3</p>
 
-<p class='description'>用例执行情况：</p>
+<p class='description'>测试用例包含用户接口,主任务包接口，子任务包接口</p>
 </div>
 
 
@@ -222,44 +222,26 @@ function showOutput(id, name) {
 </tr>
 
 <tr class='passClass'>
-    <td>utils.test.test_login.Test_Login</td>
-    <td>1</td>
-    <td>1</td>
+    <td>utils.test.test_taskpackageson.Test_taskpackageSon</td>
+    <td>3</td>
+    <td>3</td>
     <td>0</td>
     <td>0</td>
-    <td><a href="javascript:showClassDetail('c1',1)">Detail</a></td>
+    <td><a href="javascript:showClassDetail('c1',3)">Detail</a></td>
 </tr>
 
 <tr id='pt1.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_user</div></td>
+    <td class='none'><div class='testcase'>test_taskpackageson_admin: 验证管理员创建上传记录，对比记录准确性,管理员root,任务包task16,验证登出后无权访问数据</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr class='passClass'>
-    <td>utils.test.test_taskpackage.Test_taskpackage</td>
-    <td>1</td>
-    <td>1</td>
-    <td>0</td>
-    <td>0</td>
-    <td><a href="javascript:showClassDetail('c2',1)">Detail</a></td>
-</tr>
-
-<tr id='pt2.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_taskpackage</div></td>
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_taskpackageson_worker_false: 验证作业员上传不属于自己的任务包,作业员worker,任务包task16，验证登出后权限</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr class='passClass'>
-    <td>utils.test.test_taskpackageson.Test_taskpackageSon</td>
-    <td>1</td>
-    <td>1</td>
-    <td>0</td>
-    <td>0</td>
-    <td><a href="javascript:showClassDetail('c3',1)">Detail</a></td>
-</tr>
-
-<tr id='pt3.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_taskpackageson</div></td>
+<tr id='pt1.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_taskpackageson_worker_true: 验证作业员上传属于自己的作业包,作业员worker,任务包task1</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 

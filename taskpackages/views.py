@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import time
+import threading
+
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.mixins import CreateModelMixin, ListModelMixin
@@ -16,6 +19,7 @@ from utils.permission import AdminPerssion
 from .serializers import TaskPackageSerializer, TaskPackageSonSerializer, TaskPackageOwnerSerializer, \
     EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer, RegionTaskSerializer, \
     RegionTaskChunkSerializer
+from rest_framework.pagination import _positive_int
 
 
 class TaskPackagePagination(PageNumberPagination):
@@ -49,8 +53,21 @@ class SchedulePagination(PageNumberPagination):
 class RegionTaskPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'limit'
-    max_page_size = 20
+    max_page_size = 9999
     page_query_param = 'page'
+
+    # def get_page_size(self, request):
+    #     if self.page_size_query_param:
+    #         try:
+    #             return _positive_int(
+    #                 request.query_params[self.page_size_query_param],
+    #                 strict=True,
+    #                 cutoff=self.max_page_size
+    #             )
+    #         except (KeyError, ValueError):
+    #             pass
+    #
+    #     return self.page_size
 
 
 class TaskPackageViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):
@@ -90,7 +107,7 @@ class TaskPackageViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Generic
                     # return TaskPackage.objects.filter(regiontask_name=regiontask_name, owner=user.username,
                     #                                   isdelete=False).order_by("id")
                     return TaskPackage.objects.filter(regiontask_name=regiontask_name, owner=user.username,
-                                                  isdelete=False)
+                                                      isdelete=False)
             return None
         return []
 
@@ -100,6 +117,7 @@ class TaskPackageSonViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Gene
     list:根据主任务包名字,返回所有子任务包
     create:上传子任务包
     """
+
     pagination_class = TaskPackageSonPagination
     permission_classes = [IsAuthenticated]
     serializer_class = TaskPackageSonSerializer
@@ -131,7 +149,7 @@ class TaskPackageSonViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Gene
                                                              regiontask_name=regiontask_name, isdelete=False)
                     else:
                         return []
-        return Noney
+        return None
 
 
 class TaskPackageOwnerViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, GenericViewSet):
@@ -210,11 +228,12 @@ class EchartScheduleViewSet(mixins.ListModelMixin, GenericViewSet):
     def list(self, request, *args, **kwargs):
         regiontask_name = self.request.query_params.get("regiontask_name")
         if not regiontask_name:
-            return Response("请选择任务区域", status=status.HTTP_400_BAD_REQUEST)
-
-        schedules = TaskPackageScheduleSet.objects.all()
+            return Response(u"请选择任务区域", status=status.HTTP_400_BAD_REQUEST)
+        # time.sleep(60)
+        # schedules = [schedule.schedule for schedule in TaskPackageScheduleSet.objects.filter(regiontask_name=regiontask_name)]
+        schedules = TaskPackageScheduleSet.objects.filter(regiontask_name=regiontask_name)
         for schedule in schedules:
-            count = TaskPackage.objects.filter(schedule=schedule, regiontask_name=regiontask_name).count()
+            count = TaskPackage.objects.filter(schedule=schedule.schedule, regiontask_name=regiontask_name).count()
             try:
                 echartschedule = EchartSchedule.objects.get(taskpackage_schedule=schedule,
                                                             regiontask_name=regiontask_name)
@@ -293,6 +312,7 @@ class RegionTaskView(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Upda
             return RegionTask.objects.all()
         else:
             return None
+
 
 
 class RegionTaskChunkUploadView(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):

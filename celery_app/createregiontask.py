@@ -197,6 +197,7 @@ def ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde):
     # print wrkspc + MXD_name
     # mapDoc = arcpy.mapping.MapDocument(wrkspc + MXD_name)
     mapDoc = arcpy.mapping.MapDocument(new_mxdfile)
+    # TODO
     # con = "C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
     con = u"C:/Users/ltcx/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
 

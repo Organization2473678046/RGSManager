@@ -368,36 +368,6 @@ class RegionTaskSerializer(serializers.ModelSerializer):
             return instance
 
 
-    # if not hasattr(instance.file,'path'):
-    #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
-    #     if hasattr(regiontask.file, 'path'):
-    #         createregiontask.delay(regiontask.id, regiontask.file.path)
-    # elif hasattr(instance.file,'path') and instance.status == u'处理完成':
-    #     validated_data['file'] = instance.file
-    #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
-    # elif hasattr(instance.file,'path') and instance.status == u'处理中':
-    #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
-    #     if hasattr(regiontask.file, 'path'):
-    #         pass
-
-
-    # if validated_data['file'] is not None:
-    #     if instance.status == u'处理中':
-    #         regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
-    #         createregiontask.delay(regiontask.id, regiontask.file.path)
-    #     elif instance.status == u'处理完成':
-    #         validated_data['file'] = instance.file
-    #         regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
-
-    # regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
-    # if hasattr(regiontask.file,'path'):
-    # if validated_data['file'] is not None and regiontask.status == u'处理中':
-    #     # print regiontask.file.path
-    #     createregiontask.delay(regiontask.id, regiontask.file.path)
-    #     return regiontask
-    # else:
-    #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
-    # return instance
 
 
 class RegionTaskChunkSerializer(serializers.ModelSerializer):

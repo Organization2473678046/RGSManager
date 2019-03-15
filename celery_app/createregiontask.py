@@ -30,15 +30,6 @@ def createregiontask(regiontask_id, regiontask_filepath):
     z = zipfile.is_zipfile(regiontask_filepath)
     r = rarfile.is_rarfile(regiontask_filepath)
     if z:
-<<<<<<< HEAD
-        # save_list = regiontask_filepath.split(u"/")
-        # save_list.pop()
-        # save_path = u"/".join(save_list)
-        # print regiontask_filepath
-
-        # rar_command = '"C:\Program Files\WinRAR\WinRAR.exe" x %s %s' % (regiontask_filepath, file_dir)
-=======
->>>>>>> V0.10
         # -ibck: 后台运行; -o+:覆盖已存在文件
         rar_command = '"C:\Program Files\WinRAR\WinRAR.exe" x %s %s -ibck -o+' % (regiontask_filepath, file_dir)
         rar_command = rar_command.encode('gbk')
@@ -67,19 +58,11 @@ def createregiontask(regiontask_id, regiontask_filepath):
                     gdbpath = os.path.join(dir_abspath, subdir)
                     datatype = u"mapindex"
                     ARCGIS_create_database(gdbpath, time_ymdhms, datatype)
-<<<<<<< HEAD
-                    # print u"创建mapindex数据库成功"
-=======
 
->>>>>>> V0.10
                 elif subdir.startswith(u"RGS"):
                     gdbpath = os.path.join(dir_abspath, subdir)
                     datatype = u"rgs"
                     ARCGIS_create_database(gdbpath, time_ymdhms, datatype)
-<<<<<<< HEAD
-                    # print u"创建rgs数据库成功"
-=======
->>>>>>> V0.10
 
         if dir.startswith(u"接图表"):
             gdbpath = os.path.join(file_dir, dir)
@@ -196,14 +179,8 @@ def ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde):
     # print wrkspc + MXD_name
     # mapDoc = arcpy.mapping.MapDocument(wrkspc + MXD_name)
     mapDoc = arcpy.mapping.MapDocument(new_mxdfile)
-<<<<<<< HEAD
-    # TODO
-    # con = "C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
-    con = u"C:/Users/ltcx/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
-=======
     con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on 192.168.3.120_6080 (系统管理员).ags"
     # con = u"C:/Users/ltcx/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
->>>>>>> V0.10
 
     sddraft_name = wrkspc + service_name
     sddraft = sddraft_name + '.sddraft'

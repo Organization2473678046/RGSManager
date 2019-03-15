@@ -18,13 +18,8 @@ from taskpackages.models import TaskPackage, TaskPackageSon, TaskPackageOwner, E
 from users.models import User
 from utils.permission import AdminPerssion
 from .serializers import TaskPackageSerializer, TaskPackageSonSerializer, TaskPackageOwnerSerializer, \
-<<<<<<< HEAD
-    EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer, RegionTaskSerializer, \
-    RegionTaskChunkSerializer
-from rest_framework.pagination import _positive_int
-=======
-    EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer, RegionTaskSerializer
->>>>>>> V0.10
+    EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer, RegionTaskSerializer, EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer, RegionTaskSerializer
+
 
 
 class TaskPackagePagination(PageNumberPagination):
@@ -247,14 +242,14 @@ class EchartScheduleViewSet(mixins.ListModelMixin, GenericViewSet):
         regiontask_name = self.request.query_params.get("regiontask_name")
         if not regiontask_name:
             return Response(u"请选择任务区域", status=status.HTTP_400_BAD_REQUEST)
-<<<<<<< HEAD
+
         # time.sleep(60)
         # schedules = [schedule.schedule for schedule in TaskPackageScheduleSet.objects.filter(regiontask_name=regiontask_name)]
         schedules = TaskPackageScheduleSet.objects.filter(regiontask_name=regiontask_name)
-=======
+
         schedules = [schedule.schedule for schedule in
                      TaskPackageScheduleSet.objects.filter(regiontask_name=regiontask_name)] + [u'未指定状态']
->>>>>>> V0.10
+
         for schedule in schedules:
             count = TaskPackage.objects.filter(schedule=schedule.schedule, regiontask_name=regiontask_name).count()
             try:
@@ -332,9 +327,9 @@ class RegionTaskView(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Upda
             return None
 
 
-<<<<<<< HEAD
 
-=======
+
+
 # 超期提醒管理员
 class OverdueViewSetAdmin(GenericViewSet, mixins.ListModelMixin):
     permission_classes = [IsAuthenticated]

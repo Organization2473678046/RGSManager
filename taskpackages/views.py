@@ -7,15 +7,15 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
+from datetime import datetime
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 from taskpackages.models import TaskPackage, TaskPackageSon, TaskPackageOwner, EchartTaskPackage, EchartSchedule, \
-    TaskPackageScheduleSet, RegionTask, RegionTaskChunk
+    TaskPackageScheduleSet, RegionTask
 from users.models import User
 from utils.permission import AdminPerssion
 from .serializers import TaskPackageSerializer, TaskPackageSonSerializer, TaskPackageOwnerSerializer, \
-    EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer, RegionTaskSerializer, \
-    RegionTaskChunkSerializer
+    EchartTaskpackageSerializer, EchartScheduleSerializer, ScheduleSerializer, RegionTaskSerializer
 
 
 class TaskPackagePagination(PageNumberPagination):
@@ -40,16 +40,16 @@ class TaskPackageOwnerPagination(PageNumberPagination):
 
 
 class SchedulePagination(PageNumberPagination):
-    page_size = 10
+    page_size = 9999
     page_size_query_param = 'limit'
-    max_page_size = 20
+    max_page_size = 9999
     page_query_param = 'page'
 
 
 class RegionTaskPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 9999
     page_size_query_param = 'limit'
-    max_page_size = 20
+    max_page_size = 9999
     page_query_param = 'page'
 
 
@@ -74,6 +74,20 @@ class TaskPackageViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Generic
         return [IsAuthenticated()]
 
     def get_queryset(self):
+        # 超时判断
+        regiontask_name = self.request.query_params.get("regiontask_name")
+        taskpackages = TaskPackage.objects.filter(regiontask_name=regiontask_name)
+        for taskpackage in taskpackages:
+            taskpackage_owner = TaskPackageOwner.objects.filter(taskpackage_name=taskpackage.name,
+                                                                regiontask_name=regiontask_name,
+                                                                isdelete=False).order_by("-createtime").first()
+            if taskpackage_owner is not None:
+                if taskpackage_owner.endtime < datetime.now():
+                    taskpackage_owner.isoverdue = True
+                    taskpackage_owner.save()
+                    taskpackage.isoverdue = True
+                    taskpackage.save()
+
         # 访问接口文档时,会访问这个函数,此时request is None,如果加了过滤之后,访问接口文档时会报警告
         # UserWarning: <class 'taskpackages.views.TaskPackageViewSet'> is not compatible with schema generation
         #   "{} is not compatible with schema generation".format(view.__class__)
@@ -82,7 +96,6 @@ class TaskPackageViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Generic
         if self.request is not None:
             user = self.request.user
             if self.action == 'list':
-                regiontask_name = self.request.query_params.get("regiontask_name")
                 if user.isadmin:
                     # return TaskPackage.objects.filter(regiontask_name=regiontask_name, isdelete=False).order_by("id")
                     return TaskPackage.objects.filter(regiontask_name=regiontask_name, isdelete=False)
@@ -90,7 +103,7 @@ class TaskPackageViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Generic
                     # return TaskPackage.objects.filter(regiontask_name=regiontask_name, owner=user.username,
                     #                                   isdelete=False).order_by("id")
                     return TaskPackage.objects.filter(regiontask_name=regiontask_name, owner=user.username,
-                                                  isdelete=False)
+                                                      isdelete=False)
             return None
         return []
 
@@ -131,7 +144,7 @@ class TaskPackageSonViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, Gene
                                                              regiontask_name=regiontask_name, isdelete=False)
                     else:
                         return []
-        return Noney
+        return None
 
 
 class TaskPackageOwnerViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, GenericViewSet):
@@ -179,7 +192,7 @@ class EchartTaskpackageViewSet(mixins.ListModelMixin, GenericViewSet):
     def list(self, request, *args, **kwargs):
         regiontask_name = self.request.query_params.get("regiontask_name")
         if not regiontask_name:
-            return Response("请选择任务区域", status=status.HTTP_400_BAD_REQUEST)
+            return Response(u"请选择任务区域", status=status.HTTP_400_BAD_REQUEST)
         users = User.objects.all()
         for user in users:
             count = TaskPackage.objects.filter(owner=user.username, regiontask_name=regiontask_name).count()
@@ -210,9 +223,9 @@ class EchartScheduleViewSet(mixins.ListModelMixin, GenericViewSet):
     def list(self, request, *args, **kwargs):
         regiontask_name = self.request.query_params.get("regiontask_name")
         if not regiontask_name:
-            return Response("请选择任务区域", status=status.HTTP_400_BAD_REQUEST)
-
-        schedules = TaskPackageScheduleSet.objects.all()
+            return Response(u"请选择任务区域", status=status.HTTP_400_BAD_REQUEST)
+        schedules = [schedule.schedule for schedule in
+                     TaskPackageScheduleSet.objects.filter(regiontask_name=regiontask_name)] + [u'未指定状态']
         for schedule in schedules:
             count = TaskPackage.objects.filter(schedule=schedule, regiontask_name=regiontask_name).count()
             try:
@@ -246,9 +259,6 @@ class ScheduleViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Upd
     ordering = ("id",)
     search_fields = ("id", "schedule")
 
-    # queryset = TaskPackageScheduleSet.objects.all()
-    # permission_classes = [IsAuthenticated, AdminPerssion]
-
     def get_permissions(self):
         if self.action == "list":
             return [IsAuthenticated()]
@@ -268,7 +278,6 @@ class RegionTaskView(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Upda
     create: 创建任务区域
     update: 更新任务区域信息
     """
-    # permission_classes = [IsAuthenticated, AdminPerssion]
     serializer_class = RegionTaskSerializer
     pagination_class = RegionTaskPagination
     filter_backends = [SearchFilter, DjangoFilterBackend, OrderingFilter]
@@ -289,16 +298,91 @@ class RegionTaskView(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.Upda
             else:
                 return RegionTask.objects.all()
         elif self.action == "update":
-            # return RegionTask.objects.filter(id=self.request.parser_context["kwargs"]["pk"])
             return RegionTask.objects.all()
         else:
             return None
 
 
+# 超期提醒管理员
+class OverdueViewSetAdmin(GenericViewSet, mixins.ListModelMixin):
+    permission_classes = [IsAuthenticated]
+    serializer_class = TaskPackageOwnerSerializer
+
+    def get_queryset(self):
+        regiontask_name = self.request.query_params.get("regiontask_name")
+        taskpackages = TaskPackage.objects.all()
+        for taskpackage in taskpackages:
+            taskpackage_owner = TaskPackageOwner.objects.filter(taskpackage_name=taskpackage.name,
+                                                                regiontask_name=regiontask_name).order_by(
+                "-createtime").first()
+            if taskpackage_owner is not None:
+                if taskpackage_owner.endtime < datetime.now():
+                    if taskpackage_owner.isoverdue is not True:
+                        taskpackage_owner.isoverdue = True
+                        taskpackage_owner.save()
+                        taskpackage.isoverdue = True
+                        taskpackage.save()
+
+        taskpackage = TaskPackage.objects.get(id=int(self.request.query_params.get("id")))
+        return TaskPackageOwner.objects.filter(taskpackage_name=taskpackage.name,
+                                               regiontask_name=taskpackage.regiontask_name,
+                                               isdelete=False).order_by("-createtime")
+
+
+class OverdueViewSetWorker(GenericViewSet, mixins.ListModelMixin):
+    permission_classes = [IsAuthenticated]
+    serializer_class = TaskPackageOwnerSerializer
+    pagination_class = TaskPackagePagination
+
+    def get_queryset(self):
+        user = self.request.user
+        taskpackages = TaskPackage.objects.all()
+        for taskpackage in taskpackages:
+            taskpackage_owner = TaskPackageOwner.objects.filter(taskpackage_name=taskpackage.name).order_by(
+                "-createtime").first()
+            if taskpackage_owner is not None:
+                if taskpackage_owner.endtime < datetime.now():
+                    if taskpackage_owner.isoverdue is not True:
+                        taskpackage_owner.isoverdue = True
+                        taskpackage_owner.save()
+                        taskpackage.isoverdue = True
+                        taskpackage.save()
+
+        taskpackages = TaskPackage.objects.filter(isoverdue=True, owner=user.username)
+        taskpackageowner_list = []
+        for taskpackage in taskpackages:
+            taskpackage__owner = TaskPackageOwner.objects.filter(taskpackage_name=taskpackage.name).order_by(
+                "-createtime").first()
+            taskpackageowner_list.append(taskpackage__owner)
+        return taskpackageowner_list
+
+
+# 根据图幅号返回具体作业包的信息
+class TaskpackageData(GenericViewSet, ListModelMixin):
+    permission_classes = [IsAuthenticated, AdminPerssion]
+    serializer_class = TaskPackageOwnerSerializer
+
+    def get_queryset(self):
+        regiontask_name = self.request.query_params.get("regiontask_name")
+        mapnum = self.request.query_params.get("mapnum")
+
+        if self.action == "list":
+            if mapnum and regiontask_name is not None:
+                taskpackage = TaskPackage.objects.filter(mapnums__icontains=mapnum).first()
+                taskpackage_owner = TaskPackageOwner.objects.filter(isdelete=False, regiontask_name=regiontask_name,
+                                                taskpackage_name=taskpackage.name).order_by("-createtime").first()
+                if taskpackage_owner is not None:
+                    return [taskpackage_owner]
+        else:
+            return None
+
+
+"""
 class RegionTaskChunkUploadView(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):
-    """
-    分块上传文件
-    """
+    
+    
+    # 分块上传文件
+    
     # permission_classes = [IsAuthenticated, AdminPerssion]
     serializer_class = RegionTaskChunkSerializer
 
@@ -316,7 +400,7 @@ class RegionTaskChunkUploadView(mixins.ListModelMixin, mixins.CreateModelMixin, 
                 return RegionTaskChunk.objects.all().order_by('id')
         else:
             return None
-
+"""
 
 """
 # 子任务包文件分块上传

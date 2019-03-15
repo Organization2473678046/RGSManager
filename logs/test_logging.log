@@ -1,0 +1,331 @@
+
+INFO 2019-03-14 11:14:14,431 basehttp 124 "GET /v0.10/regiontasks/ HTTP/1.1" 200 397
+INFO 2019-03-14 11:14:16,640 basehttp 124 "OPTIONS /v0.10/usermanage/?page=1&limit=10 HTTP/1.1" 200 0
+INFO 2019-03-14 11:14:16,707 basehttp 124 "GET /v0.10/overdue_worker/?page=1&limit=5 HTTP/1.1" 200 52
+INFO 2019-03-14 11:14:16,720 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=10 HTTP/1.1" 200 682
+INFO 2019-03-14 11:14:18,167 basehttp 124 "GET /v0.10/usermanage/?ordering=username&search=111 HTTP/1.1" 200 8300
+INFO 2019-03-14 11:14:22,148 basehttp 124 "GET /v0.10/usermanage/?search= HTTP/1.1" 200 9128
+INFO 2019-03-14 11:14:23,052 basehttp 124 "OPTIONS /v0.10/usermanage/?page=1&limit=10&search=%E4%BD%9C%E4%B8%9A%E5%91%984 HTTP/1.1" 200 0
+INFO 2019-03-14 11:14:23,127 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=10&search=%E4%BD%9C%E4%B8%9A%E5%91%984 HTTP/1.1" 200 159
+INFO 2019-03-14 11:14:24,611 basehttp 124 "GET /v0.10/usermanage/?ordering=-id&search= HTTP/1.1" 200 9213
+INFO 2019-03-14 11:14:27,132 basehttp 124 "GET /v0.10/usermanage/?ordering=id&search= HTTP/1.1" 200 9208
+INFO 2019-03-14 11:14:29,709 basehttp 124 "GET /v0.10/usermanage/?ordering=-username&search= HTTP/1.1" 200 9243
+INFO 2019-03-14 11:14:32,167 basehttp 124 "GET /v0.10/user/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6IjEyM0AxNjMuY29tIiwiZXhwIjoxNTUzMTMwNjM3fQ.wXhPJX1DpO5a-p2bC5fVXr1ETzMEFT-VrC0zFKnZae0 HTTP/1.1" 200 61
+INFO 2019-03-14 11:14:32,240 basehttp 124 "GET /v0.10/regiontasks/ HTTP/1.1" 200 397
+INFO 2019-03-14 11:14:32,565 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=10 HTTP/1.1" 200 682
+INFO 2019-03-14 11:14:32,569 basehttp 124 "GET /v0.10/overdue_worker/?page=1&limit=5 HTTP/1.1" 200 52
+INFO 2019-03-14 11:14:34,918 basehttp 124 "OPTIONS /v0.10/usermanage/?page=1&limit=5 HTTP/1.1" 200 0
+INFO 2019-03-14 11:14:34,989 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=5 HTTP/1.1" 200 634
+INFO 2019-03-14 11:14:36,913 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=10 HTTP/1.1" 200 682
+INFO 2019-03-14 11:14:38,766 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=5 HTTP/1.1" 200 634
+INFO 2019-03-14 11:14:39,543 basehttp 124 "OPTIONS /v0.10/usermanage/?page=2&limit=5 HTTP/1.1" 200 0
+INFO 2019-03-14 11:14:39,628 basehttp 124 "GET /v0.10/usermanage/?page=2&limit=5 HTTP/1.1" 200 204
+INFO 2019-03-14 11:14:40,947 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=5 HTTP/1.1" 200 634
+INFO 2019-03-14 11:14:43,846 basehttp 124 "OPTIONS /v0.10/usermanage/?page=1&limit=5&ordering=name,id HTTP/1.1" 200 0
+INFO 2019-03-14 11:14:43,928 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=5&ordering=name,id HTTP/1.1" 200 660
+INFO 2019-03-14 11:14:44,937 basehttp 124 "OPTIONS /v0.10/usermanage/?page=1&limit=5&ordering=-name,id HTTP/1.1" 200 0
+INFO 2019-03-14 11:14:45,012 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=5&ordering=-name,id HTTP/1.1" 200 661
+INFO 2019-03-14 11:14:46,482 basehttp 124 "OPTIONS /v0.10/usermanage/?page=1&limit=5&ordering=id,id HTTP/1.1" 200 0
+INFO 2019-03-14 11:14:46,556 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=5&ordering=id,id HTTP/1.1" 200 658
+INFO 2019-03-14 11:14:47,226 basehttp 124 "OPTIONS /v0.10/usermanage/?page=1&limit=5&ordering=-id,id HTTP/1.1" 200 0
+INFO 2019-03-14 11:14:47,289 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=5&ordering=-id,id HTTP/1.1" 200 652
+INFO 2019-03-14 11:14:48,229 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=5&ordering=id,id HTTP/1.1" 200 658
+INFO 2019-03-14 11:14:56,025 basehttp 124 "GET /v0.10/regiontasks/?page=1&limit=10 HTTP/1.1" 200 397
+INFO 2019-03-14 11:14:57,552 basehttp 124 "GET /v0.10/usermanage/?page=1&limit=10 HTTP/1.1" 200 682
+INFO 2019-03-14 11:15:00,338 basehttp 124 "GET /v0.10/taskpackages/?page=1&limit=10&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 1687
+INFO 2019-03-14 11:15:02,576 basehttp 124 "OPTIONS /v0.10/overdue_admin/?id=3&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 0
+INFO 2019-03-14 11:15:02,688 basehttp 124 "GET /v0.10/overdue_admin/?id=3&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 291
+INFO 2019-03-14 11:15:05,263 basehttp 124 "OPTIONS /v0.10/overdue_admin/?id=4&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 0
+INFO 2019-03-14 11:15:05,358 basehttp 124 "GET /v0.10/overdue_admin/?id=4&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 2
+INFO 2019-03-14 11:15:08,368 basehttp 124 "GET /v0.10/user/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6IjEyM0AxNjMuY29tIiwiZXhwIjoxNTUzMTMwNjM3fQ.wXhPJX1DpO5a-p2bC5fVXr1ETzMEFT-VrC0zFKnZae0 HTTP/1.1" 200 61
+INFO 2019-03-14 11:15:08,444 basehttp 124 "GET /v0.10/regiontasks/ HTTP/1.1" 200 397
+INFO 2019-03-14 11:15:08,961 basehttp 124 "GET /v0.10/overdue_worker/?page=1&limit=5 HTTP/1.1" 200 52
+INFO 2019-03-14 11:15:09,007 basehttp 124 "GET /v0.10/taskpackages/?page=1&limit=10&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 1687
+INFO 2019-03-14 11:15:52,762 basehttp 124 "OPTIONS /v0.10/login/ HTTP/1.1" 200 0
+WARNING 2019-03-14 11:15:53,105 basehttp 124 "POST /v0.10/login/ HTTP/1.1" 400 67
+WARNING 2019-03-14 11:15:58,180 basehttp 124 "POST /v0.10/login/ HTTP/1.1" 400 67
+INFO 2019-03-14 11:16:00,119 basehttp 124 "POST /v0.10/login/ HTTP/1.1" 200 176
+INFO 2019-03-14 11:16:00,173 basehttp 124 "OPTIONS /v0.10/user/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IndvcmtlcjIiLCJ1c2VyX2lkIjo0LCJlbWFpbCI6IiIsImV4cCI6MTU1MzEzODE2MH0.b7v6qdP02e3L5OFQ1p-6ZG3uxZ5qgTm8Nx_7BgvAY6Q HTTP/1.1" 200 0
+INFO 2019-03-14 11:16:00,244 basehttp 124 "GET /v0.10/user/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IndvcmtlcjIiLCJ1c2VyX2lkIjo0LCJlbWFpbCI6IiIsImV4cCI6MTU1MzEzODE2MH0.b7v6qdP02e3L5OFQ1p-6ZG3uxZ5qgTm8Nx_7BgvAY6Q HTTP/1.1" 200 66
+INFO 2019-03-14 11:16:00,315 basehttp 124 "GET /v0.10/regiontasks/ HTTP/1.1" 200 397
+INFO 2019-03-14 11:16:01,062 basehttp 124 "GET /v0.10/overdue_worker/?page=1&limit=5 HTTP/1.1" 200 651
+INFO 2019-03-14 11:16:08,733 basehttp 124 "GET /v0.10/overdue_worker/?page=1&limit=5 HTTP/1.1" 200 651
+INFO 2019-03-14 11:16:23,144 basehttp 124 "GET /v0.10/taskpackages/?page=1&limit=10&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 1687
+INFO 2019-03-14 11:16:24,892 basehttp 124 "GET /v0.10/overdue_admin/?id=3&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 291
+INFO 2019-03-14 11:16:29,707 basehttp 124 "OPTIONS /v0.10/taskpackageowners/?id=3&taskpackage_name=%E4%BB%BB%E5%8A%A1%E5%8C%853%E5%8F%B7&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F&page=1&limit=5 HTTP/1.1" 200 0
+INFO 2019-03-14 11:16:29,782 basehttp 124 "GET /v0.10/taskpackageowners/?id=3&taskpackage_name=%E4%BB%BB%E5%8A%A1%E5%8C%853%E5%8F%B7&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F&page=1&limit=5 HTTP/1.1" 200 341
+INFO 2019-03-14 11:31:41,278 basehttp 124 "GET /v0.10/ HTTP/1.1" 200 7112
+INFO 2019-03-14 11:31:44,109 basehttp 124 "GET /v0.10/taskpackages/ HTTP/1.1" 200 15743
+INFO 2019-03-14 11:33:53,884 basehttp 124 "OPTIONS /v0.10/user/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6bnVsbCwiZXhwIjoxNTUzMTM4MjkyfQ.nyEZTxuwIOVbUgWt0VVVnPPueCIKFMuAK8y_VjsuyHQ HTTP/1.1" 200 0
+INFO 2019-03-14 11:33:53,947 basehttp 124 "GET /v0.10/user/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6bnVsbCwiZXhwIjoxNTUzMTM4MjkyfQ.nyEZTxuwIOVbUgWt0VVVnPPueCIKFMuAK8y_VjsuyHQ HTTP/1.1" 200 61
+INFO 2019-03-14 11:33:53,963 basehttp 124 "OPTIONS /v0.10/regiontasks/ HTTP/1.1" 200 0
+INFO 2019-03-14 11:33:54,028 basehttp 124 "GET /v0.10/regiontasks/ HTTP/1.1" 200 397
+INFO 2019-03-14 11:33:54,601 basehttp 124 "OPTIONS /v0.10/overdue_worker/?page=1&limit=5 HTTP/1.1" 200 0
+INFO 2019-03-14 11:33:54,602 basehttp 124 "OPTIONS /v0.10/taskpackages/?page=1&limit=10&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 0
+INFO 2019-03-14 11:33:54,743 basehttp 124 "GET /v0.10/overdue_worker/?page=1&limit=5 HTTP/1.1" 200 52
+INFO 2019-03-14 11:33:54,796 basehttp 124 "GET /v0.10/taskpackages/?page=1&limit=10&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 1847
+INFO 2019-03-14 11:33:57,697 basehttp 124 "OPTIONS /v0.10/regiontasks/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 0
+INFO 2019-03-14 11:33:57,779 basehttp 124 "GET /v0.10/regiontasks/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 397
+INFO 2019-03-14 11:34:06,240 basehttp 124 "GET /v0.10/user/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6bnVsbCwiZXhwIjoxNTUzMTM4MjkyfQ.nyEZTxuwIOVbUgWt0VVVnPPueCIKFMuAK8y_VjsuyHQ HTTP/1.1" 200 61
+INFO 2019-03-14 11:34:06,313 basehttp 124 "GET /v0.10/regiontasks/ HTTP/1.1" 200 397
+INFO 2019-03-14 11:34:06,742 basehttp 124 "GET /v0.10/regiontasks/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 397
+INFO 2019-03-14 11:34:06,746 basehttp 124 "GET /v0.10/overdue_worker/?page=1&limit=5 HTTP/1.1" 200 52
+INFO 2019-03-14 11:34:08,802 basehttp 124 "GET /v0.10/taskpackages/?page=1&limit=10&regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 1847
+INFO 2019-03-15 10:49:46,579 basehttp 124 "GET /v0.10/ HTTP/1.1" 200 7265
+WARNING 2019-03-15 10:49:46,858 base 152 Not Found: /favicon.ico
+WARNING 2019-03-15 10:49:46,859 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2557
+ERROR 2019-03-15 10:49:49,528 exception 135 Internal Server Error: /v0.10/taskpackagedata/
+Traceback (most recent call last):
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\viewsets.py", line 116, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\mixins.py", line 40, in list
+    queryset = self.filter_queryset(self.get_queryset())
+  File "E:\RGSManager\taskpackages\views.py", line 370, in get_queryset
+    taskpackage = TaskPackage.objects.filter(mapnums__icontains=mapnum)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\query.py", line 787, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\query.py", line 805, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\sql\query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\sql\query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\sql\query.py", line 1160, in build_filter
+    value, lookups, used_joins = self.prepare_lookup_value(value, lookups, can_reuse, allow_joins)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\sql\query.py", line 989, in prepare_lookup_value
+    raise ValueError("Cannot use None as a query value")
+ValueError: Cannot use None as a query value
+ERROR 2019-03-15 10:49:49,990 basehttp 124 "GET /v0.10/taskpackagedata/ HTTP/1.1" 500 130948
+INFO 2019-03-15 10:51:07,236 basehttp 124 "GET /v0.10/taskpackagedata/ HTTP/1.1" 200 5640
+INFO 2019-03-15 10:51:09,851 basehttp 124 "GET /v0.10/taskpackagedata/ HTTP/1.1" 200 5640
+WARNING 2019-03-15 10:51:29,842 base 152 Not Found: /v0.10/taskpackagedata/regiontask_name=东南区域1800幅
+WARNING 2019-03-15 10:51:29,844 basehttp 124 "GET /v0.10/taskpackagedata/regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F1800%E5%B9%85 HTTP/1.1" 404 10257
+ERROR 2019-03-15 10:52:02,903 exception 135 Internal Server Error: /v0.10/taskpackagedata/
+Traceback (most recent call last):
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\viewsets.py", line 116, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\mixins.py", line 40, in list
+    queryset = self.filter_queryset(self.get_queryset())
+  File "E:\RGSManager\taskpackages\views.py", line 374, in get_queryset
+    taskpackage_name=taskpackage.namer).order_by("-createtime").first()
+AttributeError: 'QuerySet' object has no attribute 'namer'
+ERROR 2019-03-15 10:52:03,328 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F1800%E5%B9%85&mapnum=%27%27 HTTP/1.1" 500 99907
+ERROR 2019-03-15 10:52:28,845 exception 135 Internal Server Error: /v0.10/taskpackagedata/
+Traceback (most recent call last):
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\viewsets.py", line 116, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\mixins.py", line 40, in list
+    queryset = self.filter_queryset(self.get_queryset())
+  File "E:\RGSManager\taskpackages\views.py", line 374, in get_queryset
+    taskpackage_name=taskpackage.name).order_by("-createtime").first()
+AttributeError: 'QuerySet' object has no attribute 'name'
+ERROR 2019-03-15 10:52:29,335 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F1800%E5%B9%85&mapnum=H49E004024 HTTP/1.1" 500 99958
+ERROR 2019-03-15 10:54:05,551 exception 135 Internal Server Error: /v0.10/taskpackagedata/
+Traceback (most recent call last):
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\viewsets.py", line 116, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\mixins.py", line 40, in list
+    queryset = self.filter_queryset(self.get_queryset())
+  File "E:\RGSManager\taskpackages\views.py", line 374, in get_queryset
+    taskpackage_owner.schedule = taskpackage.schedule
+AttributeError: 'NoneType' object has no attribute 'schedule'
+ERROR 2019-03-15 10:54:06,000 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F1800%E5%B9%85&mapnum=H49E004024 HTTP/1.1" 500 100246
+INFO 2019-03-15 10:57:02,137 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F1800%E5%B9%85&mapnum=H49E004024 HTTP/1.1" 200 6088
+ERROR 2019-03-15 10:57:29,816 exception 135 Internal Server Error: /v0.10/taskpackagedata/
+Traceback (most recent call last):
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\viewsets.py", line 116, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 401, in initial
+    self.check_permissions(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 334, in check_permissions
+    if not permission.has_permission(request, self):
+  File "E:\RGSManager\utils\permission.py", line 11, in has_permission
+    if request.user.isadmin is False or request.user == "AnonymousUser":
+AttributeError: 'AnonymousUser' object has no attribute 'isadmin'
+ERROR 2019-03-15 10:57:30,308 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F1800%E5%B9%85&mapnum=H49E004024 HTTP/1.1" 500 102777
+WARNING 2019-03-15 11:02:48,563 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F1800%E5%B9%85&mapnum=H49E004024 HTTP/1.1" 401 5628
+INFO 2019-03-15 11:02:48,809 basehttp 124 "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3385
+INFO 2019-03-15 11:02:48,818 basehttp 124 "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+INFO 2019-03-15 11:02:48,828 basehttp 124 "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1131
+INFO 2019-03-15 11:02:48,831 basehttp 124 "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121200
+INFO 2019-03-15 11:02:48,839 basehttp 124 "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3597
+INFO 2019-03-15 11:02:48,845 basehttp 124 "GET /static/rest_framework/js/jquery-3.3.1.min.js HTTP/1.1" 200 86927
+INFO 2019-03-15 11:02:48,848 basehttp 124 "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1735
+INFO 2019-03-15 11:02:48,859 basehttp 124 "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 37045
+INFO 2019-03-15 11:02:48,862 basehttp 124 "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+INFO 2019-03-15 11:02:48,867 basehttp 124 "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+INFO 2019-03-15 11:02:48,868 basehttp 124 "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+INFO 2019-03-15 11:02:51,299 basehttp 124 "GET /v0.10/api-auth/login/?next=/v0.10/taskpackagedata/ HTTP/1.1" 200 2730
+INFO 2019-03-15 11:02:53,790 basehttp 124 "POST /v0.10/api-auth/login/ HTTP/1.1" 302 0
+INFO 2019-03-15 11:02:53,921 basehttp 124 "GET /v0.10/taskpackagedata/ HTTP/1.1" 200 5640
+INFO 2019-03-15 11:09:55,213 basehttp 124 "GET /v0.10/ HTTP/1.1" 200 7265
+INFO 2019-03-15 11:09:57,993 basehttp 124 "GET /v0.10/taskpackageowners/ HTTP/1.1" 200 10934
+WARNING 2019-03-15 11:10:28,980 basehttp 124 "POST /v0.10/taskpackageowners/ HTTP/1.1" 400 11043
+INFO 2019-03-15 11:10:49,532 basehttp 124 "POST /v0.10/taskpackageowners/ HTTP/1.1" 201 11341
+INFO 2019-03-15 11:11:16,079 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F1800%E5%B9%85&mapnum=H49E004024 HTTP/1.1" 200 6088
+ERROR 2019-03-15 11:11:16,086 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F1800%E5%B9%85&mapnum=H49E004024 HTTP/1.1" 500 59
+INFO 2019-03-15 11:11:19,239 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F&mapnum=H49E004024 HTTP/1.1" 200 6472
+ERROR 2019-03-15 11:15:04,092 exception 135 Internal Server Error: /v0.10/taskpackagedata/
+Traceback (most recent call last):
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\viewsets.py", line 116, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\mixins.py", line 48, in list
+    return Response(serializer.data)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\utils\functional.py", line 35, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\serializers.py", line 1022, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\serializers.py", line 1123, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'schedule' was declared on serializer TaskPackageOwnerSerializer, but has not been included in the 'fields' option.
+ERROR 2019-03-15 11:15:04,599 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F&mapnum=H49E004024 HTTP/1.1" 500 138593
+ERROR 2019-03-15 11:15:40,414 exception 135 Internal Server Error: /v0.10/taskpackagedata/
+Traceback (most recent call last):
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\viewsets.py", line 116, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\mixins.py", line 48, in list
+    return Response(serializer.data)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\serializers.py", line 527, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\fields.py", line 1893, in to_representation
+    return method(value)
+  File "E:\RGSManager\taskpackages\serializers.py", line 267, in get_schedule
+    taskpackage = TaskPackage.objects.get(taskpackage_name=taskpackage_name)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\query.py", line 371, in get
+    clone = self.filter(*args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\query.py", line 787, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\query.py", line 805, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\sql\query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\sql\query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\sql\query.py", line 1154, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\sql\query.py", line 1034, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\db\models\sql\query.py", line 1352, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+FieldError: Cannot resolve keyword 'taskpackage_name' into field. Choices are: createtime, describe, exowner, file, id, isdelete, isoverdue, mapnumcounts, mapnums, name, newtaskpackagesonfornotice, owner, reallyname, regiontask_name, schedule, status, updatetime
+ERROR 2019-03-15 11:15:40,980 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F&mapnum=H49E004024 HTTP/1.1" 500 177331

@@ -9,7 +9,7 @@ if not os.environ.get("DJANGO_SETTINGS_MODULE"):
 import django
 
 django.setup()
-from taskpackages.models import RegionTask, TaskPackageScheduleSet
+from taskpackages.models import RegionTask, TaskPackageScheduleSet,TaskPackage
 
 if __name__ == "__main__":
     # from taskpackages.models import TaskPackage
@@ -47,9 +47,16 @@ if __name__ == "__main__":
 
 
     # 批量修改status
+<<<<<<< HEAD
     # regiontasks = RegionTask.objects.all().order_by('id')[1:]
     # for regiontask in regiontasks:
     #     regiontask.status = '处理中'
     #     regiontask.save()
+=======
+    schedules = TaskPackageScheduleSet.objects.filter(regiontask_name='东南区域1800幅').order_by('id')[2:]
+    for schedule in schedules:
+       TaskPackageScheduleSet.objects.create(schedule=schedule.schedule,regiontask_name='写Python脚本的时候')
+
+>>>>>>> V0.10
     pass
 

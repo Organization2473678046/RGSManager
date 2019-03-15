@@ -1,24 +1,27 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from datetime import datetime
 import hashlib
 import os
 import shutil
 import zipfile
 from unrar import rarfile
+from django.conf import settings
+from datetime import datetime
+from RGSManager.settings import BASE_DIR
 from rest_framework import serializers
 from rest_framework.exceptions import APIException
-from RGSManager.settings import BASE_DIR
 from celery_app.createregiontask import createregiontask
 from celery_app.regionchunk import regionmerge
 from models import TaskPackage, TaskPackageSon, TaskPackageOwner, EchartTaskPackage, EchartSchedule, \
-    TaskPackageScheduleSet, RegionTask, RegionTaskChunk, RegionTaskMerge
-from django.conf import settings
+    TaskPackageScheduleSet, RegionTask
 from rest_framework import status
 from celery_app.clipfromsde import clipfromsde
 from users.models import User
 from django.conf import settings
+import logging
+
+logger = logging.getLogger("django_error")
 
 
 class PermissionValidationError(APIException):
@@ -27,12 +30,18 @@ class PermissionValidationError(APIException):
 
 class TaskPackageSerializer(serializers.ModelSerializer):
     exreallyname = serializers.SerializerMethodField(label=u"前任作业员真实姓名")
+    starttime = serializers.DateTimeField(allow_null=True, label=u"开始时间", write_only=True)
+    endtime = serializers.DateTimeField(allow_null=True, label=u"结束时间", write_only=True)
 
     class Meta:
         model = TaskPackage
         fields = ["id", "name", "owner", "exowner", "mapnums", "mapnumcounts", "file", "status", "createtime",
                   "updatetime", "describe", "schedule", "exreallyname", "reallyname", "newtaskpackagesonfornotice",
+<<<<<<< HEAD
                   "regiontask_name",'taskuuid']
+=======
+                  "regiontask_name", "isoverdue", "endtime", "starttime"]
+>>>>>>> V0.10
         extra_kwargs = {
             "name": {"required": True, "allow_null": False, "help_text": u"主任务包名字"},
             "owner": {"required": True, "allow_null": False, "help_text": u"作业员"},
@@ -43,9 +52,11 @@ class TaskPackageSerializer(serializers.ModelSerializer):
             "createtime": {"format": '%Y-%m-%d %H:%M:%S'},
             "updatetime": {"format": '%Y-%m-%d %H:%M:%S'},
             "describe": {"allow_null": False},
-            # "reallyname":{"required": False},
             "newtaskpackagesonfornotice": {"required": False, "read_only": True},
-            "regiontask_name": {"required": True}
+            "regiontask_name": {"required": True},
+            "isoverdue": {"help_text": "超期提示"},
+            "starttime": {"help_text": "开始时间"},
+            "endtime": {"help_text": "结束时间"},
         }
 
     def get_exreallyname(self, obj):
@@ -53,6 +64,7 @@ class TaskPackageSerializer(serializers.ModelSerializer):
         try:
             user = User.objects.get(username=username)
         except User.DoesNotExist:
+            logging.warning(User.DoesNotExist)
             return None
         exreallyname = user.reallyname
         return exreallyname
@@ -61,7 +73,8 @@ class TaskPackageSerializer(serializers.ModelSerializer):
         owner = validated_data.get("owner")
         try:
             user = User.objects.get(username=owner)
-        except User.DoesNotExist:
+        except User.DoesNotExist as e:
+            logger.warning(e)
             raise serializers.ValidationError(u"作业员 {} 不存在".format(owner))
         else:
             validated_data["reallyname"] = user.reallyname
@@ -70,20 +83,24 @@ class TaskPackageSerializer(serializers.ModelSerializer):
         try:
             regiontask = RegionTask.objects.get(name=regiontask_name)
         except RegionTask.DoesNotExist:
+            logging.warning(RegionTask.DoesNotExist)
             raise serializers.ValidationError(u"任务区域 {} 不存在".format(regiontask_name))
         try:
             taskpackage = TaskPackage.objects.get(regiontask_name=regiontask_name, name=validated_data["name"])
         except:
             pass
         else:
+            logging.warning("任务包名称已存在")
             raise serializers.ValidationError(u"任务包名称 {} 已存在".format(validated_data["name"]))
 
         return validated_data
 
     def create(self, validated_data):
+        starttime = validated_data["starttime"]
+        endtime = validated_data["endtime"]
+        del validated_data["starttime"]
+        del validated_data["endtime"]
         taskpackage = super(TaskPackageSerializer, self).create(validated_data)
-        # taskpackage = TaskPackage.objects.create(**validated_data)
-        # taskpackage = TaskPackage(**validated_data)
         taskpackageson = TaskPackageSon.objects.create(
             taskpackage_name=taskpackage.name,
             version="v0.0",
@@ -92,17 +109,34 @@ class TaskPackageSerializer(serializers.ModelSerializer):
             file=taskpackage.file,
             regiontask_name=taskpackage.regiontask_name,
         )
+        TaskPackageOwner.objects.create(
+            taskpackage_name=validated_data["name"],
+            owner=validated_data["owner"],
+            describe=validated_data["describe"],
+            regiontask_name=validated_data["regiontask_name"],
+            starttime=starttime,
+            endtime=endtime
+        )
 
         MEDIA = settings.MEDIA_ROOT
         mapnumlist = validated_data["mapnums"]
         taskname = validated_data["name"]
-        regiontask = RegionTask.objects.get(name=taskpackage.regiontask_name)
+        try:
+            regiontask = RegionTask.objects.get(name=taskpackage.regiontask_name)
+        except Exception as e:
+            logging.error(e)
+            return None
         mapindexsdepath = regiontask.mapindexsde
         rgssdepath = regiontask.rgssde
         if mapindexsdepath is not None and rgssdepath is not None:
             if os.path.exists(mapindexsdepath) and os.path.exists(rgssdepath):
                 # 进入celery进行作业包的异步裁切
+<<<<<<< HEAD
                 clipfromsde.delay(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpackage.id, taskpackageson.id)
+=======
+                clipfromsde.delay(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpackage.id,
+                                  taskpackageson.id)
+>>>>>>> V0.10
 
         return taskpackage
 
@@ -117,7 +151,6 @@ class TaskPackageSerializer(serializers.ModelSerializer):
 class TaskPackageSonSerializer(serializers.ModelSerializer):
     handle_progress = serializers.BooleanField(allow_null=True)
     taskpackage_file_id = serializers.IntegerField(allow_null=True)
-    # schedule = ScheduleChoiceField(choices=SCHEDULE_CHOICE, label=u"任务包处理进度")
     reallyname = serializers.SerializerMethodField(label=u"作业员真实姓名")
 
     class Meta:
@@ -131,8 +164,6 @@ class TaskPackageSonSerializer(serializers.ModelSerializer):
             "file": {"required": True, "allow_null": False, "error_messages": {"required": u"请选择文件"}},
             "createtime": {"format": '%Y-%m-%d %H:%M:%S'},
             "updatetime": {"format": '%Y-%m-%d %H:%M:%S'},
-            # "handle_progress":{"required": False},
-            # "taskpackage_file_id":{"required": False},
             "regiontask_name": {"required": True}
         }
 
@@ -141,6 +172,7 @@ class TaskPackageSonSerializer(serializers.ModelSerializer):
         try:
             user = User.objects.get(username=username)
         except User.DoesNotExist:
+            logging.warning(User.DoesNotExist)
             return None
         reallyname = user.reallyname
         return reallyname
@@ -150,6 +182,7 @@ class TaskPackageSonSerializer(serializers.ModelSerializer):
         try:
             regiontask = RegionTask.objects.get(name=regiontask_name)
         except RegionTask.DoesNotExist:
+            logging.warning(RegionTask.DoesNotExist)
             raise serializers.ValidationError(u"任务区域 {} 不存在".format(regiontask_name))
 
         taskpackage_name = validated_data.get("taskpackage_name")
@@ -157,6 +190,7 @@ class TaskPackageSonSerializer(serializers.ModelSerializer):
             taskpackage = TaskPackage.objects.filter(isdelete=False).get(name=taskpackage_name,
                                                                          regiontask_name=regiontask_name)
         except TaskPackage.DoesNotExist:
+            logging.warning(TaskPackage.DoesNotExist)
             raise serializers.ValidationError(u"{0}名为 {1} 的任务包不存在".format(regiontask_name, taskpackage_name))
         else:
             user = self.context["request"].user
@@ -190,6 +224,7 @@ class TaskPackageSonSerializer(serializers.ModelSerializer):
         taskpackage.schedule = taskpackageson.schedule
         taskpackage.newtaskpackagesonfornotice += 1
         taskpackage.updatetime = taskpackageson.createtime
+        taskpackage.isoverdue = False
         taskpackage.save()
 
         return taskpackageson
@@ -198,17 +233,20 @@ class TaskPackageSonSerializer(serializers.ModelSerializer):
 class TaskPackageOwnerSerializer(serializers.ModelSerializer):
     exreallyname = serializers.SerializerMethodField(label=u"真实姓名")
     reallyname = serializers.SerializerMethodField(label=u"真实姓名")
+    schedule = serializers.SerializerMethodField(label=u"任务包进度")
 
     class Meta:
         model = TaskPackageOwner
         fields = ["id", "taskpackage_name", "owner", "exowner", "createtime", "describe", "reallyname", "exreallyname",
-                  "regiontask_name"]
+                  "regiontask_name", "starttime", "endtime", "isoverdue", "schedule"]
         extra_kwargs = {
             "taskpackage_name": {"required": True, "allow_null": False, "help_text": u"主任务包名字"},
             "owner": {"required": True, "allow_null": False, "help_text": u"要@的作业员"},
             "exowner": {"read_only": True},
             "createtime": {"format": '%Y-%m-%d %H:%M:%S'},
-            "regiontask_name": {"required": True}
+            "regiontask_name": {"required": True},
+            "starttime": {"format": '%Y-%m-%d %H:%M:%S'},
+            "endtime": {"format": '%Y-%m-%d %H:%M:%S'},
         }
 
     def get_reallyname(self, obj):
@@ -216,6 +254,7 @@ class TaskPackageOwnerSerializer(serializers.ModelSerializer):
         try:
             user = User.objects.get(username=username)
         except User.DoesNotExist:
+            logging.warning(User.DoesNotExist)
             return None
         reallyname = user.reallyname
         return reallyname
@@ -225,22 +264,34 @@ class TaskPackageOwnerSerializer(serializers.ModelSerializer):
         try:
             user = User.objects.get(username=username)
         except User.DoesNotExist:
+            logging.warning(User.DoesNotExist)
             return None
         exreallyname = user.reallyname
         return exreallyname
+
+    def get_schedule(self, obj):
+        taskpackage_name = obj.taskpackage_name
+        try:
+            taskpackage = TaskPackage.objects.get(name=taskpackage_name)
+        except User.DoesNotExist:
+            logging.warning(TaskPackage.DoesNotExist)
+            return None
+        schedule = taskpackage.schedule
+        return schedule
 
     def validate(self, validated_data):
         regiontask_name = validated_data.get("regiontask_name")
         try:
             regiontask = RegionTask.objects.get(name=regiontask_name)
         except RegionTask.DoesNotExist:
+            logging.warning(RegionTask.DoesNotExist)
             raise serializers.ValidationError(u"任务区域 {} 不存在".format(regiontask_name))
 
         taskpackage_name = validated_data.get("taskpackage_name")
         try:
             taskpackage = TaskPackage.objects.get(name=taskpackage_name, regiontask_name=regiontask_name)
         except TaskPackage.DoesNotExist:
-            # raise serializers.ValidationError(u"任务包{}不存在".format(taskpackage_name))
+            logging.warning(TaskPackage.DoesNotExist)
             raise serializers.ValidationError(u"{0}名为 {1} 的任务包不存在".format(regiontask_name, taskpackage_name))
         else:
             if validated_data["owner"] == taskpackage.owner:
@@ -258,12 +309,19 @@ class TaskPackageOwnerSerializer(serializers.ModelSerializer):
             owner=validated_data["owner"],
             exowner=validated_data["exowner"],
             describe=validated_data["describe"],
-            regiontask_name=validated_data["regiontask_name"]
+            regiontask_name=validated_data["regiontask_name"],
+            starttime=validated_data["starttime"],
+            endtime=validated_data["endtime"]
         )
 
         taskpackage.exowner = taskpackage.owner
         taskpackage.owner = validated_data["owner"]
-        user = User.objects.get(username=taskpackage.owner)
+        taskpackage.isoverdue = False
+        try:
+            user = User.objects.get(username=taskpackage.owner)
+        except Exception as e:
+            logging.error(e)
+            return None
         taskpackage.reallyname = user.reallyname
         taskpackage.save()
 
@@ -288,35 +346,9 @@ class ScheduleSerializer(serializers.ModelSerializer):
         fields = ["id", "schedule", "regiontask_name"]
 
     def validate(self, validated_data):
-        # action = self.context["view"].action
-        # if action == "create":
-        #     try:
-        #         TaskPackageScheduleSet.objects.get(schedule=attrs["schedule"], regiontask_name=attrs["regiontask_name"])
-        #     except:
-        #         pass
-        #     else:
-        #         raise serializers.ValidationError(
-        #             "新增进度失败，区域“{0}”下进度“{1}”重复".format(attrs["regiontask_name"], attrs["schedule"]))
-        #     return attrs
-        # else:
-        #     schedule_id = self.context["request"].parser_context["kwargs"]["pk"]
-        #     try:
-        #         instance = TaskPackageScheduleSet.objects.get(id=schedule_id)
-        #         regiontask_name = instance.regiontask_name
-        #         TaskPackageScheduleSet.objects.get(schedule=attrs["schedule"], regiontask_name=regiontask_name)
-        #     except:
-        #         pass
-        #     else:
-        #         raise serializers.ValidationError("修改进度失败，区域“{0}”下进度“{1}”重复".format(regiontask_name, attrs["schedule"]))
-        #     return attrs
-
         # 防止同一个项目区域内,进度名字重复
-        print self.context['view'].action
         schedule = validated_data.get("schedule")
         regiontask_name = validated_data.get("regiontask_name")
-        print regiontask_name
-
-        print self.context['view'].kwargs
         if self.context['view'].action == 'update':
             id = self.context['view'].kwargs.get('pk')
             try:
@@ -325,9 +357,6 @@ class ScheduleSerializer(serializers.ModelSerializer):
                 pass
             else:
                 regiontask_name = taskPackageschedule.regiontask_name
-
-        print schedule
-        print regiontask_name
         try:
             taskPackageschedule = TaskPackageScheduleSet.objects.get(schedule=schedule, regiontask_name=regiontask_name)
         except:
@@ -345,7 +374,10 @@ class RegionTaskSerializer(serializers.ModelSerializer):
         fields = ["id", "name", "file", "status", "basemapservice", "mapindexfeatureservice", "mapindexmapservice",
                   "mapindexschedulemapservice", "describe", "createtime"]
         extra_kwargs = {
+<<<<<<< HEAD
             # "file":{"allow_null": False},
+=======
+>>>>>>> V0.10
             "status": {"read_only": True},
             "basemapservice": {"read_only": True},
             "mapindexfeatureservice": {"read_only": True},
@@ -359,6 +391,7 @@ class RegionTaskSerializer(serializers.ModelSerializer):
         return regiontask
 
     def update(self, instance, validated_data):
+<<<<<<< HEAD
         print instance.status
         print type(instance.file)
 
@@ -366,12 +399,19 @@ class RegionTaskSerializer(serializers.ModelSerializer):
             regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
             # if validated_data['file'] is not None:
             if hasattr(regiontask.file, 'path'):
+=======
+        if instance.status == u'处理中':
+            regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
+            if hasattr(regiontask.file, 'path'):
+                print regiontask.file.path
+>>>>>>> V0.10
                 createregiontask.delay(regiontask.id, regiontask.file.path)
             return regiontask
         else:
             return instance
 
 
+<<<<<<< HEAD
     # if not hasattr(instance.file,'path'):
     #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
     #     if hasattr(regiontask.file, 'path'):
@@ -402,8 +442,22 @@ class RegionTaskSerializer(serializers.ModelSerializer):
     # else:
     #     regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
     # return instance
+=======
 
 
+
+
+
+
+
+
+
+
+>>>>>>> V0.10
+
+
+
+"""
 class RegionTaskChunkSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegionTaskChunk
@@ -437,7 +491,6 @@ class RegionTaskChunkSerializer(serializers.ModelSerializer):
                 myhash.update(b)
             f.close()
             if myhash.hexdigest() == instance.chunkmd5:
-                # print u"文件切片MD5校验通过"
                 pass
             else:
                 path = instance.file.path.split("\\")
@@ -446,16 +499,15 @@ class RegionTaskChunkSerializer(serializers.ModelSerializer):
                 shutil.rmtree(file_path)
                 instance.delete()
                 raise serializers.ValidationError("区域:{0};文件切片编号:{1};MD5校验错误".format(name, chunk))
-                # print u"文件切片MD5校验错误"
         else:
             instance.delete()
 
             raise serializers.ValidationError("区域:{0};文件切片编号:{1};切片上传失败".format(name, chunk))
-            # print u"文件不存在"
 
         # 合并文件
         if validated_data["chunk"] == validated_data["chunks"] - 1:
             regionmerge.delay(path, filemd5, name, chunks)
+
             # path_list = os.path.join(BASE_DIR, instance.file.path).split("\\")
             # path_list.pop()
             # fromdir = "\\".join(path_list)  # 读取文件块路径
@@ -532,7 +584,11 @@ class RegionTaskChunkSerializer(serializers.ModelSerializer):
         return instance
 
 
+<<<<<<< HEAD
 """
+=======
+
+>>>>>>> V0.10
 class TaskPackageChunkSerializer(serializers.ModelSerializer):
     class Meta:
         model = TaskPackageChunk
@@ -543,7 +599,9 @@ class TaskPackageChunkSerializer(serializers.ModelSerializer):
             "taskpackage_name": {"required": True, "allow_null": False, "help_text": u"主任务包名字"},
             "user_username": {"read_only": True, "help_text": u"子任务包归属者"},
             "version": {"read_only": True},
-            "file": {"required": True, "allow_null": False, "error_messages": {"required": u"请选择文件"}},
+            "file": {"required": True, "allow_null": False, 
+            
+            "error_messages": {"required": u"请选择文件"}},
             "createtime": {"format": '%Y-%m-%d %H:%M:%S'},
             "updatetime": {"format": '%Y-%m-%d %H:%M:%S'},
             "regiontask_name": {"required": True}

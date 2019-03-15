@@ -329,3 +329,16 @@ Traceback (most recent call last):
     "Choices are: %s" % (name, ", ".join(available)))
 FieldError: Cannot resolve keyword 'taskpackage_name' into field. Choices are: createtime, describe, exowner, file, id, isdelete, isoverdue, mapnumcounts, mapnums, name, newtaskpackagesonfornotice, owner, reallyname, regiontask_name, schedule, status, updatetime
 ERROR 2019-03-15 11:15:40,980 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F&mapnum=H49E004024 HTTP/1.1" 500 177331
+INFO 2019-03-15 11:16:26,627 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F&mapnum=H49E004024 HTTP/1.1" 200 6511
+INFO 2019-03-15 11:16:53,207 basehttp 124 "GET /v0.10/ HTTP/1.1" 200 7265
+INFO 2019-03-15 11:16:55,019 basehttp 124 "GET /v0.10/taskpackages/ HTTP/1.1" 200 15743
+INFO 2019-03-15 11:16:55,075 basehttp 124 "GET /static/rest_framework/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 304 0
+INFO 2019-03-15 11:16:56,819 basehttp 124 "GET /v0.10/ HTTP/1.1" 200 7265
+INFO 2019-03-15 11:17:00,447 basehttp 124 "GET /v0.10/taskpackagedata/ HTTP/1.1" 200 5640
+INFO 2019-03-15 11:17:06,217 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F&mapnum=H49E004024 HTTP/1.1" 200 6511
+INFO 2019-03-15 11:17:27,176 basehttp 124 "GET /v0.10/ HTTP/1.1" 200 7265
+INFO 2019-03-15 11:17:30,990 basehttp 124 "GET /v0.10/taskpackages/ HTTP/1.1" 200 15743
+INFO 2019-03-15 11:17:51,457 basehttp 124 "GET /v0.10/taskpackages/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F HTTP/1.1" 200 19666
+INFO 2019-03-15 11:17:54,753 basehttp 124 "GET /v0.10/ HTTP/1.1" 200 7265
+INFO 2019-03-15 11:17:58,115 basehttp 124 "GET /v0.10/taskpackagedata/ HTTP/1.1" 200 5640
+INFO 2019-03-15 11:18:04,736 basehttp 124 "GET /v0.10/taskpackagedata/?regiontask_name=%E4%B8%9C%E5%8D%97%E5%8C%BA%E5%9F%9F&mapnum=H49E004024 HTTP/1.1" 200 6510

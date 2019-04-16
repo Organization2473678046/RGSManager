@@ -28,6 +28,7 @@ sys.setdefaultencoding('utf8')
 
 @app.task
 def clipfromsde(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpackage_id, taskpackageson_id):
+    print mapindexsdepath
     taskdirname = u"data/{0}/{1}/{2}/{3}/{4}".format(datetime.now().strftime("%Y"),
                                                      datetime.now().strftime("%m"),
                                                      datetime.now().strftime("%d"),

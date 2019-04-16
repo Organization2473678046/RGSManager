@@ -13,6 +13,11 @@ def user_directory_path(instance, filename):
                                              datetime.now().strftime("%d"),
                                              datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"), filename)
 
+# 此路径用于手动加包
+# def user_directory_path(instance, filename):
+#     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+#     return 'user/{0}'.format(filename)
+
 
 def file_chunk_path(instance, filename):
     return 'file_chunk/{0}/{1}/{2}/{3}/{4}'.format(
@@ -43,6 +48,7 @@ class TaskPackage(models.Model):
     newtaskpackagesonfornotice = models.IntegerField(default=0, null=True, verbose_name=u"消息提醒")
     reallyname = models.CharField(max_length=150, default=None, null=True, verbose_name=u"作业员真实姓名")
     regiontask_name = models.CharField(max_length=150, default=u"东南区域", verbose_name=u"任务区域")
+    isoverdue = models.NullBooleanField(default=False, null=True, verbose_name=u"超期提醒")
 
     class Meta:
         verbose_name = u"任务包"
@@ -85,6 +91,9 @@ class TaskPackageOwner(models.Model):
     createtime = models.DateTimeField(auto_now_add=True, verbose_name=u"创建时间")
     regiontask_name = models.CharField(max_length=150, default=u"东南区域", verbose_name=u"任务区域")
     isdelete = models.BooleanField(default=False, verbose_name=u"逻辑删除")
+    starttime = models.DateTimeField(null=True, verbose_name=u"开始时间")
+    endtime = models.DateTimeField(null=True, verbose_name=u"结束时间")
+    isoverdue = models.NullBooleanField(default=False, verbose_name=u"是否超期")
 
     class Meta:
         verbose_name = u'任务包归属'

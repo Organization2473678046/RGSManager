@@ -33,11 +33,7 @@ def clipfromsde(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpa
                                                      datetime.now().strftime("%m"),
                                                      datetime.now().strftime("%d"),
                                                      datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"), taskname)
-    # taskdirname=u"user/{0}/{1}".format(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"), taskname)
-    # taskdirnameup = u"data/{0}/{1}/{2}/{3}".format(datetime.now().strftime("%Y"),
-    #                                                datetime.now().strftime("%m"),
-    #                                                datetime.now().strftime("%d"),
-    #                                                datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"))
+
     taskdirnameup = os.path.dirname(taskdirname)
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     # 三楼服务器sde
@@ -64,11 +60,9 @@ def clipfromsde(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpa
         SQL = u"new_jbmapn = '%s'" % mapnum
         SQList.append(SQL)
     SQLstr = u" or ".join(SQList)
-    # print SQLstr
 
     # arcpy.env.workspace = os.path.join(SCRIPT_DIR, mapindexsde)
     arcpy.env.workspace = mapindexsdepath
-    # print arcpy.env.workspace
 
     for ds in arcpy.ListDatasets(feature_type='feature') + ['']:
         if ds == mapindexsde + u".DLG_50000":
@@ -112,13 +106,11 @@ def changeDJdbtasktable(dbname, tablename, taskpackage_id, statusfieldname, file
     UPDATESQL = u"UPDATE %s set %s = '1',%s='%s' where ID=%d" % (
         tablename, statusfieldname, filefieldname, MEDIAfilepath, taskpackage_id)
     # SQL="SELECT * FROM %s" %tablename
-    # print UPDATESQL
     cur.execute(UPDATESQL)
 
     UPDATESQL1 = u"UPDATE %s set %s='%s' where ID=%d" % (
         taskpackagesontablename, filefieldname, MEDIAfilepath, taskpackageson_id)
     # SQL="SELECT * FROM %s" %tablename
-    # print UPDATESQL
     cur.execute(UPDATESQL1)
 
     conn.commit()

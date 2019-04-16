@@ -1,17 +1,6 @@
 #!C:/Python27/ArcGIS10.2/python.exe
 # -*- coding:utf-8 -*-
-"""
-#============================================
-#
-# Project: mycelery
-# Name: The file name is celeryconfig
-# Purpose: 
-# Auther: Administrator
-# Tel: 17372796660
-#
-#============================================
-#
-"""
+
 import os
 
 # BORKER_URL='amqp://admin:Lantucx2018@localhost:5672/admin-vhost'

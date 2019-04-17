@@ -1,0 +1,131 @@
+INFO 2019-03-14 19:38:44,635 basehttp 124 "GET /v0.10/overdue_worker/ HTTP/1.1" 200 5760
+WARNING 2019-03-19 10:20:19,897 base 152 Not Found: /v9/
+WARNING 2019-03-19 10:20:28,934 base 152 Not Found: /favicon.ico
+WARNING 2019-03-21 15:55:37,023 base 152 Not Found: /v0.10/media/data/2019/01/26/2019-01-26-10-44-38-988000/北京最新路网可用作路径分析GDB.rar
+WARNING 2019-03-21 17:34:48,631 base 152 Not Found: /favicon.ico
+ERROR 2019-03-22 15:32:13,549 exception 135 Internal Server Error: /v0.10/user/login
+Traceback (most recent call last):
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\utils\deprecation.py", line 138, in __call__
+    response = self.process_request(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\middleware\common.py", line 64, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\middleware\common.py", line 104, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 192.168.3.120:8000/v0.10/user/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2019-03-22 15:48:54,043 exception 135 Internal Server Error: /v0.10/user/login
+Traceback (most recent call last):
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\utils\deprecation.py", line 138, in __call__
+    response = self.process_request(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\middleware\common.py", line 64, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\middleware\common.py", line 104, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 192.168.3.120:8000/v0.10/user/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+WARNING 2019-03-22 15:49:17,424 base 152 Not Found: /favicon.ico
+ERROR 2019-03-22 15:49:23,604 exception 135 Internal Server Error: /v0.10/user/login
+Traceback (most recent call last):
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\utils\deprecation.py", line 138, in __call__
+    response = self.process_request(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\middleware\common.py", line 64, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\middleware\common.py", line 104, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 192.168.3.120:8000/v0.10/user/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+WARNING 2019-03-22 16:25:09,855 base 152 Not Found: /v0.10/table/list
+WARNING 2019-03-22 16:27:02,661 base 152 Not Found: /v0.10/table/list
+WARNING 2019-03-22 16:27:53,936 base 152 Not Found: /v0.10/table/list
+WARNING 2019-03-25 20:54:08,200 base 152 Not Found: /v0.10/resultfile/
+WARNING 2019-03-25 21:20:01,473 base 152 Not Found: /v0.10/fileinfos/
+WARNING 2019-03-25 21:20:03,667 base 152 Not Found: /v0.10/fileinfos/
+WARNING 2019-03-25 21:20:05,914 base 152 Not Found: /v0.10/fileinfos/
+WARNING 2019-03-26 08:31:03,529 base 152 Not Found: /v0.10/fileinfos/
+WARNING 2019-03-26 08:31:05,818 base 152 Not Found: /v0.10/fileinfos/
+WARNING 2019-03-26 08:31:54,000 base 152 Not Found: /v0.10/fileinfos/
+WARNING 2019-03-26 08:38:43,802 base 152 Not Found: /v0.10/resultfile/
+WARNING 2019-03-26 08:39:43,487 base 152 Not Found: /v0.10/resultfile/
+WARNING 2019-03-26 08:43:19,711 base 152 Not Found: /v0.10/resultfile/
+WARNING 2019-03-26 08:43:47,086 base 152 Not Found: /v0.10/resultfile/
+WARNING 2019-03-26 08:50:39,226 base 152 Not Found: /v0.10/resultfile/
+WARNING 2019-03-29 10:46:03,085 base 152 Not Found: /v0.10/handoutlistnames/
+WARNING 2019-03-29 10:46:50,280 base 152 Not Found: /v0.10/handoutlistnames/
+WARNING 2019-03-29 10:46:56,901 base 152 Not Found: /v0.10/handoutlistnames/
+WARNING 2019-03-29 10:47:11,193 base 152 Not Found: /v0.10/handoutlistnames/
+WARNING 2019-03-29 10:47:11,321 base 152 Not Found: /favicon.ico
+WARNING 2019-04-16 17:14:58,821 base 152 Not Found: /favicon.ico
+ERROR 2019-04-16 17:15:33,177 exception 135 Internal Server Error: /v0.10/overdue_admin/
+Traceback (most recent call last):
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\viewsets.py", line 116, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\mixins.py", line 40, in list
+    queryset = self.filter_queryset(self.get_queryset())
+  File "G:/RGSManager\taskpackages\views.py", line 360, in get_queryset
+    taskpackage = TaskPackage.objects.get(id=int(self.request.query_params.get("id")))
+TypeError: int() argument must be a string or a number, not 'NoneType'
+WARNING 2019-04-16 18:49:11,904 base 152 Not Found: /
+WARNING 2019-04-16 18:49:11,907 basehttp 124 "GET / HTTP/1.1" 404 2502
+INFO 2019-04-16 18:49:21,118 basehttp 124 "GET /v0.10/ HTTP/1.1" 200 7016
+ERROR 2019-04-16 18:49:24,194 exception 135 Internal Server Error: /v0.10/overdue_admin/
+Traceback (most recent call last):
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\viewsets.py", line 116, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 495, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 455, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\views.py", line 492, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Python27\ArcGIS10.2\lib\site-packages\rest_framework\mixins.py", line 40, in list
+    queryset = self.filter_queryset(self.get_queryset())
+  File "E:\RGSManager\taskpackages\views.py", line 360, in get_queryset
+    taskpackage = TaskPackage.objects.get(id=int(self.request.query_params.get("id")))
+TypeError: int() argument must be a string or a number, not 'NoneType'
+ERROR 2019-04-16 18:49:24,614 basehttp 124 "GET /v0.10/overdue_admin/ HTTP/1.1" 500 99885
+WARNING 2019-04-17 10:27:10,309 base 152 Not Found: /
+WARNING 2019-04-17 10:27:10,334 basehttp 124 "GET / HTTP/1.1" 404 2502
+WARNING 2019-04-17 10:27:10,526 base 152 Not Found: /favicon.ico
+WARNING 2019-04-17 10:27:10,528 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2553
+INFO 2019-04-17 10:27:16,194 basehttp 124 "GET /v0.10/ HTTP/1.1" 200 7016
+INFO 2019-04-17 10:27:16,414 basehttp 124 "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3597
+INFO 2019-04-17 10:27:16,430 basehttp 124 "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121200
+INFO 2019-04-17 10:27:16,467 basehttp 124 "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3385
+INFO 2019-04-17 10:27:16,466 basehttp 124 "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1735
+INFO 2019-04-17 10:27:16,480 basehttp 124 "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+INFO 2019-04-17 10:27:16,486 basehttp 124 "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1131
+INFO 2019-04-17 10:27:16,493 basehttp 124 "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 37045
+INFO 2019-04-17 10:27:16,499 basehttp 124 "GET /static/rest_framework/js/jquery-3.3.1.min.js HTTP/1.1" 200 86927
+INFO 2019-04-17 10:27:16,503 basehttp 124 "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+INFO 2019-04-17 10:27:16,505 basehttp 124 "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+INFO 2019-04-17 10:27:16,509 basehttp 124 "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+INFO 2019-04-17 10:27:23,786 basehttp 124 "GET /v0.10/taskpackagesons/ HTTP/1.1" 200 10903
+INFO 2019-04-17 10:27:39,256 basehttp 124 "POST /v0.10/taskpackagesons/ HTTP/1.1" 201 11690
+INFO 2019-04-17 19:37:31,621 basehttp 124 "GET /v0.10/ HTTP/1.1" 200 7016
+INFO 2019-04-17 19:37:35,184 basehttp 124 "GET /v0.10/taskpackages/ HTTP/1.1" 200 15743
+INFO 2019-04-17 19:37:35,334 basehttp 124 "GET /static/rest_framework/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 18028

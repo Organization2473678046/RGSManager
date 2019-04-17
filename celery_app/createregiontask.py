@@ -8,7 +8,6 @@ import arcpy
 import json
 import urllib
 import urllib2
-import shutil
 from datetime import datetime
 import psycopg2
 from unrar import rarfile
@@ -26,46 +25,27 @@ sys.setdefaultencoding('utf8')
 @app.task
 def createregiontask(regiontask_id, regiontask_filepath):
     service_name = 'mmanage' + str(regiontask_id)
-    # str_type = chardet.detect(regiontask_filepath)
-    # print str_type['encoding'], "-----------"
-    # 解压文件
-    file_dir = os.path.dirname(regiontask_filepath)  # 解压后文件保存路径
-    # 压缩包名字
-    file_name = os.path.basename(regiontask_filepath)
-    print file_name
-    print regiontask_filepath
-    # regiontask_filepath = os.path.normpath(regiontask_filepath)
+    file_dir = os.path.dirname(regiontask_filepath)         # 解压后文件保存路径
+    file_name = os.path.basename(regiontask_filepath)       # 文件名
     z = zipfile.is_zipfile(regiontask_filepath)
     r = rarfile.is_rarfile(regiontask_filepath)
     if z:
-        # save_list = regiontask_filepath.split(u"/")
-        # save_list.pop()
-        # save_path = u"/".join(save_list)
-        print regiontask_filepath
-
-        # rar_command = '"C:\Program Files\WinRAR\WinRAR.exe" x %s %s' % (regiontask_filepath, file_dir)
         # -ibck: 后台运行; -o+:覆盖已存在文件
-        rar_command = '"D:\Program Files\WinRAR\WinRAR.exe" x %s %s -ibck -o+' % (regiontask_filepath, file_dir)
+        rar_command = '"C:\Program Files\WinRAR\WinRAR.exe" x %s %s -ibck -o+' % (regiontask_filepath, file_dir)
         rar_command = rar_command.encode('gbk')
         os.system(rar_command)
         print rar_command.decode('gbk')
-        # print u"解压zip成功{0}".format(regiontask_id)
         print u"解压 {0} 成功".format(file_name)
-
     elif r:
         fz = rarfile.RarFile(regiontask_filepath, 'r')
         for file in fz.namelist():
             fz.extract(file, file_dir)
         print u"解压 {0} 成功".format(file_name)
     else:
-        print('This is not zip or rar')
+        print(u'This is not zip or rar')
         return False
 
-    # print '结束'.encode('gbk')
-    # return
-
     time_ymdhms = datetime.now().strftime(u"%Y%m%d%H%M%S")
-    # os.listdir 返回指定目录下的所有文件和目录名。
     dir_list = os.listdir(file_dir)
 
     # 创建空间库
@@ -78,51 +58,66 @@ def createregiontask(regiontask_id, regiontask_filepath):
                     gdbpath = os.path.join(dir_abspath, subdir)
                     datatype = u"mapindex"
                     ARCGIS_create_database(gdbpath, time_ymdhms, datatype)
-                    print u"创建mapindex数据库成功"
-                elif subdir.startswith(u"RGS"):
+
+                elif subdir.startswith(u"GBRGS"):
                     gdbpath = os.path.join(dir_abspath, subdir)
-                    datatype = u"rgs"
+                    datatype = u"gbrgs"
                     ARCGIS_create_database(gdbpath, time_ymdhms, datatype)
-                    print u"创建rgs数据库成功"
+
+                elif subdir.startswith(u"JBRGS"):
+                    gdbpath = os.path.join(dir_abspath, subdir)
+                    datatype = u"jbrgs"
+                    ARCGIS_create_database(gdbpath, time_ymdhms, datatype)
 
         if dir.startswith(u"接图表"):
             gdbpath = os.path.join(file_dir, dir)
             datatype = u"mapindex"
             ARCGIS_create_database(gdbpath, time_ymdhms, datatype)
-            print u"创建mapindex数据库成功"
-        elif dir.startswith(u"RGS"):
+            # print u"创建mapindex数据库成功"
+        elif dir.startswith(u"GBRGS"):
             gdbpath = os.path.join(file_dir, dir)
-            datatype = u"rgs"
+            datatype = u"gbrgs"
             ARCGIS_create_database(gdbpath, time_ymdhms, datatype)
-            print u"创建rgs数据库成功"
 
-    # return u'创建空间库'
+        elif dir.startswith(u"JBRGS"):
+            gdbpath = os.path.join(file_dir, dir)
+            datatype = u"jbrgs"
+            ARCGIS_create_database(gdbpath, time_ymdhms, datatype)
+
+    print u'创建空间库成功'
 
     mapindexsde = "mapindex" + time_ymdhms + ".sde"
-    rgssde = "rgs" + time_ymdhms + ".sde"
+    gbrgssde = "gbrgs" + time_ymdhms + ".sde"
+    jbrgssde = "jbrgs" + time_ymdhms + ".sde"
     # mmanage.mxd对应的mapindexsde,要放在当前目录下
     # old_mapindexsde = "mapindex20181137133843.sde"
-    old_mapindexsde = "mapindex20190108154543.sde"
+    old_mapindexsde = "mapindex20181206202724.sde"
+    # old_mapindexsde = "mapindex20190417154204.sde"
 
     # 注册版本,第一个参数为要注册版本的数据集的名称
-    print u'将要注册版本'
+    print u'开始注册版本'
     mapindexsde_dataset = os.path.join(os.path.dirname(os.path.abspath(__file__)), mapindexsde,
                                        mapindexsde + u".DLG_50000")
-    rgssde_dataset = os.path.join(os.path.dirname(os.path.abspath(__file__)), rgssde, rgssde + u".DLG_K050")
-    arcpy.RegisterAsVersioned_management(mapindexsde_dataset, 'EDITS_TO_BASE')
-    arcpy.RegisterAsVersioned_management(rgssde_dataset, 'EDITS_TO_BASE')
+    gbrgssde_dataset = os.path.join(os.path.dirname(os.path.abspath(__file__)), gbrgssde, gbrgssde + u".DLG_K050")
+    jbrgssde_dataset = os.path.join(os.path.dirname(os.path.abspath(__file__)), jbrgssde, jbrgssde + u".DLG_K050")
+
+    arcpy.RegisterAsVersioned_management(mapindexsde_dataset, u'EDITS_TO_BASE')
+    arcpy.RegisterAsVersioned_management(gbrgssde_dataset, u'EDITS_TO_BASE')
+    arcpy.RegisterAsVersioned_management(jbrgssde_dataset, u'EDITS_TO_BASE')
     print u'注册版本成功'
 
     # 添加用于标记颜色的status字段
     ARCGIS_add_field(mapindexsde)
-    # print u"暂不可自动发服务，请手动修改字段所需属性，注册版本，保存MXD文件，注册PG数据源，共享服务"
 
     # 发布服务
-    ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde)
+    is_successfull = ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde)
 
-    # 填充postgresql中对应字段
-    Posrgres_change_regiontask(regiontask_id, service_name, mapindexsde, rgssde)
-    return True
+    if is_successfull:
+        # 填充postgresql中对应字段
+        Posrgres_change_regiontask(regiontask_id, service_name, mapindexsde, gbrgssde_dataset, jbrgssde_dataset)
+        return True
+    else:
+        return False
 
 
 # 创建空间数据库
@@ -169,13 +164,13 @@ def ARCGIS_create_database(gdbpath, time_ymdhms, datatype):
                 arcpy.Copy_management(fcpath, sdedspath)
                 # arcpy.AddMessage(fcpath)
 
-    print u"创建空间库成功"
-    return True
+    # print u"创建空间库成功"
+    # return True
 
 
 # 添加字段
 def ARCGIS_add_field(mapindexsde):
-    field_name = u'status'
+    field_name = u'status_test'
     jtbname = u'.GBmaprange'
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     tablename = os.path.join(SCRIPT_DIR, mapindexsde, mapindexsde + u".DLG_50000", mapindexsde + jtbname)
@@ -198,8 +193,8 @@ def ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde):
     # print wrkspc + MXD_name
     # mapDoc = arcpy.mapping.MapDocument(wrkspc + MXD_name)
     mapDoc = arcpy.mapping.MapDocument(new_mxdfile)
-    # con = "C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
-    con = u"C:/Users/ltcx/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
+    # con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on 192.168.3.120_6080 (系统管理员).ags"
+    con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
 
     sddraft_name = wrkspc + service_name
     sddraft = sddraft_name + '.sddraft'
@@ -274,10 +269,12 @@ def ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde):
                 if os.path.exists(sd):
                     os.remove(sd)
                 break
+        return True
     else:
         # 如果sddraft分析包含错误，则显示它们
         print analysis['errors']
         print "Service could not be published because errors were found during analysis."
+        return False
 
 
 # 修改mxd文件数据源
@@ -287,6 +284,7 @@ def ARGIS_replaceDataSource(service_name, old_mapindexsde, mapindexsde):
     old_datasource = os.path.join(SCRIPT_DIR, old_mapindexsde)
     new_datasource = os.path.join(SCRIPT_DIR, mapindexsde)
     old_mxdfile = os.path.join(SCRIPT_DIR, 'mmanage.mxd')
+
 
     mxd = arcpy.mapping.MapDocument(old_mxdfile)
     mxd.findAndReplaceWorkspacePaths(old_datasource, new_datasource, False)
@@ -388,27 +386,28 @@ def ARGIS_deleteservice(server, servicename, username, password, token=None, por
 
 
 # 修postgres数据库中regiontask表
-def Posrgres_change_regiontask(regiontask_id, service_name, mapindexsde, rgssde):
+def Posrgres_change_regiontask(regiontask_id, service_name, mapindexsde, gbrgssde, jbrgssde):
     print u"正在更新PostgreSQL数据库"
     tablename = u"taskpackages_regiontask"
     status = u"处理完成"
-    basemapservice = u"http://192.168.3.113:6080/arcgis/rest/services/ditu/MapServer"
-    mapindexfeatureservice = u"http://192.168.3.113:6080/arcgis/rest/services/" + service_name + u"/FeatureServer"
-    mapindexmapservice = u"http://192.168.3.113:6080/arcgis/rest/services/" + service_name + u"/MapServer"
+    basemapservice = u"http://192.168.3.120:6080/arcgis/rest/services/ditu/MapServer"
+    mapindexfeatureservice = u"http://192.168.3.120:6080/arcgis/rest/services/" + service_name + u"/FeatureServer"
+    mapindexmapservice = u"http://192.168.3.120:6080/arcgis/rest/services/" + service_name + u"/MapServer"
     # mapindexschedulemapservice = u"未指定"
     mapindexsde_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), mapindexsde)
-    rgssde_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), rgssde)
+    gbrgssde_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), gbrgssde)
+    jbrgssde_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), jbrgssde)
 
-    SQL = u"update %s set status='%s',basemapservice='%s',mapindexfeatureservice='%s',mapindexmapservice='%s',mapindexsde='%s',rgssde='%s' where ID=%d" % (
+    SQL = u"update %s set status='%s',basemapservice='%s',mapindexfeatureservice='%s',mapindexmapservice='%s',mapindexsde='%s',gbrgssde='%s', jbrgssde='%s' where ID=%d" % (
         tablename, status, basemapservice, mapindexfeatureservice, mapindexmapservice,
-        mapindexsde_filepath, rgssde_filepath, regiontask_id)
+        mapindexsde_filepath, gbrgssde_filepath, jbrgssde_filepath,regiontask_id)
     Postgres_executeSQL(SQL)
     print u"PostgreSQL数据库更新成功"
 
 
 # PostgresSQL数据库通用,执行SQL语句
 def Postgres_executeSQL(SQL):
-    conn = psycopg2.connect(dbname=u"mmanageV9.0",
+    conn = psycopg2.connect(dbname=u"mmanageV0.10",
                             user=u"postgres",
                             password=u"Lantucx2018",
                             host=u"localhost",
@@ -419,18 +418,74 @@ def Postgres_executeSQL(SQL):
     conn.close()
 
 
-def aa(regiontask_filepath):
-    file_dir = os.path.dirname(regiontask_filepath)
+import arcpy
+# 补充图号属性
+def append_mapnums():
+    conn = psycopg2.connect(dbname=u"mmanageV0.10",
+                            user=u"postgres",
+                            password=u"Lantucx2018",
+                            host=u"localhost",
+                            port=u"5432")
+    cur = conn.cursor()
+    SQL = "SELECT name,file FROM taskpackages_taskpackage"
+    cur.execute(SQL)
+    name_file = cur.fetchall()
+    print name_file
+    file_path = ''
 
-    fz = zipfile.ZipFile(regiontask_filepath, 'r')
-    for file in fz.namelist():
-        fz.extract(file, file_dir)
+    file_dir = os.path.dirname(file_path)         # 解压后文件保存路径
+    file_name = os.path.basename(file_path)       # 文件名
+
+    z = zipfile.is_zipfile(file_path)
+    r = rarfile.is_rarfile(file_path)
+    if z:
+        # -ibck: 后台运行; -o+:覆盖已存在文件
+        rar_command = '"C:\Program Files\WinRAR\WinRAR.exe" x %s %s -ibck -o+' % (file_path, file_dir)
+        rar_command = rar_command.encode('gbk')
+        os.system(rar_command)
+        print rar_command.decode('gbk')
+        print u"解压成功"
+    elif r:
+        fz = rarfile.RarFile(file_path, 'r')
+        for file in fz.namelist():
+            fz.extract(file, file_dir)
+        print u"解压成功"
+    else:
+        print(u'This is not zip or rar')
+        return False
+
+
+    taskpath =u"E:\\RGSManager\\celery_app\\测试融合\\Source"
+    path = os.path.join(taskpath, u"接图表.gdb", u"DLG_50000", u"GBmaprange")
+    # 查找任务包名字和图号
+    cursor = arcpy.da.SearchCursor(path, ["new_jbmapn"])
+    taskpackage_name = "任务包1号"
+    try:
+
+        for row in cursor:
+            SQL = "SELECT mapnums from taskpackages_taskpackage where name='{0}'".format(taskpackage_name)  # 按任务包名字查询原mapnums
+            cur.execute(SQL)
+            mapnums = cur.fetchall()
+            old_mapnum = mapnums[0][0]      # 提取原有mapnums
+
+            if old_mapnum is None:
+                SQL = "UPDATE taskpackages_taskpackage set mapnums='{0}' where name='{1}'".format(row[0], taskpackage_name)
+            else:
+                SQL = "UPDATE taskpackages_taskpackage set mapnums='{0}' where name='{1}'".format(old_mapnum +","+ row[0], taskpackage_name)
+            print SQL                       # 添加mapnums
+            cur.execute(SQL)
+            conn.commit()
+        conn.close()
+    except Exception as e:
+        # e = str(e).decode('gbk')
+        print [e, ]
+
+
 
 
 if __name__ == "__main__":
-    service_name = "test05"
-
-    # createregiontask(5, u'G:/RGSManager/media/data/2019/02/19/2019-02-19-14-48-04-601000/arcgis数据库.zip', service_name)
+    # service_name = "test05"
+    createregiontask(01, u'E:\\RGSManager\\media\\data\\DATA.rar')
     # ARCGIS_publishService(service_name)
     # createregiontask(1, u'G:/RGSManager/media/data/2019/02/20/2019-02-20-17-35-43-515000/arcgis数据库.zip', service_name)
     # createregiontask(1,
@@ -440,4 +495,8 @@ if __name__ == "__main__":
     # createregiontask(1,
     #                  u'D:/PycharmProjects/V9/RGSManager/media/data/2019/02/22/2019-02-22-14-50-42-196000/测试一下.zip',
     #                  "111")
-    ARGIS_replaceDataSource('mmanage3', )
+    # ARGIS_replaceDataSource('mmanage3', )
+
+    # append_mapnums()
+
+    pass

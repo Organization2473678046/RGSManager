@@ -27,16 +27,17 @@ sys.setdefaultencoding('utf8')
 
 
 @app.task
-def clipfromsde(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpackage_id, taskpackageson_id):
+def clipfromsde(mapindexsdepath, gbrgssdepath, jbrgssdepath, mapnumlist, MEDIA, taskname, taskpackage_id, taskpackageson_id):
+    mapindexsde = os.path.basename(mapindexsdepath)
+    gbrgsde = os.path.basename(gbrgssdepath)
+    jbrgsde = os.path.basename(jbrgssdepath)
+    changeSDEmapindex(mapnumlist, mapindexsde, status=2)
+
     taskdirname = u"data/{0}/{1}/{2}/{3}/{4}".format(datetime.now().strftime("%Y"),
                                                      datetime.now().strftime("%m"),
                                                      datetime.now().strftime("%d"),
                                                      datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"), taskname)
-    # taskdirname=u"user/{0}/{1}".format(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"), taskname)
-    # taskdirnameup = u"data/{0}/{1}/{2}/{3}".format(datetime.now().strftime("%Y"),
-    #                                                datetime.now().strftime("%m"),
-    #                                                datetime.now().strftime("%d"),
-    #                                                datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f"))
+
     taskdirnameup = os.path.dirname(taskdirname)
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     # 三楼服务器sde
@@ -50,14 +51,12 @@ def clipfromsde(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpa
     # 根据传过来的sdepath获取sde
     # mapindexsde = mapindexsdepath.split("\\")[-1]
     # rgsde = rgssdepath.split("\\")[-1]
-    mapindexsde = os.path.basename(mapindexsdepath)
-    rgsde = os.path.basename(rgssdepath)
+
 
     tempath = os.path.join(SCRIPT_DIR, u"tasktemplate")
     taskpath = os.path.join(MEDIA, taskdirname)
     shutil.copytree(tempath, taskpath)
     jtbpath = os.path.join(taskpath, u"Source", u"接图表.gdb", u"DLG_50000", u"GBmaprange")
-
     SQList = []
     for mapnum in mapnumlist.split(u","):
         SQL = u"new_jbmapn = '%s'" % mapnum
@@ -65,10 +64,9 @@ def clipfromsde(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpa
     SQLstr = u" or ".join(SQList)
     # print SQLstr
 
+
     # arcpy.env.workspace = os.path.join(SCRIPT_DIR, mapindexsde)
     arcpy.env.workspace = mapindexsdepath
-    # print arcpy.env.workspace
-
     for ds in arcpy.ListDatasets(feature_type='feature') + ['']:
         if ds == mapindexsde + u".DLG_50000":
             for fc in arcpy.ListFeatureClasses(feature_dataset=ds):
@@ -76,18 +74,28 @@ def clipfromsde(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpa
                     fcpath = os.path.join(arcpy.env.workspace, ds, fc)
                     arcpy.Select_analysis(fcpath, jtbpath, SQLstr)
 
+
     # arcpy.env.workspace = os.path.join(SCRIPT_DIR, rgsde)
-    arcpy.env.workspace = rgssdepath
+    arcpy.env.workspace = gbrgssdepath
     for ds in arcpy.ListDatasets(feature_type='feature') + ['']:
-        if ds == rgsde + u".DLG_K050":
+        if ds == gbrgsde + u".DLG_K050":
             for fc in arcpy.ListFeatureClasses(feature_dataset=ds):
                 fcpath = os.path.join(arcpy.env.workspace, ds, fc)
-                taskgbpath = os.path.join(taskpath, u"Source", u"RGS.gdb", u"DLG_K050", fc.split(".")[2])
+                taskgbpath = os.path.join(taskpath, u"Source", u"GBRGS.gdb", u"DLG_K050", fc.split(".")[2])
+                arcpy.Clip_analysis(fcpath, jtbpath, taskgbpath)
+
+    # arcpy.env.workspace = os.path.join(SCRIPT_DIR, rgsde)
+    arcpy.env.workspace = jbrgssdepath
+    for ds in arcpy.ListDatasets(feature_type='feature') + ['']:
+        if ds == jbrgsde + u".DLG_K050":
+            for fc in arcpy.ListFeatureClasses(feature_dataset=ds):
+                fcpath = os.path.join(arcpy.env.workspace, ds, fc)
+                taskgbpath = os.path.join(taskpath, u"Source", u"JBRGS.gdb", u"DLG_K050", fc.split(".")[2])
                 arcpy.Clip_analysis(fcpath, jtbpath, taskgbpath)
 
     outZipFile = os.path.join(MEDIA, taskdirnameup, taskname + u".zip")
     zipUpFolder(taskpath, outZipFile)
-    dbname = u"mmanageV9.0"
+    dbname = u"mmanageV0.10"
     tablename = u"taskpackages_taskpackage"
     taskpackagesontablename = u"taskpackages_taskpackageson"
     statusfieldname = u"status"
@@ -95,7 +103,7 @@ def clipfromsde(mapindexsdepath, rgssdepath, mapnumlist, MEDIA, taskname, taskpa
     MEDIAfilepath = taskdirnameup + u"/" + taskname + u".zip"
     changeDJdbtasktable(dbname, tablename, taskpackage_id, statusfieldname, filefieldname, MEDIAfilepath,
                         taskpackageson_id, taskpackagesontablename)
-    changeSDEmapindex(mapnumlist, mapindexsde)
+    changeSDEmapindex(mapnumlist, mapindexsde, status=3)
     return True
 
 
@@ -124,7 +132,7 @@ def changeDJdbtasktable(dbname, tablename, taskpackage_id, statusfieldname, file
     conn.close()
 
 
-def changeSDEmapindex(mapnumlist, mapindexsde):
+def changeSDEmapindex(mapnumlist, mapindexsde, status):
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     workspace = os.path.join(SCRIPT_DIR, mapindexsde)
     sde_conn = arcpy.ArcSDESQLExecute(workspace)
@@ -135,7 +143,7 @@ def changeSDEmapindex(mapnumlist, mapindexsde):
     for mapnum in mapnumlist.split(u","):
         col1 = u"new_jbmapn = '%s'" % mapnum
         # sql = "update mapindex20181204150827.sde.GBmaprange set flag="1 where {3} = {4}".format(tbl, col, val, col1,col1_val)
-        sql = "update {0} set status='1' where {1}".format(tbl, col1)
+        sql = "update {0} set status='{1}' where {2}".format(tbl, status, col1)
 
         # sql="select objectid from mapindex20181204150827.sde.GBmaprange"
         sde_conn.execute(sql)
@@ -145,6 +153,15 @@ def changeSDEmapindex(mapnumlist, mapindexsde):
 
 
 if __name__ == "__main__":
-    # clipfromsde()
+    mapindexsdepath = u'E:\\RGSManager\\celery_app\\mapindex20190417165250.sde'
+    gbrgssdepath = u'E:\\RGSManager\\celery_app\\gbrgs20190417165250.sde'
+    jbrgssdepath = u'E:\\RGSManager\\celery_app\\jbrgs20190417165250.sde'
+    # jbrgssdepath = u'E:\\RGSManager\\celery_app\\jbrgs20190417165250.sde\\jbrgs20190417165250.sde.DLG_K050'
+    mapnumlist = "I49E019022,I49E019023,I49E019024"
+    MEDIA = 'E:\\RGSManager\\media'
+    taskname = u'任务包3号'
+    taskpackage_id = 4
+    taskpackageson_id = 7
+    clipfromsde(mapindexsdepath, gbrgssdepath, jbrgssdepath, mapnumlist, MEDIA, taskname, taskpackage_id, taskpackageson_id)
     # changeDJdbtasktable(u"mmanageV1.0",u"taskpackages_taskpackage",1,u"status",u"file",u"user_1/npm_lazy.rar")
-    changeSDEmapindex(u"I49E019021,I49E019022,I49E019023")
+    # changeSDEmapindex(u"I49E019021,I49E019022,I49E019023")

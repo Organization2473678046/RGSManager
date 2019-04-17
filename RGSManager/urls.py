@@ -17,7 +17,6 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import url, include
 from django.views.static import serve
@@ -25,13 +24,15 @@ from rest_framework.documentation import include_docs_urls
 from django.conf import settings
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework.routers import DefaultRouter
-from users.views import UserListViewSet,UserViewSet
+from users.views import UserListViewSet, UserViewSet, UserManageViewSet
 from taskpackages.views import TaskPackageViewSet, TaskPackageSonViewSet, TaskPackageOwnerViewSet, \
-    EchartTaskpackageViewSet, EchartScheduleViewSet, ScheduleViewSet, RegionTaskView, RegionTaskChunkUploadView
+    EchartTaskpackageViewSet, EchartScheduleViewSet, ScheduleViewSet, RegionTaskView, RegionTaskChunkUploadView, \
+    OverdueViewSetAdmin, OverdueViewSetWorker
 
 router = DefaultRouter()
 router.register(r'users', UserListViewSet, base_name='users')
 router.register(r'user', UserViewSet, base_name='user')
+router.register(r'usermanage', UserManageViewSet, base_name='usermanage')
 router.register(r'taskpackages', TaskPackageViewSet, base_name='taskpackage')
 router.register(r'taskpackagesons', TaskPackageSonViewSet, base_name='taskpackageson')
 router.register(r'taskpackageowners', TaskPackageOwnerViewSet, base_name='taskpackageowner')
@@ -39,16 +40,18 @@ router.register(r'echarttaskpackages', EchartTaskpackageViewSet, base_name='echa
 router.register(r'echartschedules', EchartScheduleViewSet, base_name='echartschedules')
 router.register(r'schedule', ScheduleViewSet, base_name='schedule')
 router.register(r'regiontasks', RegionTaskView, base_name='regiontasks')
+router.register(r'overdue_admin', OverdueViewSetAdmin, base_name='overdue_admin')
+router.register(r'overdue_worker', OverdueViewSetWorker, base_name='overdue_worker')
 # router.register(r'regiontaskschunk', RegionTaskChunkUploadView, base_name='regiontaskschunk')
 
 
 urlpatterns = [
-    url(r'^v9/admin/', admin.site.urls),
-    # url(r'^v9/xadmin/', xadmin.site.urls),
-    url(r'^v9/login/$', obtain_jwt_token),
-    url(r'^v9/', include(router.urls)),
-    url(r'^v9/docs/', include_docs_urls(title=u"库管系统API")),
-    url(r'^v9/media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
-    url(r'^v9/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^v0.10/admin/', admin.site.urls),
+    # url(r'^v0.10/xadmin/', xadmin.site.urls),
+    url(r'^v0.10/login/$', obtain_jwt_token),
+    url(r'^v0.10/', include(router.urls)),
+    url(r'^v0.10/docs/', include_docs_urls(title=u"库管系统API")),
+    url(r'^v0.10/media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
+    url(r'^v0.10/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 

@@ -56,7 +56,9 @@ def clipfromsde(mapindexsdepath, gbrgssdepath, jbrgssdepath, mapnumlist, MEDIA, 
     tempath = os.path.join(SCRIPT_DIR, u"tasktemplate")
     taskpath = os.path.join(MEDIA, taskdirname)
     shutil.copytree(tempath, taskpath)
-    jtbpath = os.path.join(taskpath, u"Source", u"接图表.gdb", u"DLG_50000", u"GBmaprange")
+    # jtbpath = os.path.join(taskpath, u"Source", u"接图表.gdb", u"DLG_50000", u"GBmaprange")
+    jtbpath = os.path.join(taskpath, u"Source", u"GBRGS.gdb", u"DLG_K050_HELP", u"Mapsheet_K050")
+
     SQList = []
     for mapnum in mapnumlist.split(u","):
         SQL = u"new_jbmapn = '%s'" % mapnum

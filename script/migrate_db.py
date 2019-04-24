@@ -11,7 +11,7 @@ sys.setdefaultencoding('utf8')
 
 def get_user_data(tablename):
     # 获取用户表数据
-    conn = psycopg2.connect(dbname="mmanageV9.0",
+    conn = psycopg2.connect(dbname="mmanageV0.10",
                             user="postgres",
                             password="Lantucx2018",
                             host="localhost",
@@ -31,7 +31,7 @@ def get_user_data(tablename):
 
 def user_insert(data, tablename):
     # users_user表数据的迁移
-    conn = psycopg2.connect(dbname="mmanageV0.10",
+    conn = psycopg2.connect(dbname="mmanageV0.11",
                             user="postgres",
                             password="Lantucx2018",
                             host="localhost",
@@ -48,7 +48,7 @@ def user_insert(data, tablename):
 
 def get_taskpackage_data(tablename):
     # 获取主任务包表数据
-    conn = psycopg2.connect(dbname="mmanageV9.0",
+    conn = psycopg2.connect(dbname="mmanageV0.10",
                             user="postgres",
                             password="Lantucx2018",
                             host="localhost",
@@ -66,7 +66,7 @@ def get_taskpackage_data(tablename):
 
 def taskpackage_insert(data):
     """taskpackages_taskpackage表数据的迁移"""
-    conn = psycopg2.connect(dbname="mmanageV0.10",
+    conn = psycopg2.connect(dbname="mmanageV0.11",
                             user="postgres",
                             password="Lantucx2018",
                             host="localhost",
@@ -88,7 +88,7 @@ def taskpackage_insert(data):
 
 def get_taskpackageson_data(tablename):
     # 获取子任务包表数据
-    conn = psycopg2.connect(dbname="mmanageV9.0",
+    conn = psycopg2.connect(dbname="mmanageV0.10",
                             user="postgres",
                             password="Lantucx2018",
                             host="localhost",
@@ -108,7 +108,7 @@ def get_taskpackageson_data(tablename):
 
 def taskpackageson_insert(data):
     # taskpackages_taskpackageson表数据的迁移
-    conn = psycopg2.connect(dbname="mmanageV0.10",
+    conn = psycopg2.connect(dbname="mmanageV0.11",
                             user="postgres",
                             password="Lantucx2018",
                             host="localhost",
@@ -124,7 +124,7 @@ def taskpackageson_insert(data):
 
 def get_taskpackageowner_data(tablename):
     # 获取@表数据
-    conn = psycopg2.connect(dbname="mmanageV9.0",
+    conn = psycopg2.connect(dbname="mmanageV0.10",
                             user="postgres",
                             password="Lantucx2018",
                             host="localhost",
@@ -144,7 +144,7 @@ def get_taskpackageowner_data(tablename):
 
 def taskpackageowner_insert(data):
     # taskpackages_taskpackageowner表数据的迁移
-    conn = psycopg2.connect(dbname="mmanageV0.10",
+    conn = psycopg2.connect(dbname="mmanageV0.11",
                             user="postgres",
                             password="Lantucx2018",
                             host="localhost",
@@ -164,7 +164,7 @@ def taskpackageowner_insert(data):
 
 def get_taskpackageschedule_data(tablename):
     # 获取进度表
-    conn = psycopg2.connect(dbname="mmanageV9.0",
+    conn = psycopg2.connect(dbname="mmanageV0.10",
                             user="postgres",
                             password="Lantucx2018",
                             host="localhost",
@@ -184,7 +184,7 @@ def get_taskpackageschedule_data(tablename):
 
 def taskpackageschedule_insert(data):
     # taskpackages_taskpackagescheduleset 表数据的迁移
-    conn = psycopg2.connect(dbname="mmanageV0.10",
+    conn = psycopg2.connect(dbname="mmanageV0.11",
                             user="postgres",
                             password="Lantucx2018",
                             host="localhost",
@@ -201,7 +201,7 @@ def taskpackageschedule_insert(data):
 
 def get_taskpackageregiontask_data(tablename):
     # 获取taskpackages_regiontask表数据
-    conn = psycopg2.connect(dbname="mmanageV9.0",
+    conn = psycopg2.connect(dbname="mmanageV0.10",
                             user="postgres",
                             password="Lantucx2018",
                             host="localhost",
@@ -221,19 +221,19 @@ def get_taskpackageregiontask_data(tablename):
 
 def taskpackageregiontask_insert(data):
     # taskpackages_regiontask表数据的迁移
-    conn = psycopg2.connect(dbname="mmanageV0.10",
+    conn = psycopg2.connect(dbname="mmanageV0.11",
                             user="postgres",
                             password="Lantucx2018",
                             host="localhost",
                             port="5432")
     cur = conn.cursor()
     if data[11] is None or data[11] =='None':
-        sql = u"insert into taskpackages_regiontask (name,basemapservice, mapindexfeatureservice, mapindexmapservice, mapindexschedulemapservice, mapindexsde, rgssde, status,createtime) values('%s','%s','%s','%s','%s','%s', '%s', '%s',%r)" % (
-           data[1],data[3], data[4],data[5],data[6],data[8],data[9], data[7],str(data[10]))
+        sql = u"insert into taskpackages_regiontask (name,basemapservice, mapindexfeatureservice, mapindexmapservice, mapindexschedulemapservice, mapindexsde, gbrgssde,jbrgssde, status,createtime) values('%s','%s','%s','%s','%s','%s', '%s', '%s', '%s',%r)" % (
+           data[1],data[3], data[4],data[5],data[6],data[8],data[9], "None", data[7],str(data[10]))
         print '1111'
     else:
-        sql = u"insert into taskpackages_regiontask (name,basemapservice, mapindexfeatureservice, mapindexmapservice, mapindexschedulemapservice, mapindexsde, rgssde, status,createtime,describe) values('%s','%s','%s','%s','%s','%s', '%s', '%s',%r,'%s')" % (
-           data[1],data[3], data[4],data[5],data[6],data[8],data[9], data[7],str(data[10]),data[11])
+        sql = u"insert into taskpackages_regiontask (name,basemapservice, mapindexfeatureservice, mapindexmapservice, mapindexschedulemapservice, mapindexsde, gbrgssde,jbrgssde, status,createtime,describe) values('%s','%s','%s','%s','%s','%s', '%s', '%s', '%s',%r,'%s')" % (
+           data[1],data[3], data[4],data[5],data[6],data[8],data[9], "None", data[7],str(data[10]),data[11])
     print sql
     cur.execute(sql)
     conn.commit()

@@ -22,7 +22,7 @@ from django.conf.urls import url, include
 from django.views.static import serve
 from rest_framework.documentation import include_docs_urls
 from django.conf import settings
-from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework_jwt.views import obtain_jwt_token, ObtainJSONWebToken
 from rest_framework.routers import DefaultRouter
 from users.views import UserListViewSet, UserViewSet, UserManageViewSet
 from taskpackages.views import TaskPackageViewSet, TaskPackageSonViewSet, TaskPackageOwnerViewSet, \
@@ -44,14 +44,15 @@ router.register(r'overdue_admin', OverdueViewSetAdmin, base_name='overdue_admin'
 router.register(r'overdue_worker', OverdueViewSetWorker, base_name='overdue_worker')
 # router.register(r'regiontaskschunk', RegionTaskChunkUploadView, base_name='regiontaskschunk')
 
-
+from users.views import AuthenticView
 urlpatterns = [
-    url(r'^v0.10/admin/', admin.site.urls),
-    # url(r'^v0.10/xadmin/', xadmin.site.urls),
-    url(r'^v0.10/login/$', obtain_jwt_token),
-    url(r'^v0.10/', include(router.urls)),
-    url(r'^v0.10/docs/', include_docs_urls(title=u"库管系统API")),
-    url(r'^v0.10/media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
-    url(r'^v0.10/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^v0.11/admin/', admin.site.urls),
+    # url(r'^v0.11/xadmin/', xadmin.site.urls),
+    # url(r'^v0.11/login/$', obtain_jwt_token),
+    url(r'^v0.11/login/$', AuthenticView.as_view()),
+    url(r'^v0.11/', include(router.urls)),
+    url(r'^v0.11/docs/', include_docs_urls(title=u"库管系统API")),
+    url(r'^v0.11/media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
+    # url(r'^v0.11/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 

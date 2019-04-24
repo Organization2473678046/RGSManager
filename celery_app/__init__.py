@@ -28,7 +28,7 @@ app.conf.update(
         'over_time_task': {
             'task': 'celery_app.over_time.over_time',
             # 'schedule':  timedelta(seconds=20),
-            'schedule':  crontab(minute=17, hour=14),
+            'schedule':  crontab(minute=0, hour=3),
             'args': ()
         }
     }

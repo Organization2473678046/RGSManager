@@ -25,8 +25,8 @@ sys.setdefaultencoding('utf8')
 @app.task
 def createregiontask(regiontask_id, regiontask_filepath):
     service_name = 'mmanage' + str(regiontask_id)
-    file_dir = os.path.dirname(regiontask_filepath)         # 解压后文件保存路径
-    file_name = os.path.basename(regiontask_filepath)       # 文件名
+    file_dir = os.path.dirname(regiontask_filepath)  # 解压后文件保存路径
+    file_name = os.path.basename(regiontask_filepath)  # 文件名
     z = zipfile.is_zipfile(regiontask_filepath)
     r = rarfile.is_rarfile(regiontask_filepath)
     if z:
@@ -114,7 +114,9 @@ def createregiontask(regiontask_id, regiontask_filepath):
 
     if is_successfull:
         # 填充postgresql中对应字段
-        Posrgres_change_regiontask(regiontask_id, service_name, mapindexsde, gbrgssde_dataset, jbrgssde_dataset)
+        gbrgssde_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), gbrgssde)
+        jbrgssde_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), jbrgssde)
+        Posrgres_change_regiontask(regiontask_id, service_name, mapindexsde, gbrgssde_filepath, jbrgssde_filepath)
         return True
     else:
         return False
@@ -193,8 +195,8 @@ def ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde):
     # print wrkspc + MXD_name
     # mapDoc = arcpy.mapping.MapDocument(wrkspc + MXD_name)
     mapDoc = arcpy.mapping.MapDocument(new_mxdfile)
-    # con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on 192.168.3.120_6080 (系统管理员).ags"
-    con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
+    con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on 192.168.3.120_6080 (系统管理员).ags"
+    # con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
 
     sddraft_name = wrkspc + service_name
     sddraft = sddraft_name + '.sddraft'
@@ -263,7 +265,7 @@ def ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde):
                 arcpy.UploadServiceDefinition_server(sd, con)
             except:
                 ARGIS_deleteservice("localhost", service_name + ".MapServer", "siteadmin", "Lantucx2018")
-                print u'服务 {0} 发布失败,正在尝试第{1}次'.format(service_name,str(count))
+                print u'服务 {0} 发布失败,正在尝试第{1}次'.format(service_name, str(count))
             else:
                 print "Service successfully published"
                 if os.path.exists(sd):
@@ -284,7 +286,6 @@ def ARGIS_replaceDataSource(service_name, old_mapindexsde, mapindexsde):
     old_datasource = os.path.join(SCRIPT_DIR, old_mapindexsde)
     new_datasource = os.path.join(SCRIPT_DIR, mapindexsde)
     old_mxdfile = os.path.join(SCRIPT_DIR, 'mmanage.mxd')
-
 
     mxd = arcpy.mapping.MapDocument(old_mxdfile)
     mxd.findAndReplaceWorkspacePaths(old_datasource, new_datasource, False)
@@ -400,14 +401,14 @@ def Posrgres_change_regiontask(regiontask_id, service_name, mapindexsde, gbrgssd
 
     SQL = u"update %s set status='%s',basemapservice='%s',mapindexfeatureservice='%s',mapindexmapservice='%s',mapindexsde='%s',gbrgssde='%s', jbrgssde='%s' where ID=%d" % (
         tablename, status, basemapservice, mapindexfeatureservice, mapindexmapservice,
-        mapindexsde_filepath, gbrgssde_filepath, jbrgssde_filepath,regiontask_id)
+        mapindexsde_filepath, gbrgssde_filepath, jbrgssde_filepath, regiontask_id)
     Postgres_executeSQL(SQL)
     print u"PostgreSQL数据库更新成功"
 
 
 # PostgresSQL数据库通用,执行SQL语句
 def Postgres_executeSQL(SQL):
-    conn = psycopg2.connect(dbname=u"mmanageV0.10",
+    conn = psycopg2.connect(dbname=u"mmanageV0.11",
                             user=u"postgres",
                             password=u"Lantucx2018",
                             host=u"localhost",
@@ -419,6 +420,8 @@ def Postgres_executeSQL(SQL):
 
 
 import arcpy
+
+
 # 补充图号属性
 def append_mapnums():
     conn = psycopg2.connect(dbname=u"mmanageV0.10",
@@ -433,8 +436,8 @@ def append_mapnums():
     print name_file
     file_path = ''
 
-    file_dir = os.path.dirname(file_path)         # 解压后文件保存路径
-    file_name = os.path.basename(file_path)       # 文件名
+    file_dir = os.path.dirname(file_path)  # 解压后文件保存路径
+    file_name = os.path.basename(file_path)  # 文件名
 
     z = zipfile.is_zipfile(file_path)
     r = rarfile.is_rarfile(file_path)
@@ -454,8 +457,7 @@ def append_mapnums():
         print(u'This is not zip or rar')
         return False
 
-
-    taskpath =u"E:\\RGSManager\\celery_app\\测试融合\\Source"
+    taskpath = u"E:\\RGSManager\\celery_app\\测试融合\\Source"
     path = os.path.join(taskpath, u"接图表.gdb", u"DLG_50000", u"GBmaprange")
     # 查找任务包名字和图号
     cursor = arcpy.da.SearchCursor(path, ["new_jbmapn"])
@@ -463,16 +465,19 @@ def append_mapnums():
     try:
 
         for row in cursor:
-            SQL = "SELECT mapnums from taskpackages_taskpackage where name='{0}'".format(taskpackage_name)  # 按任务包名字查询原mapnums
+            SQL = "SELECT mapnums from taskpackages_taskpackage where name='{0}'".format(
+                taskpackage_name)  # 按任务包名字查询原mapnums
             cur.execute(SQL)
             mapnums = cur.fetchall()
-            old_mapnum = mapnums[0][0]      # 提取原有mapnums
+            old_mapnum = mapnums[0][0]  # 提取原有mapnums
 
             if old_mapnum is None:
-                SQL = "UPDATE taskpackages_taskpackage set mapnums='{0}' where name='{1}'".format(row[0], taskpackage_name)
+                SQL = "UPDATE taskpackages_taskpackage set mapnums='{0}' where name='{1}'".format(row[0],
+                                                                                                  taskpackage_name)
             else:
-                SQL = "UPDATE taskpackages_taskpackage set mapnums='{0}' where name='{1}'".format(old_mapnum +","+ row[0], taskpackage_name)
-            print SQL                       # 添加mapnums
+                SQL = "UPDATE taskpackages_taskpackage set mapnums='{0}' where name='{1}'".format(
+                    old_mapnum + "," + row[0], taskpackage_name)
+            print SQL  # 添加mapnums
             cur.execute(SQL)
             conn.commit()
         conn.close()
@@ -481,11 +486,9 @@ def append_mapnums():
         print [e, ]
 
 
-
-
 if __name__ == "__main__":
     # service_name = "test05"
-    createregiontask(01, u'E:\\RGSManager\\media\\data\\DATA.rar')
+    createregiontask(1, u'H:\\HT\\RGSManager\\DATA.rar')
     # ARCGIS_publishService(service_name)
     # createregiontask(1, u'G:/RGSManager/media/data/2019/02/20/2019-02-20-17-35-43-515000/arcgis数据库.zip', service_name)
     # createregiontask(1,

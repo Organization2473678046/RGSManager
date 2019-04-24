@@ -7,6 +7,7 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+
 from utils.permission import AdminPerssion
 from models import User
 from .serializers import UserSerializer, UserListSerializer
@@ -80,3 +81,11 @@ class UserManageViewSet(mixins.ListModelMixin, mixins.UpdateModelMixin, GenericV
         else:
             return User.objects.all()
 
+
+from rest_framework_jwt.views import ObtainJSONWebToken
+from users.license import LicensePerssion
+
+# 重写登录认证方法，添加授权
+class AuthenticView(ObtainJSONWebToken):
+
+    permission_classes = [LicensePerssion]

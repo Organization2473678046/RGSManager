@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'RGSManager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mmanageV0.10',
+        'NAME': 'mmanageV0.11',
         'USER': 'postgres',
         'PASSWORD': 'Lantucx2018',
         'HOST': 'localhost',
@@ -171,7 +171,7 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
 }
 
-MEDIA_URL = '/v0.10/media/'
+MEDIA_URL = '/v0.11/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # APPEND_SLASH = False

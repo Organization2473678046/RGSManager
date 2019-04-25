@@ -371,7 +371,7 @@ class RegionTaskSerializer(serializers.ModelSerializer):
         if instance.status == u'处理中':
             regiontask = super(RegionTaskSerializer, self).update(instance, validated_data)
             if hasattr(regiontask.file, 'path'):
-                print regiontask.file.path
+                #print regiontask.file.path
                 createregiontask.delay(regiontask.id, regiontask.file.path)
             return regiontask
         else:

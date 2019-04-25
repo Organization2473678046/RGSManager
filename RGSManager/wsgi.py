@@ -11,7 +11,7 @@ import os
 import sys
 
 from django.core.wsgi import get_wsgi_application
-sys.path.append('G:/RGSManager')
+sys.path.append('E:/RGSManager')
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "RGSManager.settings")

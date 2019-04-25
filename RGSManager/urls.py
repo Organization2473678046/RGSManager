@@ -53,6 +53,6 @@ urlpatterns = [
     url(r'^v0.11/', include(router.urls)),
     url(r'^v0.11/docs/', include_docs_urls(title=u"库管系统API")),
     url(r'^v0.11/media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
-    # url(r'^v0.11/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^v0.11/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 

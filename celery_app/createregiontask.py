@@ -195,8 +195,8 @@ def ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde):
     # print wrkspc + MXD_name
     # mapDoc = arcpy.mapping.MapDocument(wrkspc + MXD_name)
     mapDoc = arcpy.mapping.MapDocument(new_mxdfile)
-    con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on 192.168.3.120_6080 (系统管理员).ags"
-    # con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
+    #con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on 192.168.3.120_6080 (系统管理员).ags"
+    con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
 
     sddraft_name = wrkspc + service_name
     sddraft = sddraft_name + '.sddraft'
@@ -488,7 +488,7 @@ def append_mapnums():
 
 if __name__ == "__main__":
     # service_name = "test05"
-    createregiontask(1, u'H:\\HT\\RGSManager\\DATA.rar')
+    createregiontask(1, u'E:\\software\\DATA.rar')
     # ARCGIS_publishService(service_name)
     # createregiontask(1, u'G:/RGSManager/media/data/2019/02/20/2019-02-20-17-35-43-515000/arcgis数据库.zip', service_name)
     # createregiontask(1,

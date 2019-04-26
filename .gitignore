@@ -9,6 +9,7 @@
 /celery_app/*.sde
 /celery_app/mmanage*.mxd
 /logs/*.log
+/celery_app/*.ags
 
 # local env files
 .env.local

@@ -31,7 +31,6 @@ def create_gis_server_connect_file():
         script_dir = os.path.dirname(os.path.abspath(__file__))
         outdir = script_dir
         out_folder_path = outdir
-
         localhostip=get_localhost_ip()
         server_url = u"http://{}:6080/arcgis/admin".format(localhostip)
         use_arcgis_desktop_staging_folder = False

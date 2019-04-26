@@ -89,7 +89,7 @@ def createregiontask(regiontask_id, regiontask_filepath):
     mapindexsde = "mapindex" + time_ymdhms + ".sde"
     gbrgssde = "gbrgs" + time_ymdhms + ".sde"
     jbrgssde = "jbrgs" + time_ymdhms + ".sde"
-    # mmanage.mxd对应的mapindexsde,要放在当前目录下
+    # templatemmanage.mxd对应的mapindexsde,要放在当前目录下
     # old_mapindexsde = "mapindex20181137133843.sde"
     old_mapindexsde = "mapindex20181206202724.sde"
     # old_mapindexsde = "mapindex20190417154204.sde"
@@ -285,7 +285,7 @@ def ARGIS_replaceDataSource(service_name, old_mapindexsde, mapindexsde):
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     old_datasource = os.path.join(SCRIPT_DIR, old_mapindexsde)
     new_datasource = os.path.join(SCRIPT_DIR, mapindexsde)
-    old_mxdfile = os.path.join(SCRIPT_DIR, 'mmanage.mxd')
+    old_mxdfile = os.path.join(SCRIPT_DIR, 'templatemmanage.mxd')
 
     mxd = arcpy.mapping.MapDocument(old_mxdfile)
     mxd.findAndReplaceWorkspacePaths(old_datasource, new_datasource, False)

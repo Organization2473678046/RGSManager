@@ -6,7 +6,8 @@
 
 /media/*
 !/media/.gitkeep
-
+/celery_app/*.sde
+/celery_app/mmanage*.mxd
 
 # local env files
 .env.local

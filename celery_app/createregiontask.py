@@ -17,6 +17,7 @@ from celery_app import app
 from ziptools import zipUpFolder
 import zipfile
 import xml.dom.minidom as DOM
+from create_gis_server_connect_file import create_gis_server_connect_file
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -195,8 +196,10 @@ def ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde):
     # print wrkspc + MXD_name
     # mapDoc = arcpy.mapping.MapDocument(wrkspc + MXD_name)
     mapDoc = arcpy.mapping.MapDocument(new_mxdfile)
-    #con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on 192.168.3.120_6080 (系统管理员).ags"
-    con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
+    #con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on 192.168.23.139_6080 (系统管理员).ags"
+    #con=os.path.join(os.path.dirname(os.path.abspath(__file__)),u"connect.ags")
+    con=create_gis_server_connect_file()
+    # con = u"C:/Users/Administrator/AppData/Roaming/ESRI/Desktop10.2/ArcCatalog/arcgis on localhost_6080 (系统管理员).ags"
 
     sddraft_name = wrkspc + service_name
     sddraft = sddraft_name + '.sddraft'
@@ -205,8 +208,7 @@ def ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde):
     tags = 'county, counties, population, density, census'
 
     # 将地图文档(.mxd)文件转换为服务定义草稿(.sddraft)文件。
-    arcpy.mapping.CreateMapSDDraft(mapDoc, sddraft, service_name, 'ARCGIS_SERVER',
-                                   con, True, None, summary, tags)
+    arcpy.mapping.CreateMapSDDraft(mapDoc, sddraft, service_name, 'ARCGIS_SERVER',con, True, None, summary, tags)
 
     # 添加要素服务
     new_sddraft = ARGIS_addFeatureService(sddraft_name)
@@ -276,6 +278,7 @@ def ARCGIS_publishService(service_name, old_mapindexsde, mapindexsde):
         # 如果sddraft分析包含错误，则显示它们
         print analysis['errors']
         print "Service could not be published because errors were found during analysis."
+
         return False
 
 
@@ -488,7 +491,7 @@ def append_mapnums():
 
 if __name__ == "__main__":
     # service_name = "test05"
-    createregiontask(1, u'E:\\software\\DATA.rar')
+    createregiontask(3, u'E:\\software\\DATA.rar')
     # ARCGIS_publishService(service_name)
     # createregiontask(1, u'G:/RGSManager/media/data/2019/02/20/2019-02-20-17-35-43-515000/arcgis数据库.zip', service_name)
     # createregiontask(1,
